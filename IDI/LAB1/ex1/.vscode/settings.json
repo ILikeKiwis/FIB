@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "qopenglshaderprogram": "cpp",
+        "qopenglwidget": "cpp"
+    }
+}

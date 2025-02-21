@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "qopenglfunctions_3_3_core": "cpp",
+        "qopenglwidget": "cpp",
+        "qopenglshaderprogram": "cpp"
+    }
+}
