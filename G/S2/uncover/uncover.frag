@@ -5,9 +5,11 @@ out vec4 fragColor;
 
 uniform float time;
 
+in float x;
+
 void main()
 {
-    float aux = gl_FragCoord.x+1;
+    float aux = x;
     if(aux > time) discard;
     fragColor = vec4(0,0,1,1);
 }
