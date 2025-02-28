@@ -12,14 +12,14 @@ uniform sampler2D explosion;
 
 void main()
 { 
-    float frame = floor(time/slice);
-    int f = int(frame);
-    frame = f % 48;
-    float i = frame/8.0;
-    float j = frame - 8.0*i;
-    vec2 aux = vec2(vtexCoord.x*1.0/8.0, vtexCoord.y*1.0/6.0);
-    aux.x += j/8.0;
-    aux.y += i/6.0;
+    fragColor = vec4(1);
+    int frame = int(floor(time/slice));
+    frame = frame % 48; // 0-47
+    int i = 5 - frame/8; // offset de 7 a 0
+    int j = frame%8; 	
+    float t = i/6.0;
+    float s = j/8.0;
+    vec2 aux = vec2( vtexCoord.x * 1.0/8.0 + s, vtexCoord.y * 1.0/6.0 + t); 
     vec4 color = texture (explosion, aux);
     fragColor = color.a * color;
 }
