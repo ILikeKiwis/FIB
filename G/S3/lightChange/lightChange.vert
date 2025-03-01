@@ -28,6 +28,6 @@ void main()
     V = normalize(-P);
     
     frontColor = vec4(color,1.0) * N.z;
-    vtexCoord = fract(texCoord);
+    vtexCoord = texCoord;
     gl_Position = modelViewProjectionMatrix * vec4(vertex, 1.0);
 }

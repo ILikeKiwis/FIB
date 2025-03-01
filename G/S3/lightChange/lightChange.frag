@@ -28,11 +28,12 @@ vec4 Difus(vec3 N, vec3 L) {
 	if (int(time) % 2 == 0) lightDiffuse = vec4(mix(0.0, 0.8, fract(time)));
 	else lightDiffuse = vec4(mix(0.8, 0.0, fract(time)));
 	
-	int frame = int(floor(time/2.0));
-	float t = (2.0-frame%3) / 3.0;
-	float s = (frame/3.0) / 4.0;
+	float frame = floor(time/2.0);
+	int f = int(frame);
+	float t = (2-f%3) / 3.0; 
+	float s = (f/3) / 4.0;
 	
-	vec2 texCoord = vec2(vtexCoord.x * 1.0/4.0 + s, vtexCoord.y * 1.0/3.0 + t);
+	vec2 texCoord = vec2(fract(vtexCoord.s)/4.0 + s, fract(vtexCoord.t)/3.0 + t);
 	
 	vec4 matDiff = texture(colorMap,  texCoord);
 	
