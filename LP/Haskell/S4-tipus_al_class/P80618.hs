@@ -1,5 +1,3 @@
-import Data.Binary.Get (label)
-import Language.Haskell.TH (Q)
 data Queue a = Queue [a] [a]
     deriving (Show)
 
@@ -11,7 +9,7 @@ push n (Queue l r) = Queue l (n:r)
 
 pop :: Queue a -> Queue a
 pop (Queue [] []) = Queue [] []
-pop (Queue [] (r:rs)) = Queue (reverse rs) []
+pop (Queue [] rs) = Queue (reverse (init rs)) []
 pop (Queue (l:ls) r) = Queue ls r
 
 top :: Queue a -> a
@@ -24,4 +22,6 @@ empty (Queue l r) = False
 
 instance Eq a => Eq (Queue a)
     where
-        (==) 
+        (Queue [] []) == (Queue [] []) = True
+        (Queue l1 l2) == (Queue r1 r2) = l1 ++ reverse l2 == r1 ++ reverse r2 
+
