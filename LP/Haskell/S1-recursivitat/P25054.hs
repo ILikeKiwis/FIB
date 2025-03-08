@@ -24,12 +24,14 @@ flatten:: [[Int]] -> [Int]
 flatten [] = []
 flatten (p:l) = p ++ flatten l
 
-oddsNEvens::[Int] -> ([Int], [Int])
-oddsNEvens [] = ([],[])
-oddsNEvens (p:r) 
-    |   even p = (fst l, p: snd l)
-    |   otherwise = (p: fst l, snd l)
-    where l = oddsNEvens r
+oddsNevens::[Int] -> ([Int], [Int])
+oddsNevens [] = ([],[])
+oddsNevens (p:r) 
+    |   even p = (fst l, p: (snd l))
+    |   otherwise =  (p:(fst l), snd l)
+        where 
+        l = oddsNevens r
+
 
 primeDivisors:: Int -> [Int]
 primeDivisors 1 = []

@@ -1,6 +1,7 @@
 insert:: [Int] -> Int -> [Int] 
+insert [] n = [n]
 insert (f:rest) n 
-    |   f > n = n:f:rest 
+    |   f > n = n:(f:rest) 
     |   otherwise = f:(insert rest n)
 
 isort:: [Int] -> [Int]
