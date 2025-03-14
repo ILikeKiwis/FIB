@@ -17,9 +17,9 @@ void main()
     vec4 n = texture(noise1, vec2(vtexCoord.s + 0.08*time, vtexCoord.t + 0.07*time));
     vec2 b = vec2(n.r, n.g);
     
-    float d = dot(b, a);
+    //float d = dot(b, a);
     
-    vec2 dv = a * n.r * n.g; 
+    vec2 dv = a * b; 
     
-    fragColor = texture(fons, vtexCoord + d);
+    fragColor = texture(fons, vtexCoord + dv);
 }
