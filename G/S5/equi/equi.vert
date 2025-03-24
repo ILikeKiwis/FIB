@@ -8,12 +8,17 @@ layout (location = 3) in vec2 texCoord;
 out vec4 frontColor;
 out vec2 vtexCoord;
 
+out vec4 P;
+
 uniform mat4 modelViewProjectionMatrix;
+uniform mat4 modelViewMatrix;
+uniform mat4 modelMatrix;
 uniform mat3 normalMatrix;
 
 void main()
 {
     vec3 N = normalize(normalMatrix * normal);
+    P = vec4(vertex, 1.0);
     frontColor = vec4(color,1.0) * N.z;
     vtexCoord = texCoord;
     gl_Position = modelViewProjectionMatrix * vec4(vertex, 1.0);
