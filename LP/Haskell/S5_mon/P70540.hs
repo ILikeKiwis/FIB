@@ -1,4 +1,3 @@
-import Distribution.Simple.Utils (xargs)
 data Expr = Val Int | Add Expr Expr | Sub Expr Expr | Mul Expr Expr | Div Expr Expr 
 
 eval1 :: Expr -> Int
