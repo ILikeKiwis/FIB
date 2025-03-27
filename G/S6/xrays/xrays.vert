@@ -10,6 +10,9 @@ out vec2 vtexCoord;
 
 uniform mat4 modelViewProjectionMatrix;
 uniform mat3 normalMatrix;
+uniform mat4 modelViewMatrix;
+
+out vec3 P;
 
 void main()
 {
@@ -18,5 +21,6 @@ void main()
     vtexCoord = texCoord;
     vec3 S = vec3(0.5,1.,1.);
     vec3 v = vertex * S;
+    P = (modelViewMatrix * vec4(v, 1.0)).xyz;
     gl_Position = modelViewProjectionMatrix * vec4(v, 1.0);
 }
