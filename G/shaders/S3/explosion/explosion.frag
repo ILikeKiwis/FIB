@@ -13,7 +13,7 @@ uniform sampler2D explosion;
 void main()
 { 
     fragColor = vec4(1);
-    int frame = int(floor(time/slice));
+    int frame = int(floor(time/slice));	// Frame en el que estamos
     frame = frame % 48; // 0-47
     int i = 5 - frame/8; // offset de 7 a 0
     int j = frame%8; 	
