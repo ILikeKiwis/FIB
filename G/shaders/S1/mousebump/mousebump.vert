@@ -62,14 +62,20 @@ void main()
     float diagonal = distance(boundingBoxMin, boundingBoxMax);
     
     vec3 P2 = P + N*0.03*diagonal;
-    vec4 window_P4 = modelViewProjectionMatrix * vec4(vertex, 1.0);
-    vec2 Pos_pixel = vec2(window_P4.x/window_P4.w, window_P4.y/window_P4.w) * viewport;
-    float d = distance( Pos_pixel, getMousePositionWindowSpace());
     
-    float t = smoothstep(0.05*radius, 0.8*radius, d);
-    t = 1-t;
+    vec4 window_P4 = modelViewProjectionMatrix * vec4(vertex, 1.0);
+    
+    
+    vec2 Pos_pixel = vec2(window_P4.x/window_P4.w, window_P4.y/window_P4.w);		//Al hacer division de perspectiva queda entre [-1,1] y para multipilacr por el wiport necesitamos [0, 1]
+    Pos_pixel += 1;
+    Pos_pixel /= 2;
+    
+    float d = distance(Pos_pixel * viewport, getMousePositionWindowSpace());
+    
+    float t = smoothstep(0.8*radius, 0.05*radius, d);
+    //t = 1-t;
     
     vec3 aux = mix(P, P2, t);
-    frontColor = mix(vec4(1), vec4(1, 0, 0, 1), t) * vec4(N.z);
-    gl_Position = projectionMatrix * vec4(aux, 1.0);
+    frontColor = mix(vec4(1), vec4(1, 0, 0, 1), t) * N.z;
+    gl_Position =  projectionMatrix * vec4(aux, 1.0);
 }

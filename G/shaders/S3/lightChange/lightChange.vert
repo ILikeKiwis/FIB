@@ -18,12 +18,13 @@ out vec3 N;
 out vec3 L;
 out vec3 R;
 out vec3 V;
+out vec3 P;
 
 void main()
 {
     N = normalize(normalMatrix * normal);
-    vec3 P = (modelViewMatrix * vec4(vertex, 1)).xyz;
-    L = normalize(lightPosition.xyz - P);
+    P = (modelViewMatrix * vec4(vertex, 1)).xyz;
+    
     R = normalize(2.0* dot(N,L) * N - L);
     V = normalize(-P);
     

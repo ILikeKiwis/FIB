@@ -8,11 +8,10 @@ in vec2 vtexCoord;
 uniform sampler2D colorMap;
 
 in vec3 N;
-in vec3 L;
-in vec3 R;
-in vec3 V;
+uniform vec4 lightPosition;
+in vec3 P;
 
-uniform float time = 7.1;
+uniform float time;
 
 uniform vec4 lightSpecular;
 uniform vec4 matSpecular;
@@ -48,6 +47,8 @@ vec4 Especular(vec3 N, vec3 L, vec3 R, vec3 V) {
 
 void main()
 {
-    
+    vec3 L = normalize(lightPosition.xyz - P);
+    vec3 R = normalize(2.0* dot(N,L) * N - L);
+    vec3 V = normalize(-P);
     fragColor = Difus(N, L) + Especular(N, L, R, V);
 }
