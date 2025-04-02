@@ -11,19 +11,23 @@ out vec2 vtexCoord;
 uniform mat4 modelViewProjectionMatrix;
 uniform mat3 normalMatrix;
 
-uniform float speed = 0.5;
 uniform float time;
+
 
 void main()
 {
     vec3 N = normalize(normalMatrix * normal);
+    
+    float A = (vertex.y-0.5)*sin(time);
+    if(vertex.y < 0.5)A = 0;
     frontColor = vec4(color,1.0);
     vtexCoord = texCoord;
-    float a = speed*time;
-    
-    
-    mat3 r_Y = mat3 (	vec3(cos(a), 0, -sin(a)),
-    			vec3(0, 1, 0),
-    			vec3(sin(a), 0, cos(a)));
-    gl_Position = modelViewProjectionMatrix * vec4(r_Y*vertex, 1.0);
+    mat3 rotate_X = mat3(	vec3(1, 0, 0),
+    				vec3(0, cos(A), sin(A)), 
+    				vec3(0, -sin(A), cos(A)));
+    vec3 aux = vertex;
+    aux = aux - vec3(0, 1, 0);
+    aux = rotate_X*aux;
+    aux = aux + vec3(0, 1, 0);
+    gl_Position = modelViewProjectionMatrix * vec4(aux, 1.0);
 }
