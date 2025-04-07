@@ -12,3 +12,4 @@ build x = Node (build e) (build d)
         m = length x 
         n = (div m 2) + (mod m 2)
         (e,d) = splitAt n x
+

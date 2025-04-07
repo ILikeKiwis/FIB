@@ -1,3 +1,4 @@
+import Distribution.Simple.BuildToolDepends (getAllInternalToolDependencies)
 data Temps = Temps Int Int
 data Arbre a = Arbre a [Arbre a]
 
@@ -13,3 +14,16 @@ sumes::[Temps]->Temps
 sumes = foldr suma (Temps 0 0) 
 
 sumesArbre::Arbre Temps -> Temps
+sumesArbre (Arbre (Temps h m) l)= suma (Temps h m) (sumes (map sumesArbre l))
+
+
+main::IO()
+main = do 
+    line <- getLine 
+    let temps = map parseTemps (words line)
+    print (sumes temps)
+
+parseTemps::String -> Temps
+parseTemps s = 
+    let (hStr, _:mStr) = span (/= ':') s
+    in Temps (read hStr) (read mStr)
