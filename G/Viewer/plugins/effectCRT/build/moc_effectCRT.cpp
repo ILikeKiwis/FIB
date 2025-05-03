@@ -1,49 +1,50 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'effectCRT.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.15.2)
+** Created by: The Qt Meta Object Compiler version 68 (Qt 6.4.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
 #include <memory>
 #include "../effectCRT.h"
-#include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #include <QtCore/qplugin.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'effectCRT.h' doesn't include <QObject>."
-#elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.15.2. It"
+#elif Q_MOC_OUTPUT_REVISION != 68
+#error "This file was generated using the moc from 6.4.2. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
+#endif
+
+#ifndef Q_CONSTINIT
+#define Q_CONSTINIT
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
+namespace {
 struct qt_meta_stringdata_EffectCRT_t {
-    QByteArrayData data[1];
+    uint offsetsAndSizes[2];
     char stringdata0[10];
 };
-#define QT_MOC_LITERAL(idx, ofs, len) \
-    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_EffectCRT_t, stringdata0) + ofs \
-        - idx * sizeof(QByteArrayData)) \
-    )
-static const qt_meta_stringdata_EffectCRT_t qt_meta_stringdata_EffectCRT = {
+#define QT_MOC_LITERAL(ofs, len) \
+    uint(sizeof(qt_meta_stringdata_EffectCRT_t::offsetsAndSizes) + ofs), len 
+Q_CONSTINIT static const qt_meta_stringdata_EffectCRT_t qt_meta_stringdata_EffectCRT = {
     {
-QT_MOC_LITERAL(0, 0, 9) // "EffectCRT"
-
+        QT_MOC_LITERAL(0, 9)   // "EffectCRT"
     },
     "EffectCRT"
 };
 #undef QT_MOC_LITERAL
+} // unnamed namespace
 
-static const uint qt_meta_data_EffectCRT[] = {
+Q_CONSTINIT static const uint qt_meta_data_EffectCRT[] = {
 
  // content:
-       8,       // revision
+      10,       // revision
        0,       // classname
        0,    0, // classinfo
        0,    0, // methods
@@ -56,23 +57,26 @@ static const uint qt_meta_data_EffectCRT[] = {
        0        // eod
 };
 
-void EffectCRT::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
-{
-    Q_UNUSED(_o);
-    Q_UNUSED(_id);
-    Q_UNUSED(_c);
-    Q_UNUSED(_a);
-}
-
-QT_INIT_METAOBJECT const QMetaObject EffectCRT::staticMetaObject = { {
+Q_CONSTINIT const QMetaObject EffectCRT::staticMetaObject = { {
     QMetaObject::SuperData::link<QObject::staticMetaObject>(),
-    qt_meta_stringdata_EffectCRT.data,
+    qt_meta_stringdata_EffectCRT.offsetsAndSizes,
     qt_meta_data_EffectCRT,
     qt_static_metacall,
     nullptr,
+    qt_incomplete_metaTypeArray<qt_meta_stringdata_EffectCRT_t,
+        // Q_OBJECT / Q_GADGET
+        QtPrivate::TypeAndForceComplete<EffectCRT, std::true_type>
+    >,
     nullptr
 } };
 
+void EffectCRT::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    (void)_o;
+    (void)_id;
+    (void)_c;
+    (void)_a;
+}
 
 const QMetaObject *EffectCRT::metaObject() const
 {
@@ -97,8 +101,20 @@ int EffectCRT::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     return _id;
 }
 
+#ifdef QT_MOC_EXPORT_PLUGIN_V2
+static constexpr unsigned char qt_pluginMetaDataV2_EffectCRT[] = {
+    0xbf, 
+    // "IID"
+    0x02,  0x66,  'P',  'l',  'u',  'g',  'i',  'n', 
+    // "className"
+    0x03,  0x69,  'E',  'f',  'f',  'e',  'c',  't', 
+    'C',  'R',  'T', 
+    0xff, 
+};
+QT_MOC_EXPORT_PLUGIN_V2(EffectCRT, EffectCRT, qt_pluginMetaDataV2_EffectCRT)
+#else
 QT_PLUGIN_METADATA_SECTION
-static constexpr unsigned char qt_pluginMetaData[] = {
+Q_CONSTINIT static constexpr unsigned char qt_pluginMetaData_EffectCRT[] = {
     'Q', 'T', 'M', 'E', 'T', 'A', 'D', 'A', 'T', 'A', ' ', '!',
     // metadata version, Qt version, architectural requirements
     0, QT_VERSION_MAJOR, QT_VERSION_MINOR, qPluginArchRequirements(),
@@ -111,6 +127,7 @@ static constexpr unsigned char qt_pluginMetaData[] = {
     0xff, 
 };
 QT_MOC_EXPORT_PLUGIN(EffectCRT, EffectCRT)
+#endif  // QT_MOC_EXPORT_PLUGIN_V2
 
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

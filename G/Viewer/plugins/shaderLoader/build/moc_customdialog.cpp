@@ -1,50 +1,56 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'customdialog.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.15.2)
+** Created by: The Qt Meta Object Compiler version 68 (Qt 6.4.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
 #include <memory>
 #include "../customdialog.h"
-#include <QtCore/qbytearray.h>
+#include <QtGui/qtextcursor.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'customdialog.h' doesn't include <QObject>."
-#elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.15.2. It"
+#elif Q_MOC_OUTPUT_REVISION != 68
+#error "This file was generated using the moc from 6.4.2. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
+#endif
+
+#ifndef Q_CONSTINIT
+#define Q_CONSTINIT
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
+namespace {
 struct qt_meta_stringdata_ColorButton_t {
-    QByteArrayData data[3];
-    char stringdata0[23];
+    uint offsetsAndSizes[6];
+    char stringdata0[12];
+    char stringdata1[10];
+    char stringdata2[1];
 };
-#define QT_MOC_LITERAL(idx, ofs, len) \
-    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_ColorButton_t, stringdata0) + ofs \
-        - idx * sizeof(QByteArrayData)) \
-    )
-static const qt_meta_stringdata_ColorButton_t qt_meta_stringdata_ColorButton = {
+#define QT_MOC_LITERAL(ofs, len) \
+    uint(sizeof(qt_meta_stringdata_ColorButton_t::offsetsAndSizes) + ofs), len 
+Q_CONSTINIT static const qt_meta_stringdata_ColorButton_t qt_meta_stringdata_ColorButton = {
     {
-QT_MOC_LITERAL(0, 0, 11), // "ColorButton"
-QT_MOC_LITERAL(1, 12, 9), // "pickColor"
-QT_MOC_LITERAL(2, 22, 0) // ""
-
+        QT_MOC_LITERAL(0, 11),  // "ColorButton"
+        QT_MOC_LITERAL(12, 9),  // "pickColor"
+        QT_MOC_LITERAL(22, 0)   // ""
     },
-    "ColorButton\0pickColor\0"
+    "ColorButton",
+    "pickColor",
+    ""
 };
 #undef QT_MOC_LITERAL
+} // unnamed namespace
 
-static const uint qt_meta_data_ColorButton[] = {
+Q_CONSTINIT static const uint qt_meta_data_ColorButton[] = {
 
  // content:
-       8,       // revision
+      10,       // revision
        0,       // classname
        0,    0, // classinfo
        1,   14, // methods
@@ -54,8 +60,8 @@ static const uint qt_meta_data_ColorButton[] = {
        0,       // flags
        0,       // signalCount
 
- // slots: name, argc, parameters, tag, flags
-       1,    0,   19,    2, 0x0a /* Public */,
+ // slots: name, argc, parameters, tag, flags, initial metatype offsets
+       1,    0,   20,    2, 0x0a,    1 /* Public */,
 
  // slots: parameters
     QMetaType::Void,
@@ -63,28 +69,33 @@ static const uint qt_meta_data_ColorButton[] = {
        0        // eod
 };
 
+Q_CONSTINIT const QMetaObject ColorButton::staticMetaObject = { {
+    QMetaObject::SuperData::link<QPushButton::staticMetaObject>(),
+    qt_meta_stringdata_ColorButton.offsetsAndSizes,
+    qt_meta_data_ColorButton,
+    qt_static_metacall,
+    nullptr,
+    qt_incomplete_metaTypeArray<qt_meta_stringdata_ColorButton_t,
+        // Q_OBJECT / Q_GADGET
+        QtPrivate::TypeAndForceComplete<ColorButton, std::true_type>,
+        // method 'pickColor'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>
+    >,
+    nullptr
+} };
+
 void ColorButton::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
         auto *_t = static_cast<ColorButton *>(_o);
-        Q_UNUSED(_t)
+        (void)_t;
         switch (_id) {
         case 0: _t->pickColor(); break;
         default: ;
         }
     }
-    Q_UNUSED(_a);
+    (void)_a;
 }
-
-QT_INIT_METAOBJECT const QMetaObject ColorButton::staticMetaObject = { {
-    QMetaObject::SuperData::link<QPushButton::staticMetaObject>(),
-    qt_meta_stringdata_ColorButton.data,
-    qt_meta_data_ColorButton,
-    qt_static_metacall,
-    nullptr,
-    nullptr
-} };
-
 
 const QMetaObject *ColorButton::metaObject() const
 {
@@ -110,45 +121,58 @@ int ColorButton::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         _id -= 1;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         if (_id < 1)
-            *reinterpret_cast<int*>(_a[0]) = -1;
+            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
         _id -= 1;
     }
     return _id;
 }
+namespace {
 struct qt_meta_stringdata_CustomDialog_t {
-    QByteArrayData data[10];
-    char stringdata0[122];
+    uint offsetsAndSizes[20];
+    char stringdata0[13];
+    char stringdata1[16];
+    char stringdata2[1];
+    char stringdata3[16];
+    char stringdata4[17];
+    char stringdata5[17];
+    char stringdata6[17];
+    char stringdata7[11];
+    char stringdata8[9];
+    char stringdata9[5];
 };
-#define QT_MOC_LITERAL(idx, ofs, len) \
-    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_CustomDialog_t, stringdata0) + ofs \
-        - idx * sizeof(QByteArrayData)) \
-    )
-static const qt_meta_stringdata_CustomDialog_t qt_meta_stringdata_CustomDialog = {
+#define QT_MOC_LITERAL(ofs, len) \
+    uint(sizeof(qt_meta_stringdata_CustomDialog_t::offsetsAndSizes) + ofs), len 
+Q_CONSTINIT static const qt_meta_stringdata_CustomDialog_t qt_meta_stringdata_CustomDialog = {
     {
-QT_MOC_LITERAL(0, 0, 12), // "CustomDialog"
-QT_MOC_LITERAL(1, 13, 15), // "customBtnAccept"
-QT_MOC_LITERAL(2, 29, 0), // ""
-QT_MOC_LITERAL(3, 30, 15), // "customBtnReject"
-QT_MOC_LITERAL(4, 46, 16), // "customBtnMessage"
-QT_MOC_LITERAL(5, 63, 16), // "customBtnOpenUrl"
-QT_MOC_LITERAL(6, 80, 16), // "updateBtnClicked"
-QT_MOC_LITERAL(7, 97, 10), // "btnClicked"
-QT_MOC_LITERAL(8, 108, 8), // "resizeMe"
-QT_MOC_LITERAL(9, 117, 4) // "exec"
-
+        QT_MOC_LITERAL(0, 12),  // "CustomDialog"
+        QT_MOC_LITERAL(13, 15),  // "customBtnAccept"
+        QT_MOC_LITERAL(29, 0),  // ""
+        QT_MOC_LITERAL(30, 15),  // "customBtnReject"
+        QT_MOC_LITERAL(46, 16),  // "customBtnMessage"
+        QT_MOC_LITERAL(63, 16),  // "customBtnOpenUrl"
+        QT_MOC_LITERAL(80, 16),  // "updateBtnClicked"
+        QT_MOC_LITERAL(97, 10),  // "btnClicked"
+        QT_MOC_LITERAL(108, 8),  // "resizeMe"
+        QT_MOC_LITERAL(117, 4)   // "exec"
     },
-    "CustomDialog\0customBtnAccept\0\0"
-    "customBtnReject\0customBtnMessage\0"
-    "customBtnOpenUrl\0updateBtnClicked\0"
-    "btnClicked\0resizeMe\0exec"
+    "CustomDialog",
+    "customBtnAccept",
+    "",
+    "customBtnReject",
+    "customBtnMessage",
+    "customBtnOpenUrl",
+    "updateBtnClicked",
+    "btnClicked",
+    "resizeMe",
+    "exec"
 };
 #undef QT_MOC_LITERAL
+} // unnamed namespace
 
-static const uint qt_meta_data_CustomDialog[] = {
+Q_CONSTINIT static const uint qt_meta_data_CustomDialog[] = {
 
  // content:
-       8,       // revision
+      10,       // revision
        0,       // classname
        0,    0, // classinfo
        7,   14, // methods
@@ -158,14 +182,14 @@ static const uint qt_meta_data_CustomDialog[] = {
        0,       // flags
        0,       // signalCount
 
- // slots: name, argc, parameters, tag, flags
-       1,    0,   49,    2, 0x0a /* Public */,
-       3,    0,   50,    2, 0x0a /* Public */,
-       4,    0,   51,    2, 0x0a /* Public */,
-       5,    0,   52,    2, 0x0a /* Public */,
-       6,    1,   53,    2, 0x0a /* Public */,
-       8,    0,   56,    2, 0x0a /* Public */,
-       9,    0,   57,    2, 0x0a /* Public */,
+ // slots: name, argc, parameters, tag, flags, initial metatype offsets
+       1,    0,   56,    2, 0x0a,    1 /* Public */,
+       3,    0,   57,    2, 0x0a,    2 /* Public */,
+       4,    0,   58,    2, 0x0a,    3 /* Public */,
+       5,    0,   59,    2, 0x0a,    4 /* Public */,
+       6,    1,   60,    2, 0x0a,    5 /* Public */,
+       8,    0,   63,    2, 0x0a,    7 /* Public */,
+       9,    0,   64,    2, 0x0a,    8 /* Public */,
 
  // slots: parameters
     QMetaType::Void,
@@ -179,17 +203,45 @@ static const uint qt_meta_data_CustomDialog[] = {
        0        // eod
 };
 
+Q_CONSTINIT const QMetaObject CustomDialog::staticMetaObject = { {
+    QMetaObject::SuperData::link<QDialog::staticMetaObject>(),
+    qt_meta_stringdata_CustomDialog.offsetsAndSizes,
+    qt_meta_data_CustomDialog,
+    qt_static_metacall,
+    nullptr,
+    qt_incomplete_metaTypeArray<qt_meta_stringdata_CustomDialog_t,
+        // Q_OBJECT / Q_GADGET
+        QtPrivate::TypeAndForceComplete<CustomDialog, std::true_type>,
+        // method 'customBtnAccept'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'customBtnReject'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'customBtnMessage'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'customBtnOpenUrl'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'updateBtnClicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QObject *, std::false_type>,
+        // method 'resizeMe'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'exec'
+        QtPrivate::TypeAndForceComplete<int, std::false_type>
+    >,
+    nullptr
+} };
+
 void CustomDialog::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
         auto *_t = static_cast<CustomDialog *>(_o);
-        Q_UNUSED(_t)
+        (void)_t;
         switch (_id) {
         case 0: _t->customBtnAccept(); break;
         case 1: _t->customBtnReject(); break;
         case 2: _t->customBtnMessage(); break;
         case 3: _t->customBtnOpenUrl(); break;
-        case 4: _t->updateBtnClicked((*reinterpret_cast< QObject*(*)>(_a[1]))); break;
+        case 4: _t->updateBtnClicked((*reinterpret_cast< std::add_pointer_t<QObject*>>(_a[1]))); break;
         case 5: _t->resizeMe(); break;
         case 6: { int _r = _t->exec();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
@@ -197,16 +249,6 @@ void CustomDialog::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         }
     }
 }
-
-QT_INIT_METAOBJECT const QMetaObject CustomDialog::staticMetaObject = { {
-    QMetaObject::SuperData::link<QDialog::staticMetaObject>(),
-    qt_meta_stringdata_CustomDialog.data,
-    qt_meta_data_CustomDialog,
-    qt_static_metacall,
-    nullptr,
-    nullptr
-} };
-
 
 const QMetaObject *CustomDialog::metaObject() const
 {
@@ -232,7 +274,7 @@ int CustomDialog::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         if (_id < 7)
-            *reinterpret_cast<int*>(_a[0]) = -1;
+            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
         _id -= 7;
     }
     return _id;

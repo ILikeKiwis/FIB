@@ -1,49 +1,50 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'drawvbong.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.15.2)
+** Created by: The Qt Meta Object Compiler version 68 (Qt 6.4.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
 #include <memory>
 #include "../drawvbong.h"
-#include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #include <QtCore/qplugin.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'drawvbong.h' doesn't include <QObject>."
-#elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.15.2. It"
+#elif Q_MOC_OUTPUT_REVISION != 68
+#error "This file was generated using the moc from 6.4.2. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
+#endif
+
+#ifndef Q_CONSTINIT
+#define Q_CONSTINIT
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
+namespace {
 struct qt_meta_stringdata_DrawVBOng_t {
-    QByteArrayData data[1];
+    uint offsetsAndSizes[2];
     char stringdata0[10];
 };
-#define QT_MOC_LITERAL(idx, ofs, len) \
-    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_DrawVBOng_t, stringdata0) + ofs \
-        - idx * sizeof(QByteArrayData)) \
-    )
-static const qt_meta_stringdata_DrawVBOng_t qt_meta_stringdata_DrawVBOng = {
+#define QT_MOC_LITERAL(ofs, len) \
+    uint(sizeof(qt_meta_stringdata_DrawVBOng_t::offsetsAndSizes) + ofs), len 
+Q_CONSTINIT static const qt_meta_stringdata_DrawVBOng_t qt_meta_stringdata_DrawVBOng = {
     {
-QT_MOC_LITERAL(0, 0, 9) // "DrawVBOng"
-
+        QT_MOC_LITERAL(0, 9)   // "DrawVBOng"
     },
     "DrawVBOng"
 };
 #undef QT_MOC_LITERAL
+} // unnamed namespace
 
-static const uint qt_meta_data_DrawVBOng[] = {
+Q_CONSTINIT static const uint qt_meta_data_DrawVBOng[] = {
 
  // content:
-       8,       // revision
+      10,       // revision
        0,       // classname
        0,    0, // classinfo
        0,    0, // methods
@@ -56,23 +57,26 @@ static const uint qt_meta_data_DrawVBOng[] = {
        0        // eod
 };
 
-void DrawVBOng::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
-{
-    Q_UNUSED(_o);
-    Q_UNUSED(_id);
-    Q_UNUSED(_c);
-    Q_UNUSED(_a);
-}
-
-QT_INIT_METAOBJECT const QMetaObject DrawVBOng::staticMetaObject = { {
+Q_CONSTINIT const QMetaObject DrawVBOng::staticMetaObject = { {
     QMetaObject::SuperData::link<QObject::staticMetaObject>(),
-    qt_meta_stringdata_DrawVBOng.data,
+    qt_meta_stringdata_DrawVBOng.offsetsAndSizes,
     qt_meta_data_DrawVBOng,
     qt_static_metacall,
     nullptr,
+    qt_incomplete_metaTypeArray<qt_meta_stringdata_DrawVBOng_t,
+        // Q_OBJECT / Q_GADGET
+        QtPrivate::TypeAndForceComplete<DrawVBOng, std::true_type>
+    >,
     nullptr
 } };
 
+void DrawVBOng::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    (void)_o;
+    (void)_id;
+    (void)_c;
+    (void)_a;
+}
 
 const QMetaObject *DrawVBOng::metaObject() const
 {
@@ -97,8 +101,20 @@ int DrawVBOng::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     return _id;
 }
 
+#ifdef QT_MOC_EXPORT_PLUGIN_V2
+static constexpr unsigned char qt_pluginMetaDataV2_DrawVBOng[] = {
+    0xbf, 
+    // "IID"
+    0x02,  0x66,  'P',  'l',  'u',  'g',  'i',  'n', 
+    // "className"
+    0x03,  0x69,  'D',  'r',  'a',  'w',  'V',  'B', 
+    'O',  'n',  'g', 
+    0xff, 
+};
+QT_MOC_EXPORT_PLUGIN_V2(DrawVBOng, DrawVBOng, qt_pluginMetaDataV2_DrawVBOng)
+#else
 QT_PLUGIN_METADATA_SECTION
-static constexpr unsigned char qt_pluginMetaData[] = {
+Q_CONSTINIT static constexpr unsigned char qt_pluginMetaData_DrawVBOng[] = {
     'Q', 'T', 'M', 'E', 'T', 'A', 'D', 'A', 'T', 'A', ' ', '!',
     // metadata version, Qt version, architectural requirements
     0, QT_VERSION_MAJOR, QT_VERSION_MINOR, qPluginArchRequirements(),
@@ -111,6 +127,7 @@ static constexpr unsigned char qt_pluginMetaData[] = {
     0xff, 
 };
 QT_MOC_EXPORT_PLUGIN(DrawVBOng, DrawVBOng)
+#endif  // QT_MOC_EXPORT_PLUGIN_V2
 
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

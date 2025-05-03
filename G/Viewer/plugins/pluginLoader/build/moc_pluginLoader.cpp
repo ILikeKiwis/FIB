@@ -1,68 +1,92 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'pluginLoader.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.15.2)
+** Created by: The Qt Meta Object Compiler version 68 (Qt 6.4.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
 #include <memory>
 #include "../pluginLoader.h"
-#include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #include <QtCore/qplugin.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'pluginLoader.h' doesn't include <QObject>."
-#elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.15.2. It"
+#elif Q_MOC_OUTPUT_REVISION != 68
+#error "This file was generated using the moc from 6.4.2. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
+#endif
+
+#ifndef Q_CONSTINIT
+#define Q_CONSTINIT
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
+namespace {
 struct qt_meta_stringdata_PluginLoader_t {
-    QByteArrayData data[15];
-    char stringdata0[197];
+    uint offsetsAndSizes[30];
+    char stringdata0[13];
+    char stringdata1[20];
+    char stringdata2[1];
+    char stringdata3[25];
+    char stringdata4[13];
+    char stringdata5[5];
+    char stringdata6[22];
+    char stringdata7[12];
+    char stringdata8[14];
+    char stringdata9[14];
+    char stringdata10[14];
+    char stringdata11[14];
+    char stringdata12[14];
+    char stringdata13[11];
+    char stringdata14[5];
 };
-#define QT_MOC_LITERAL(idx, ofs, len) \
-    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_PluginLoader_t, stringdata0) + ofs \
-        - idx * sizeof(QByteArrayData)) \
-    )
-static const qt_meta_stringdata_PluginLoader_t qt_meta_stringdata_PluginLoader = {
+#define QT_MOC_LITERAL(ofs, len) \
+    uint(sizeof(qt_meta_stringdata_PluginLoader_t::offsetsAndSizes) + ofs), len 
+Q_CONSTINIT static const qt_meta_stringdata_PluginLoader_t qt_meta_stringdata_PluginLoader = {
     {
-QT_MOC_LITERAL(0, 0, 12), // "PluginLoader"
-QT_MOC_LITERAL(1, 13, 19), // "createDefaultPlugin"
-QT_MOC_LITERAL(2, 33, 0), // ""
-QT_MOC_LITERAL(3, 34, 24), // "createPluginFromTemplate"
-QT_MOC_LITERAL(4, 59, 12), // "attachPlugin"
-QT_MOC_LITERAL(5, 72, 4), // "name"
-QT_MOC_LITERAL(6, 77, 21), // "openFilesInTextEditor"
-QT_MOC_LITERAL(7, 99, 11), // "resetCamera"
-QT_MOC_LITERAL(8, 111, 13), // "cameraPreset1"
-QT_MOC_LITERAL(9, 125, 13), // "cameraPreset2"
-QT_MOC_LITERAL(10, 139, 13), // "cameraPreset3"
-QT_MOC_LITERAL(11, 153, 13), // "cameraPreset4"
-QT_MOC_LITERAL(12, 167, 13), // "cameraPreset5"
-QT_MOC_LITERAL(13, 181, 10), // "loadObject"
-QT_MOC_LITERAL(14, 192, 4) // "file"
-
+        QT_MOC_LITERAL(0, 12),  // "PluginLoader"
+        QT_MOC_LITERAL(13, 19),  // "createDefaultPlugin"
+        QT_MOC_LITERAL(33, 0),  // ""
+        QT_MOC_LITERAL(34, 24),  // "createPluginFromTemplate"
+        QT_MOC_LITERAL(59, 12),  // "attachPlugin"
+        QT_MOC_LITERAL(72, 4),  // "name"
+        QT_MOC_LITERAL(77, 21),  // "openFilesInTextEditor"
+        QT_MOC_LITERAL(99, 11),  // "resetCamera"
+        QT_MOC_LITERAL(111, 13),  // "cameraPreset1"
+        QT_MOC_LITERAL(125, 13),  // "cameraPreset2"
+        QT_MOC_LITERAL(139, 13),  // "cameraPreset3"
+        QT_MOC_LITERAL(153, 13),  // "cameraPreset4"
+        QT_MOC_LITERAL(167, 13),  // "cameraPreset5"
+        QT_MOC_LITERAL(181, 10),  // "loadObject"
+        QT_MOC_LITERAL(192, 4)   // "file"
     },
-    "PluginLoader\0createDefaultPlugin\0\0"
-    "createPluginFromTemplate\0attachPlugin\0"
-    "name\0openFilesInTextEditor\0resetCamera\0"
-    "cameraPreset1\0cameraPreset2\0cameraPreset3\0"
-    "cameraPreset4\0cameraPreset5\0loadObject\0"
+    "PluginLoader",
+    "createDefaultPlugin",
+    "",
+    "createPluginFromTemplate",
+    "attachPlugin",
+    "name",
+    "openFilesInTextEditor",
+    "resetCamera",
+    "cameraPreset1",
+    "cameraPreset2",
+    "cameraPreset3",
+    "cameraPreset4",
+    "cameraPreset5",
+    "loadObject",
     "file"
 };
 #undef QT_MOC_LITERAL
+} // unnamed namespace
 
-static const uint qt_meta_data_PluginLoader[] = {
+Q_CONSTINIT static const uint qt_meta_data_PluginLoader[] = {
 
  // content:
-       8,       // revision
+      10,       // revision
        0,       // classname
        0,    0, // classinfo
       13,   14, // methods
@@ -72,20 +96,20 @@ static const uint qt_meta_data_PluginLoader[] = {
        0,       // flags
        0,       // signalCount
 
- // slots: name, argc, parameters, tag, flags
-       1,    0,   79,    2, 0x0a /* Public */,
-       3,    0,   80,    2, 0x0a /* Public */,
-       4,    0,   81,    2, 0x0a /* Public */,
-       4,    1,   82,    2, 0x0a /* Public */,
-       6,    0,   85,    2, 0x0a /* Public */,
-       7,    0,   86,    2, 0x0a /* Public */,
-       8,    0,   87,    2, 0x0a /* Public */,
-       9,    0,   88,    2, 0x0a /* Public */,
-      10,    0,   89,    2, 0x0a /* Public */,
-      11,    0,   90,    2, 0x0a /* Public */,
-      12,    0,   91,    2, 0x0a /* Public */,
-      13,    0,   92,    2, 0x0a /* Public */,
-      13,    1,   93,    2, 0x0a /* Public */,
+ // slots: name, argc, parameters, tag, flags, initial metatype offsets
+       1,    0,   92,    2, 0x0a,    1 /* Public */,
+       3,    0,   93,    2, 0x0a,    2 /* Public */,
+       4,    0,   94,    2, 0x0a,    3 /* Public */,
+       4,    1,   95,    2, 0x0a,    4 /* Public */,
+       6,    0,   98,    2, 0x0a,    6 /* Public */,
+       7,    0,   99,    2, 0x0a,    7 /* Public */,
+       8,    0,  100,    2, 0x0a,    8 /* Public */,
+       9,    0,  101,    2, 0x0a,    9 /* Public */,
+      10,    0,  102,    2, 0x0a,   10 /* Public */,
+      11,    0,  103,    2, 0x0a,   11 /* Public */,
+      12,    0,  104,    2, 0x0a,   12 /* Public */,
+      13,    0,  105,    2, 0x0a,   13 /* Public */,
+      13,    1,  106,    2, 0x0a,   14 /* Public */,
 
  // slots: parameters
     QMetaType::Void,
@@ -105,16 +129,57 @@ static const uint qt_meta_data_PluginLoader[] = {
        0        // eod
 };
 
+Q_CONSTINIT const QMetaObject PluginLoader::staticMetaObject = { {
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
+    qt_meta_stringdata_PluginLoader.offsetsAndSizes,
+    qt_meta_data_PluginLoader,
+    qt_static_metacall,
+    nullptr,
+    qt_incomplete_metaTypeArray<qt_meta_stringdata_PluginLoader_t,
+        // Q_OBJECT / Q_GADGET
+        QtPrivate::TypeAndForceComplete<PluginLoader, std::true_type>,
+        // method 'createDefaultPlugin'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'createPluginFromTemplate'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'attachPlugin'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'attachPlugin'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
+        // method 'openFilesInTextEditor'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'resetCamera'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'cameraPreset1'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'cameraPreset2'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'cameraPreset3'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'cameraPreset4'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'cameraPreset5'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'loadObject'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'loadObject'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>
+    >,
+    nullptr
+} };
+
 void PluginLoader::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
         auto *_t = static_cast<PluginLoader *>(_o);
-        Q_UNUSED(_t)
+        (void)_t;
         switch (_id) {
         case 0: _t->createDefaultPlugin(); break;
         case 1: _t->createPluginFromTemplate(); break;
         case 2: _t->attachPlugin(); break;
-        case 3: _t->attachPlugin((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 3: _t->attachPlugin((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         case 4: _t->openFilesInTextEditor(); break;
         case 5: _t->resetCamera(); break;
         case 6: _t->cameraPreset1(); break;
@@ -123,21 +188,11 @@ void PluginLoader::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 9: _t->cameraPreset4(); break;
         case 10: _t->cameraPreset5(); break;
         case 11: _t->loadObject(); break;
-        case 12: _t->loadObject((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 12: _t->loadObject((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         default: ;
         }
     }
 }
-
-QT_INIT_METAOBJECT const QMetaObject PluginLoader::staticMetaObject = { {
-    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
-    qt_meta_stringdata_PluginLoader.data,
-    qt_meta_data_PluginLoader,
-    qt_static_metacall,
-    nullptr,
-    nullptr
-} };
-
 
 const QMetaObject *PluginLoader::metaObject() const
 {
@@ -167,14 +222,26 @@ int PluginLoader::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         _id -= 13;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         if (_id < 13)
-            *reinterpret_cast<int*>(_a[0]) = -1;
+            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
         _id -= 13;
     }
     return _id;
 }
 
+#ifdef QT_MOC_EXPORT_PLUGIN_V2
+static constexpr unsigned char qt_pluginMetaDataV2_PluginLoader[] = {
+    0xbf, 
+    // "IID"
+    0x02,  0x66,  'P',  'l',  'u',  'g',  'i',  'n', 
+    // "className"
+    0x03,  0x6c,  'P',  'l',  'u',  'g',  'i',  'n', 
+    'L',  'o',  'a',  'd',  'e',  'r', 
+    0xff, 
+};
+QT_MOC_EXPORT_PLUGIN_V2(PluginLoader, PluginLoader, qt_pluginMetaDataV2_PluginLoader)
+#else
 QT_PLUGIN_METADATA_SECTION
-static constexpr unsigned char qt_pluginMetaData[] = {
+Q_CONSTINIT static constexpr unsigned char qt_pluginMetaData_PluginLoader[] = {
     'Q', 'T', 'M', 'E', 'T', 'A', 'D', 'A', 'T', 'A', ' ', '!',
     // metadata version, Qt version, architectural requirements
     0, QT_VERSION_MAJOR, QT_VERSION_MINOR, qPluginArchRequirements(),
@@ -187,6 +254,7 @@ static constexpr unsigned char qt_pluginMetaData[] = {
     0xff, 
 };
 QT_MOC_EXPORT_PLUGIN(PluginLoader, PluginLoader)
+#endif  // QT_MOC_EXPORT_PLUGIN_V2
 
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

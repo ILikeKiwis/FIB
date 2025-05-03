@@ -1,49 +1,50 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'renderdefault.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.15.2)
+** Created by: The Qt Meta Object Compiler version 68 (Qt 6.4.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
 #include <memory>
 #include "../renderdefault.h"
-#include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #include <QtCore/qplugin.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'renderdefault.h' doesn't include <QObject>."
-#elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.15.2. It"
+#elif Q_MOC_OUTPUT_REVISION != 68
+#error "This file was generated using the moc from 6.4.2. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
+#endif
+
+#ifndef Q_CONSTINIT
+#define Q_CONSTINIT
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
+namespace {
 struct qt_meta_stringdata_RenderDefault_t {
-    QByteArrayData data[1];
+    uint offsetsAndSizes[2];
     char stringdata0[14];
 };
-#define QT_MOC_LITERAL(idx, ofs, len) \
-    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_RenderDefault_t, stringdata0) + ofs \
-        - idx * sizeof(QByteArrayData)) \
-    )
-static const qt_meta_stringdata_RenderDefault_t qt_meta_stringdata_RenderDefault = {
+#define QT_MOC_LITERAL(ofs, len) \
+    uint(sizeof(qt_meta_stringdata_RenderDefault_t::offsetsAndSizes) + ofs), len 
+Q_CONSTINIT static const qt_meta_stringdata_RenderDefault_t qt_meta_stringdata_RenderDefault = {
     {
-QT_MOC_LITERAL(0, 0, 13) // "RenderDefault"
-
+        QT_MOC_LITERAL(0, 13)   // "RenderDefault"
     },
     "RenderDefault"
 };
 #undef QT_MOC_LITERAL
+} // unnamed namespace
 
-static const uint qt_meta_data_RenderDefault[] = {
+Q_CONSTINIT static const uint qt_meta_data_RenderDefault[] = {
 
  // content:
-       8,       // revision
+      10,       // revision
        0,       // classname
        0,    0, // classinfo
        0,    0, // methods
@@ -56,23 +57,26 @@ static const uint qt_meta_data_RenderDefault[] = {
        0        // eod
 };
 
-void RenderDefault::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
-{
-    Q_UNUSED(_o);
-    Q_UNUSED(_id);
-    Q_UNUSED(_c);
-    Q_UNUSED(_a);
-}
-
-QT_INIT_METAOBJECT const QMetaObject RenderDefault::staticMetaObject = { {
+Q_CONSTINIT const QMetaObject RenderDefault::staticMetaObject = { {
     QMetaObject::SuperData::link<QObject::staticMetaObject>(),
-    qt_meta_stringdata_RenderDefault.data,
+    qt_meta_stringdata_RenderDefault.offsetsAndSizes,
     qt_meta_data_RenderDefault,
     qt_static_metacall,
     nullptr,
+    qt_incomplete_metaTypeArray<qt_meta_stringdata_RenderDefault_t,
+        // Q_OBJECT / Q_GADGET
+        QtPrivate::TypeAndForceComplete<RenderDefault, std::true_type>
+    >,
     nullptr
 } };
 
+void RenderDefault::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    (void)_o;
+    (void)_id;
+    (void)_c;
+    (void)_a;
+}
 
 const QMetaObject *RenderDefault::metaObject() const
 {
@@ -97,8 +101,20 @@ int RenderDefault::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     return _id;
 }
 
+#ifdef QT_MOC_EXPORT_PLUGIN_V2
+static constexpr unsigned char qt_pluginMetaDataV2_RenderDefault[] = {
+    0xbf, 
+    // "IID"
+    0x02,  0x66,  'P',  'l',  'u',  'g',  'i',  'n', 
+    // "className"
+    0x03,  0x6d,  'R',  'e',  'n',  'd',  'e',  'r', 
+    'D',  'e',  'f',  'a',  'u',  'l',  't', 
+    0xff, 
+};
+QT_MOC_EXPORT_PLUGIN_V2(RenderDefault, RenderDefault, qt_pluginMetaDataV2_RenderDefault)
+#else
 QT_PLUGIN_METADATA_SECTION
-static constexpr unsigned char qt_pluginMetaData[] = {
+Q_CONSTINIT static constexpr unsigned char qt_pluginMetaData_RenderDefault[] = {
     'Q', 'T', 'M', 'E', 'T', 'A', 'D', 'A', 'T', 'A', ' ', '!',
     // metadata version, Qt version, architectural requirements
     0, QT_VERSION_MAJOR, QT_VERSION_MINOR, qPluginArchRequirements(),
@@ -111,6 +127,7 @@ static constexpr unsigned char qt_pluginMetaData[] = {
     0xff, 
 };
 QT_MOC_EXPORT_PLUGIN(RenderDefault, RenderDefault)
+#endif  // QT_MOC_EXPORT_PLUGIN_V2
 
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

@@ -1,109 +1,179 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'shaderLoader.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.15.2)
+** Created by: The Qt Meta Object Compiler version 68 (Qt 6.4.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
 #include <memory>
 #include "../shaderLoader.h"
-#include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #include <QtCore/qplugin.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'shaderLoader.h' doesn't include <QObject>."
-#elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.15.2. It"
+#elif Q_MOC_OUTPUT_REVISION != 68
+#error "This file was generated using the moc from 6.4.2. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
+#endif
+
+#ifndef Q_CONSTINIT
+#define Q_CONSTINIT
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
+namespace {
 struct qt_meta_stringdata_ShaderLoader_t {
-    QByteArrayData data[44];
-    char stringdata0[667];
+    uint offsetsAndSizes[88];
+    char stringdata0[13];
+    char stringdata1[25];
+    char stringdata2[1];
+    char stringdata3[27];
+    char stringdata4[25];
+    char stringdata5[14];
+    char stringdata6[5];
+    char stringdata7[22];
+    char stringdata8[15];
+    char stringdata9[15];
+    char stringdata10[15];
+    char stringdata11[22];
+    char stringdata12[21];
+    char stringdata13[22];
+    char stringdata14[12];
+    char stringdata15[14];
+    char stringdata16[14];
+    char stringdata17[14];
+    char stringdata18[14];
+    char stringdata19[14];
+    char stringdata20[11];
+    char stringdata21[5];
+    char stringdata22[22];
+    char stringdata23[13];
+    char stringdata24[13];
+    char stringdata25[13];
+    char stringdata26[13];
+    char stringdata27[13];
+    char stringdata28[16];
+    char stringdata29[16];
+    char stringdata30[17];
+    char stringdata31[22];
+    char stringdata32[20];
+    char stringdata33[19];
+    char stringdata34[18];
+    char stringdata35[19];
+    char stringdata36[19];
+    char stringdata37[20];
+    char stringdata38[12];
+    char stringdata39[3];
+    char stringdata40[12];
+    char stringdata41[3];
+    char stringdata42[12];
+    char stringdata43[12];
 };
-#define QT_MOC_LITERAL(idx, ofs, len) \
-    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_ShaderLoader_t, stringdata0) + ofs \
-        - idx * sizeof(QByteArrayData)) \
-    )
-static const qt_meta_stringdata_ShaderLoader_t qt_meta_stringdata_ShaderLoader = {
+#define QT_MOC_LITERAL(ofs, len) \
+    uint(sizeof(qt_meta_stringdata_ShaderLoader_t::offsetsAndSizes) + ofs), len 
+Q_CONSTINIT static const qt_meta_stringdata_ShaderLoader_t qt_meta_stringdata_ShaderLoader = {
     {
-QT_MOC_LITERAL(0, 0, 12), // "ShaderLoader"
-QT_MOC_LITERAL(1, 13, 24), // "createDefaultShadersVSFS"
-QT_MOC_LITERAL(2, 38, 0), // ""
-QT_MOC_LITERAL(3, 39, 26), // "createDefaultShadersVSGSFS"
-QT_MOC_LITERAL(4, 66, 24), // "createShaderFromTemplate"
-QT_MOC_LITERAL(5, 91, 13), // "attachShaders"
-QT_MOC_LITERAL(6, 105, 4), // "name"
-QT_MOC_LITERAL(7, 110, 21), // "openFilesInTextEditor"
-QT_MOC_LITERAL(8, 132, 14), // "switchStatusVS"
-QT_MOC_LITERAL(9, 147, 14), // "switchStatusGS"
-QT_MOC_LITERAL(10, 162, 14), // "switchStatusFS"
-QT_MOC_LITERAL(11, 177, 21), // "switchStatusWireframe"
-QT_MOC_LITERAL(12, 199, 20), // "switchStatusShowAxes"
-QT_MOC_LITERAL(13, 220, 21), // "switchStatusShowLight"
-QT_MOC_LITERAL(14, 242, 11), // "resetCamera"
-QT_MOC_LITERAL(15, 254, 13), // "cameraPreset1"
-QT_MOC_LITERAL(16, 268, 13), // "cameraPreset2"
-QT_MOC_LITERAL(17, 282, 13), // "cameraPreset3"
-QT_MOC_LITERAL(18, 296, 13), // "cameraPreset4"
-QT_MOC_LITERAL(19, 310, 13), // "cameraPreset5"
-QT_MOC_LITERAL(20, 324, 10), // "loadObject"
-QT_MOC_LITERAL(21, 335, 4), // "file"
-QT_MOC_LITERAL(22, 340, 21), // "changeBackgroundColor"
-QT_MOC_LITERAL(23, 362, 12), // "loadTexture0"
-QT_MOC_LITERAL(24, 375, 12), // "loadTexture1"
-QT_MOC_LITERAL(25, 388, 12), // "loadTexture2"
-QT_MOC_LITERAL(26, 401, 12), // "loadTexture3"
-QT_MOC_LITERAL(27, 414, 12), // "showTextures"
-QT_MOC_LITERAL(28, 427, 15), // "setLightAmbient"
-QT_MOC_LITERAL(29, 443, 15), // "setLightDiffuse"
-QT_MOC_LITERAL(30, 459, 16), // "setLightSpecular"
-QT_MOC_LITERAL(31, 476, 21), // "setLightPositionWorld"
-QT_MOC_LITERAL(32, 498, 19), // "setLightPositionEye"
-QT_MOC_LITERAL(33, 518, 18), // "resetLightPosition"
-QT_MOC_LITERAL(34, 537, 17), // "switchLightRotate"
-QT_MOC_LITERAL(35, 555, 18), // "setMaterialAmbient"
-QT_MOC_LITERAL(36, 574, 18), // "setMaterialDiffuse"
-QT_MOC_LITERAL(37, 593, 19), // "setMaterialSpecular"
-QT_MOC_LITERAL(38, 613, 11), // "editUniform"
-QT_MOC_LITERAL(39, 625, 2), // "id"
-QT_MOC_LITERAL(40, 628, 11), // "uniformMult"
-QT_MOC_LITERAL(41, 640, 2), // "up"
-QT_MOC_LITERAL(42, 643, 11), // "executeTest"
-QT_MOC_LITERAL(43, 655, 11) // "compareTest"
-
+        QT_MOC_LITERAL(0, 12),  // "ShaderLoader"
+        QT_MOC_LITERAL(13, 24),  // "createDefaultShadersVSFS"
+        QT_MOC_LITERAL(38, 0),  // ""
+        QT_MOC_LITERAL(39, 26),  // "createDefaultShadersVSGSFS"
+        QT_MOC_LITERAL(66, 24),  // "createShaderFromTemplate"
+        QT_MOC_LITERAL(91, 13),  // "attachShaders"
+        QT_MOC_LITERAL(105, 4),  // "name"
+        QT_MOC_LITERAL(110, 21),  // "openFilesInTextEditor"
+        QT_MOC_LITERAL(132, 14),  // "switchStatusVS"
+        QT_MOC_LITERAL(147, 14),  // "switchStatusGS"
+        QT_MOC_LITERAL(162, 14),  // "switchStatusFS"
+        QT_MOC_LITERAL(177, 21),  // "switchStatusWireframe"
+        QT_MOC_LITERAL(199, 20),  // "switchStatusShowAxes"
+        QT_MOC_LITERAL(220, 21),  // "switchStatusShowLight"
+        QT_MOC_LITERAL(242, 11),  // "resetCamera"
+        QT_MOC_LITERAL(254, 13),  // "cameraPreset1"
+        QT_MOC_LITERAL(268, 13),  // "cameraPreset2"
+        QT_MOC_LITERAL(282, 13),  // "cameraPreset3"
+        QT_MOC_LITERAL(296, 13),  // "cameraPreset4"
+        QT_MOC_LITERAL(310, 13),  // "cameraPreset5"
+        QT_MOC_LITERAL(324, 10),  // "loadObject"
+        QT_MOC_LITERAL(335, 4),  // "file"
+        QT_MOC_LITERAL(340, 21),  // "changeBackgroundColor"
+        QT_MOC_LITERAL(362, 12),  // "loadTexture0"
+        QT_MOC_LITERAL(375, 12),  // "loadTexture1"
+        QT_MOC_LITERAL(388, 12),  // "loadTexture2"
+        QT_MOC_LITERAL(401, 12),  // "loadTexture3"
+        QT_MOC_LITERAL(414, 12),  // "showTextures"
+        QT_MOC_LITERAL(427, 15),  // "setLightAmbient"
+        QT_MOC_LITERAL(443, 15),  // "setLightDiffuse"
+        QT_MOC_LITERAL(459, 16),  // "setLightSpecular"
+        QT_MOC_LITERAL(476, 21),  // "setLightPositionWorld"
+        QT_MOC_LITERAL(498, 19),  // "setLightPositionEye"
+        QT_MOC_LITERAL(518, 18),  // "resetLightPosition"
+        QT_MOC_LITERAL(537, 17),  // "switchLightRotate"
+        QT_MOC_LITERAL(555, 18),  // "setMaterialAmbient"
+        QT_MOC_LITERAL(574, 18),  // "setMaterialDiffuse"
+        QT_MOC_LITERAL(593, 19),  // "setMaterialSpecular"
+        QT_MOC_LITERAL(613, 11),  // "editUniform"
+        QT_MOC_LITERAL(625, 2),  // "id"
+        QT_MOC_LITERAL(628, 11),  // "uniformMult"
+        QT_MOC_LITERAL(640, 2),  // "up"
+        QT_MOC_LITERAL(643, 11),  // "executeTest"
+        QT_MOC_LITERAL(655, 11)   // "compareTest"
     },
-    "ShaderLoader\0createDefaultShadersVSFS\0"
-    "\0createDefaultShadersVSGSFS\0"
-    "createShaderFromTemplate\0attachShaders\0"
-    "name\0openFilesInTextEditor\0switchStatusVS\0"
-    "switchStatusGS\0switchStatusFS\0"
-    "switchStatusWireframe\0switchStatusShowAxes\0"
-    "switchStatusShowLight\0resetCamera\0"
-    "cameraPreset1\0cameraPreset2\0cameraPreset3\0"
-    "cameraPreset4\0cameraPreset5\0loadObject\0"
-    "file\0changeBackgroundColor\0loadTexture0\0"
-    "loadTexture1\0loadTexture2\0loadTexture3\0"
-    "showTextures\0setLightAmbient\0"
-    "setLightDiffuse\0setLightSpecular\0"
-    "setLightPositionWorld\0setLightPositionEye\0"
-    "resetLightPosition\0switchLightRotate\0"
-    "setMaterialAmbient\0setMaterialDiffuse\0"
-    "setMaterialSpecular\0editUniform\0id\0"
-    "uniformMult\0up\0executeTest\0compareTest"
+    "ShaderLoader",
+    "createDefaultShadersVSFS",
+    "",
+    "createDefaultShadersVSGSFS",
+    "createShaderFromTemplate",
+    "attachShaders",
+    "name",
+    "openFilesInTextEditor",
+    "switchStatusVS",
+    "switchStatusGS",
+    "switchStatusFS",
+    "switchStatusWireframe",
+    "switchStatusShowAxes",
+    "switchStatusShowLight",
+    "resetCamera",
+    "cameraPreset1",
+    "cameraPreset2",
+    "cameraPreset3",
+    "cameraPreset4",
+    "cameraPreset5",
+    "loadObject",
+    "file",
+    "changeBackgroundColor",
+    "loadTexture0",
+    "loadTexture1",
+    "loadTexture2",
+    "loadTexture3",
+    "showTextures",
+    "setLightAmbient",
+    "setLightDiffuse",
+    "setLightSpecular",
+    "setLightPositionWorld",
+    "setLightPositionEye",
+    "resetLightPosition",
+    "switchLightRotate",
+    "setMaterialAmbient",
+    "setMaterialDiffuse",
+    "setMaterialSpecular",
+    "editUniform",
+    "id",
+    "uniformMult",
+    "up",
+    "executeTest",
+    "compareTest"
 };
 #undef QT_MOC_LITERAL
+} // unnamed namespace
 
-static const uint qt_meta_data_ShaderLoader[] = {
+Q_CONSTINIT static const uint qt_meta_data_ShaderLoader[] = {
 
  // content:
-       8,       // revision
+      10,       // revision
        0,       // classname
        0,    0, // classinfo
       40,   14, // methods
@@ -113,47 +183,47 @@ static const uint qt_meta_data_ShaderLoader[] = {
        0,       // flags
        0,       // signalCount
 
- // slots: name, argc, parameters, tag, flags
-       1,    0,  214,    2, 0x0a /* Public */,
-       3,    0,  215,    2, 0x0a /* Public */,
-       4,    0,  216,    2, 0x0a /* Public */,
-       5,    0,  217,    2, 0x0a /* Public */,
-       5,    1,  218,    2, 0x0a /* Public */,
-       7,    0,  221,    2, 0x0a /* Public */,
-       8,    0,  222,    2, 0x0a /* Public */,
-       9,    0,  223,    2, 0x0a /* Public */,
-      10,    0,  224,    2, 0x0a /* Public */,
-      11,    0,  225,    2, 0x0a /* Public */,
-      12,    0,  226,    2, 0x0a /* Public */,
-      13,    0,  227,    2, 0x0a /* Public */,
-      14,    0,  228,    2, 0x0a /* Public */,
-      15,    0,  229,    2, 0x0a /* Public */,
-      16,    0,  230,    2, 0x0a /* Public */,
-      17,    0,  231,    2, 0x0a /* Public */,
-      18,    0,  232,    2, 0x0a /* Public */,
-      19,    0,  233,    2, 0x0a /* Public */,
-      20,    0,  234,    2, 0x0a /* Public */,
-      20,    1,  235,    2, 0x0a /* Public */,
-      22,    0,  238,    2, 0x0a /* Public */,
-      23,    0,  239,    2, 0x0a /* Public */,
-      24,    0,  240,    2, 0x0a /* Public */,
-      25,    0,  241,    2, 0x0a /* Public */,
-      26,    0,  242,    2, 0x0a /* Public */,
-      27,    0,  243,    2, 0x0a /* Public */,
-      28,    0,  244,    2, 0x0a /* Public */,
-      29,    0,  245,    2, 0x0a /* Public */,
-      30,    0,  246,    2, 0x0a /* Public */,
-      31,    0,  247,    2, 0x0a /* Public */,
-      32,    0,  248,    2, 0x0a /* Public */,
-      33,    0,  249,    2, 0x0a /* Public */,
-      34,    0,  250,    2, 0x0a /* Public */,
-      35,    0,  251,    2, 0x0a /* Public */,
-      36,    0,  252,    2, 0x0a /* Public */,
-      37,    0,  253,    2, 0x0a /* Public */,
-      38,    1,  254,    2, 0x0a /* Public */,
-      40,    1,  257,    2, 0x0a /* Public */,
-      42,    0,  260,    2, 0x0a /* Public */,
-      43,    0,  261,    2, 0x0a /* Public */,
+ // slots: name, argc, parameters, tag, flags, initial metatype offsets
+       1,    0,  254,    2, 0x0a,    1 /* Public */,
+       3,    0,  255,    2, 0x0a,    2 /* Public */,
+       4,    0,  256,    2, 0x0a,    3 /* Public */,
+       5,    0,  257,    2, 0x0a,    4 /* Public */,
+       5,    1,  258,    2, 0x0a,    5 /* Public */,
+       7,    0,  261,    2, 0x0a,    7 /* Public */,
+       8,    0,  262,    2, 0x0a,    8 /* Public */,
+       9,    0,  263,    2, 0x0a,    9 /* Public */,
+      10,    0,  264,    2, 0x0a,   10 /* Public */,
+      11,    0,  265,    2, 0x0a,   11 /* Public */,
+      12,    0,  266,    2, 0x0a,   12 /* Public */,
+      13,    0,  267,    2, 0x0a,   13 /* Public */,
+      14,    0,  268,    2, 0x0a,   14 /* Public */,
+      15,    0,  269,    2, 0x0a,   15 /* Public */,
+      16,    0,  270,    2, 0x0a,   16 /* Public */,
+      17,    0,  271,    2, 0x0a,   17 /* Public */,
+      18,    0,  272,    2, 0x0a,   18 /* Public */,
+      19,    0,  273,    2, 0x0a,   19 /* Public */,
+      20,    0,  274,    2, 0x0a,   20 /* Public */,
+      20,    1,  275,    2, 0x0a,   21 /* Public */,
+      22,    0,  278,    2, 0x0a,   23 /* Public */,
+      23,    0,  279,    2, 0x0a,   24 /* Public */,
+      24,    0,  280,    2, 0x0a,   25 /* Public */,
+      25,    0,  281,    2, 0x0a,   26 /* Public */,
+      26,    0,  282,    2, 0x0a,   27 /* Public */,
+      27,    0,  283,    2, 0x0a,   28 /* Public */,
+      28,    0,  284,    2, 0x0a,   29 /* Public */,
+      29,    0,  285,    2, 0x0a,   30 /* Public */,
+      30,    0,  286,    2, 0x0a,   31 /* Public */,
+      31,    0,  287,    2, 0x0a,   32 /* Public */,
+      32,    0,  288,    2, 0x0a,   33 /* Public */,
+      33,    0,  289,    2, 0x0a,   34 /* Public */,
+      34,    0,  290,    2, 0x0a,   35 /* Public */,
+      35,    0,  291,    2, 0x0a,   36 /* Public */,
+      36,    0,  292,    2, 0x0a,   37 /* Public */,
+      37,    0,  293,    2, 0x0a,   38 /* Public */,
+      38,    1,  294,    2, 0x0a,   39 /* Public */,
+      40,    1,  297,    2, 0x0a,   41 /* Public */,
+      42,    0,  300,    2, 0x0a,   43 /* Public */,
+      43,    0,  301,    2, 0x0a,   44 /* Public */,
 
  // slots: parameters
     QMetaType::Void,
@@ -200,17 +270,114 @@ static const uint qt_meta_data_ShaderLoader[] = {
        0        // eod
 };
 
+Q_CONSTINIT const QMetaObject ShaderLoader::staticMetaObject = { {
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
+    qt_meta_stringdata_ShaderLoader.offsetsAndSizes,
+    qt_meta_data_ShaderLoader,
+    qt_static_metacall,
+    nullptr,
+    qt_incomplete_metaTypeArray<qt_meta_stringdata_ShaderLoader_t,
+        // Q_OBJECT / Q_GADGET
+        QtPrivate::TypeAndForceComplete<ShaderLoader, std::true_type>,
+        // method 'createDefaultShadersVSFS'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'createDefaultShadersVSGSFS'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'createShaderFromTemplate'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'attachShaders'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'attachShaders'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
+        // method 'openFilesInTextEditor'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'switchStatusVS'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'switchStatusGS'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'switchStatusFS'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'switchStatusWireframe'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'switchStatusShowAxes'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'switchStatusShowLight'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'resetCamera'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'cameraPreset1'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'cameraPreset2'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'cameraPreset3'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'cameraPreset4'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'cameraPreset5'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'loadObject'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'loadObject'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
+        // method 'changeBackgroundColor'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'loadTexture0'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'loadTexture1'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'loadTexture2'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'loadTexture3'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'showTextures'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'setLightAmbient'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'setLightDiffuse'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'setLightSpecular'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'setLightPositionWorld'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'setLightPositionEye'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'resetLightPosition'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'switchLightRotate'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'setMaterialAmbient'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'setMaterialDiffuse'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'setMaterialSpecular'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'editUniform'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        // method 'uniformMult'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<bool, std::false_type>,
+        // method 'executeTest'
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
+        // method 'compareTest'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>
+    >,
+    nullptr
+} };
+
 void ShaderLoader::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
         auto *_t = static_cast<ShaderLoader *>(_o);
-        Q_UNUSED(_t)
+        (void)_t;
         switch (_id) {
         case 0: _t->createDefaultShadersVSFS(); break;
         case 1: _t->createDefaultShadersVSGSFS(); break;
         case 2: _t->createShaderFromTemplate(); break;
         case 3: _t->attachShaders(); break;
-        case 4: _t->attachShaders((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 4: _t->attachShaders((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         case 5: _t->openFilesInTextEditor(); break;
         case 6: _t->switchStatusVS(); break;
         case 7: _t->switchStatusGS(); break;
@@ -225,7 +392,7 @@ void ShaderLoader::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 16: _t->cameraPreset4(); break;
         case 17: _t->cameraPreset5(); break;
         case 18: _t->loadObject(); break;
-        case 19: _t->loadObject((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 19: _t->loadObject((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         case 20: _t->changeBackgroundColor(); break;
         case 21: _t->loadTexture0(); break;
         case 22: _t->loadTexture1(); break;
@@ -242,8 +409,8 @@ void ShaderLoader::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 33: _t->setMaterialAmbient(); break;
         case 34: _t->setMaterialDiffuse(); break;
         case 35: _t->setMaterialSpecular(); break;
-        case 36: _t->editUniform((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 37: _t->uniformMult((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 36: _t->editUniform((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 37: _t->uniformMult((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
         case 38: { QString _r = _t->executeTest();
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
         case 39: _t->compareTest(); break;
@@ -251,16 +418,6 @@ void ShaderLoader::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         }
     }
 }
-
-QT_INIT_METAOBJECT const QMetaObject ShaderLoader::staticMetaObject = { {
-    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
-    qt_meta_stringdata_ShaderLoader.data,
-    qt_meta_data_ShaderLoader,
-    qt_static_metacall,
-    nullptr,
-    nullptr
-} };
-
 
 const QMetaObject *ShaderLoader::metaObject() const
 {
@@ -290,14 +447,26 @@ int ShaderLoader::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         _id -= 40;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         if (_id < 40)
-            *reinterpret_cast<int*>(_a[0]) = -1;
+            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
         _id -= 40;
     }
     return _id;
 }
 
+#ifdef QT_MOC_EXPORT_PLUGIN_V2
+static constexpr unsigned char qt_pluginMetaDataV2_ShaderLoader[] = {
+    0xbf, 
+    // "IID"
+    0x02,  0x66,  'P',  'l',  'u',  'g',  'i',  'n', 
+    // "className"
+    0x03,  0x6c,  'S',  'h',  'a',  'd',  'e',  'r', 
+    'L',  'o',  'a',  'd',  'e',  'r', 
+    0xff, 
+};
+QT_MOC_EXPORT_PLUGIN_V2(ShaderLoader, ShaderLoader, qt_pluginMetaDataV2_ShaderLoader)
+#else
 QT_PLUGIN_METADATA_SECTION
-static constexpr unsigned char qt_pluginMetaData[] = {
+Q_CONSTINIT static constexpr unsigned char qt_pluginMetaData_ShaderLoader[] = {
     'Q', 'T', 'M', 'E', 'T', 'A', 'D', 'A', 'T', 'A', ' ', '!',
     // metadata version, Qt version, architectural requirements
     0, QT_VERSION_MAJOR, QT_VERSION_MINOR, qPluginArchRequirements(),
@@ -310,6 +479,7 @@ static constexpr unsigned char qt_pluginMetaData[] = {
     0xff, 
 };
 QT_MOC_EXPORT_PLUGIN(ShaderLoader, ShaderLoader)
+#endif  // QT_MOC_EXPORT_PLUGIN_V2
 
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE
