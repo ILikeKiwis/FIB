@@ -2,6 +2,8 @@
 
 layout (location = 0) in vec3 vertex;
 
+uniform vec4 color;
+
 uniform mat4 modelViewProjectionMatrix;
 
 void main(){

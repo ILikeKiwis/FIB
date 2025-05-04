@@ -1,2 +1,2 @@
-TARGET     = $$qtLibraryTarget(S2_obj_selec3)
+TARGET     = $$qtLibraryTarget(S2_obj_selec1)
 include(../common.pro)
