@@ -1,2 +1,2 @@
-TARGET     = $$qtLibraryTarget(S2_drawBB10)
+TARGET     = $$qtLibraryTarget(S2_drawBB3)
 include(../common.pro)

@@ -1,0 +1,4 @@
+Cargar shaders directamente al program 
+Porque no me funciona con solo un program y tengo que usar 2
+
+ejercicio de seleccion de objetos con el mouse

@@ -1,8 +1,8 @@
-#include "S2_drawBB.h"
+#include "S2_obj_selec.h"
 #include "glwidget.h"
 
 
-void S2_drawBB::onPluginLoad()
+void S2_obj_selec::onPluginLoad()
 {
 	GLWidget &g = *glwidget();
 	float coords [] = {
@@ -51,12 +51,12 @@ void S2_drawBB::onPluginLoad()
 
 }
 
-void S2_drawBB::preFrame()
+void S2_obj_selec::preFrame()
 {
 	
 }
 
-void S2_drawBB::postFrame()
+void S2_obj_selec::postFrame()
 {
 	GLWidget &g = *glwidget();
 	program->bind();
@@ -65,23 +65,26 @@ void S2_drawBB::postFrame()
 	g.glGetIntegerv(GL_POLYGON_MODE, &polygonMode);
 	
 	g.glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	for (Object & obj : g.scene()->objects()){
-		Point  trans = obj.boundingBox().min();
-		Point scale = obj.boundingBox().max() - obj.boundingBox().min();
+	int seleccionat = scene()->selectedObject();
+	for (int i = 0; i < scene()->objects().size(); i++) {
+		if (i == seleccionat) {
+			const Object& obj = scene()->objects()[i];
+			Point  trans = obj.boundingBox().min();
+			Point scale = obj.boundingBox().max() - obj.boundingBox().min();
 		
-		program->setUniformValue("translate", trans);
-		program->setUniformValue("scale", scale);
-		QMatrix4x4 mvp = g.camera()->projectionMatrix() * g.camera()->viewMatrix();
-		program->setUniformValue("modelViewProjectionMatrix", mvp);
-		g.glBindVertexArray(VAObox);
-		g.glDrawArrays(GL_TRIANGLE_STRIP, 0, 14);
-
+			program->setUniformValue("translate", trans);
+			program->setUniformValue("scale", scale);
+			QMatrix4x4 mvp = g.camera()->projectionMatrix() * g.camera()->viewMatrix();
+			program->setUniformValue("modelViewProjectionMatrix", mvp);
+			g.glBindVertexArray(VAObox);
+			g.glDrawArrays(GL_TRIANGLE_STRIP, 0, 14);
+		}
 	}
 	g.glPolygonMode(GL_FRONT_AND_BACK, polygonMode);
 	program->release();
 }
 
-void S2_drawBB::onObjectAdd()
+void S2_obj_selec::onObjectAdd()
 {
 	GLWidget & widget = * glwidget();
 	widget.makeCurrent();
@@ -90,27 +93,27 @@ void S2_drawBB::onObjectAdd()
 
 }
 
-bool S2_drawBB::drawScene()
+bool S2_obj_selec::drawScene()
 {
 	return false; // return true only if implemented
 }
 
-bool S2_drawBB::drawObject(int)
+bool S2_obj_selec::drawObject(int)
 {
 	return false; // return true only if implemented
 }
 
-bool S2_drawBB::paintGL()
+bool S2_obj_selec::paintGL()
 {
 	return false; // return true only if implemented
 }
 
-void S2_drawBB::keyPressEvent(QKeyEvent *)
+void S2_obj_selec::keyPressEvent(QKeyEvent *)
 {
 	
 }
 
-void S2_drawBB::mouseMoveEvent(QMouseEvent *)
+void S2_obj_selec::mouseMoveEvent(QMouseEvent *)
 {
 	
 }
