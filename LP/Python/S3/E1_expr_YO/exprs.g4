@@ -5,12 +5,12 @@ root
     ;
     
 expr
-    : <assoc=right> expr '^' expr
-    | expr '/' expr
-    | expr '*' expr 
-    | expr '-' expr
-    | expr '+' expr
-    | INT
+    : <assoc=right> expr '^' expr   #pot
+    | expr '/' expr                 #div
+    | expr '*' expr                 #mul
+    | expr '-' expr                 #resta
+    | expr '+' expr                 #suma
+    | INT                           #numero
     ;
 
 INT
