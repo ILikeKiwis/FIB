@@ -27,6 +27,11 @@ class EvalVisitor(ex4Visitor):
         if b:
             for stm in ctx.statement():
                 self.visit(stm)
+
+    def visitWhile(self, ctx):
+        while(self.visit(ctx.boolexpr())):
+            for stm in ctx.statement():
+                self.visit(stm)
         
     def visitBoolexpr(self, ctx):
         [expr1, operator, expr2] = list(ctx.getChildren())

@@ -1,0 +1,11 @@
+function fs (n)
+    if n = 1 then   
+        return 1 
+    end
+    return n + fs(n-1)
+end
+
+main 
+    a := 2 
+    write fs(2)
+end

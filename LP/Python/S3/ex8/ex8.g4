@@ -1,16 +1,28 @@
-grammar ex4;
+grammar ex8;
 
-
-
-program 
-    : statement* EOF
+program
+    : (func)* main EOF
     ;
 
-statement
+func 
+    : 'function' ID '(' paramList? ')' NL (statement)* 'end' NL
+    ;
+
+paramList
+    : ID (',' ID)*
+    ;
+
+main
+    : 'main' NL (statement)* 'end' NL*
+    ;
+
+statement 
     : assign NL
     | write NL
-    | cond 
-    | while 
+    | cond NL*
+    | while NL*
+    | funcCall NL
+    | retSt NL
     ;
 
 assign 
@@ -38,11 +50,24 @@ boolexpr
     | expr '>' expr                 
     ;
 
+funcCall
+    : ID '(' arglist? ')'
+    ;
+
+arglist
+    : expr (',' expr)*
+    ; 
+
+retSt
+    : 'return' expr
+    ;
+
 expr 
     : <assoc=right> expr '^' expr   #Pot
     | expr ('*' | '/') expr         #MultDiv
     | expr ('+' | '-') expr         #SumSub
     | NUM                           #Num
+    | funcCall                      #fExpr
     | ID                            #Id
     ;
 

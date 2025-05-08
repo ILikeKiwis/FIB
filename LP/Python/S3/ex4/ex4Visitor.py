@@ -34,6 +34,11 @@ class ex4Visitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by ex4Parser#while.
+    def visitWhile(self, ctx:ex4Parser.WhileContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by ex4Parser#boolexpr.
     def visitBoolexpr(self, ctx:ex4Parser.BoolexprContext):
         return self.visitChildren(ctx)
