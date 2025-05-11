@@ -19,6 +19,16 @@ class gVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by gParser#AssignSt.
+    def visitAssignSt(self, ctx:gParser.AssignStContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by gParser#assign.
+    def visitAssign(self, ctx:gParser.AssignContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by gParser#UnitaryOp.
     def visitUnitaryOp(self, ctx:gParser.UnitaryOpContext):
         return self.visitChildren(ctx)
@@ -31,6 +41,11 @@ class gVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by gParser#List.
     def visitList(self, ctx:gParser.ListContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by gParser#Id.
+    def visitId(self, ctx:gParser.IdContext):
         return self.visitChildren(ctx)
 
 
@@ -56,6 +71,16 @@ class gVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by gParser#numList.
     def visitNumList(self, ctx:gParser.NumListContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by gParser#num.
+    def visitNum(self, ctx:gParser.NumContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by gParser#neg.
+    def visitNeg(self, ctx:gParser.NegContext):
         return self.visitChildren(ctx)
 
 

@@ -1,8 +1,16 @@
 from antlr4 import *
 from gVisitor import gVisitor
 import numpy as np
+from functools import reduce
+from operator import add, mul, sub, pow, floordiv, mod
+
+def foldr(func, arr):
+    return reduce(lambda acc, x: func(x, acc), arr[::-1])
 
 class Evaler(gVisitor):
+
+    def __init__(self):
+        self.vars = {}
 
     def visitProgram(self, ctx):
         for st in ctx.statement():
@@ -12,6 +20,11 @@ class Evaler(gVisitor):
         print("   ", ctx.expr().getText())
         ret = self.visit(ctx.expr())
         print (ret)
+
+    def visitAssign(self, ctx):
+        id = ctx.ID().getText()
+        value = self.visit(ctx.expr())
+        self.vars[id] = value
     
     def visitFilterOp(self, ctx):
         expr1 = ctx.expr(0)
@@ -30,8 +43,6 @@ class Evaler(gVisitor):
             print("lenght error")
             return [-0]
 
-
-    
     def visitBinaryOp(self, ctx):
         expr1 = ctx.expr(0)
         expr2 = ctx.expr(1)
@@ -94,17 +105,17 @@ class Evaler(gVisitor):
             else :
                 match b:
                     case '+':
-                        ret = np.add.reduce(value)
+                        ret = foldr(add, value)
                     case '-':
-                        ret = np.subtract.reduce(value)
+                        ret = foldr(sub, value)
                     case '*':
-                        ret = np.multiply.reduce(value)
+                        ret = foldr(mul, value)
                     case '%':
-                        ret = np.floor_divide.reduce(value)
+                        ret = foldr(floordiv, value)
                     case '^':
-                        ret = np.power.reduce(value)
+                        ret = foldr(pow, value)
                     case '|':
-                        ret = np.mod.reduce(value)
+                        ret = foldr(mod, value)
                 return ret
         else :
             op = ctx.uop().getText()
@@ -119,10 +130,15 @@ class Evaler(gVisitor):
     
     def visitList(self, ctx):
         l_ctx = ctx.numList()
-        return np.array([int(n.getText()) for n in l_ctx.NUM()])
+        return np.array([self.visit(x) for x in l_ctx.num()])
 
     def visitPrio(self, ctx):
         return self.visit(ctx.expr())
     
+    def visitId(self, ctx):
+        value = self.vars[ctx.ID().getText()]
+        return value
+    
     def visitNum(self, ctx):
-        return int(ctx.NUM().getText())
+        a = -1 if ctx.neg() != None else 1
+        return a*int(ctx.NUM().getText())

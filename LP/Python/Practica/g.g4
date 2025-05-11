@@ -10,7 +10,7 @@ statement
     ;
 
 assign
-    : ID '=:' expr
+    : ID '=:' expr                          
     ;
 
 expr
@@ -19,7 +19,12 @@ expr
     | uop expr                              #UnitaryOp
     | numList                               #List
     | '(' expr ')'                          #Prio
+    | ID                                    #Id
     ;
+
+ID
+  : [A-Za-z] [A-Za-z0-9_]* 
+  ;
 
 
 BOP 
@@ -46,7 +51,14 @@ uop
     ;
 
 numList
-    : NUM+  
+    : num+
+    ;
+
+num
+    : neg? NUM
+    ;
+neg
+    : '_'
     ;
 
 COMMENT

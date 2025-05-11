@@ -1,4 +1,9 @@
-1 2 3 # 1 2 3 
-# 1 2 3 
-NB. esto es un coment
-1 2 3 + 1 NB. esto es un coment en una linia 
+1 + 1 2 3 
+1 2 3 + 4 5 6 
++: 1 2 3 
++: 1 
+-/ 1 2 3 
+x =: 1 2 3 
+1 + x 
+%/ 6 4 2
+_1 * 2 3
