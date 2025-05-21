@@ -23,7 +23,7 @@ class Evaler(gVisitor):
 
     def visitAssign(self, ctx):
         id = ctx.ID().getText()
-        value = self.visit(ctx.expr())
+        value = ctx.expr()
         self.vars[id] = value
     
     def visitFilterOp(self, ctx):
@@ -73,6 +73,18 @@ class Evaler(gVisitor):
                     ret = np.hstack((value1, value2))
                 case '{':
                     ret = np.take(value2, value1)
+                case '<':
+                    ret = np.less(value1, value2)
+                case '<=':
+                    ret = np.less_equal(value1, value2)
+                case '>':
+                    ret = np.greater(value1, value2)
+                case '>=':
+                    ret = np.greater_equal(value1, value2)
+                case '=' : 
+                    ret = np.equal(value1, value2)
+                case '<>':
+                    ret = np.not_equal(value1, value2)
             return ret
         except Exception as e:
             print("lenght error")
@@ -137,7 +149,7 @@ class Evaler(gVisitor):
     
     def visitId(self, ctx):
         value = self.vars[ctx.ID().getText()]
-        return value
+        return self.visit(value)
     
     def visitNum(self, ctx):
         a = -1 if ctx.neg() != None else 1

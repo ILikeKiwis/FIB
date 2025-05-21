@@ -5,8 +5,8 @@ program
     ;
 
 statement
-    : expr NL*                              #ExprSt
-    | assign NL*                            #AssignSt
+    : assign NL*                            #AssignSt
+    | expr NL*                              #ExprSt
     ;
 
 assign
@@ -36,6 +36,12 @@ BOP
     | '|'  
     | ','
     | '{' 
+    | '<'
+    | '>'
+    | '>='
+    | '<='
+    | '='
+    | '<>'
     ;
 
 flip 
