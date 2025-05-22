@@ -16,8 +16,7 @@ assign
     ;
 
 expr
-    :   <assoc=right> major '#' flip* expr      #FilterOP
-    |   <assoc=right> major BOP flip* expr      #BinaryOP
+    :   <assoc=right> major BOP flip* expr      #BinaryOP
     |   major                                   #MajorOrMinor
     ;   
 
@@ -26,8 +25,9 @@ major
     |   minor                                   #ToMinor
     ;
 
-minor
-    :   numList                                 #List   
+minor 
+    :   numList                                 #List  
+    |   minor '#' flip* minor                   #FilterOP
     |   uop minor                               #UnitaryOP
     |   ']'                                     #Identity
     |   uop                                     #OnlyUnitary

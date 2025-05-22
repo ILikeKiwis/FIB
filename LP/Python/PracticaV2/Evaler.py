@@ -26,9 +26,9 @@ class Evaler(gVisitor):
             ret = self.visit(ctx.expr())
             print (ret)
 
-        def visitFilterOp(self, ctx):
-            expr1 = ctx.major()
-            expr2 = ctx.expr()
+        def visitFilterOP(self, ctx):
+            expr1 = ctx.minor(0)
+            expr2 = ctx.minor(1)
             n_flips = len(ctx.flip())
             flip = n_flips % 2
             if flip:
@@ -42,8 +42,8 @@ class Evaler(gVisitor):
             except Exception as e:
                 print("lenght error")
                 return [-0]
-        
         def visitBinaryOP(self, ctx):
+            
             major = ctx.major()
             expr = ctx.expr()
             op = ctx.BOP().getText()
@@ -73,8 +73,6 @@ class Evaler(gVisitor):
                         ret = np.hstack((value1, value2))
                     case '{':
                         ret = np.take(value2, value1)
-                    case '#': 
-                        ret = np.repeat(value2, value1)
                     case '<':
                         ret = np.less(value1, value2)
                     case '<=':
@@ -87,10 +85,18 @@ class Evaler(gVisitor):
                         ret = np.equal(value1, value2)
                     case '<>':
                         ret = np.not_equal(value1, value2)
+                    case '@:':
+                        self.vars["__identity__"] = self.visit(ctx.expr())
+                        ret = self.visit(major)
                 return ret
             except Exception as e:
                 print("lenght error")
                 return [-0]
+        
+        def visitLengthOP(self, ctx):
+            expr = ctx.minor()
+            print ("Entro en LENGHT con expr " + expr.getText())
+            return len(self.visit(expr))
             
         def visitMajorOrMinor(self, ctx):
             return self.visit(ctx.major())
@@ -100,6 +106,7 @@ class Evaler(gVisitor):
             expr = self.vars[id]
             old = dict(self.vars)
             self.vars["__identity__"] = self.visit(ctx.major())
+            print ("Ejecuto " + id + " en " + ctx.major().getText())
             ret = self.visit(expr)
             self.vars = old
             return ret
@@ -155,10 +162,10 @@ class Evaler(gVisitor):
                 match op:
                     case ']':
                         return self.visit(minor)
-                    case '#':
-                        return len(self.visit(minor))
                     case 'i.':
                         return np.arange(self.visit(minor))
+                    case '#' :
+                        return len(self.visit(minor))
                     
         def visitOnlyUnitary(self, ctx):
             uop_ctx = ctx.uop()

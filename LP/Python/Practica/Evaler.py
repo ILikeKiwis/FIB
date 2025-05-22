@@ -27,6 +27,7 @@ class Evaler(gVisitor):
         self.vars[id] = value
     
     def visitFilterOp(self, ctx):
+        print("Entro en filter op")
         expr1 = ctx.expr(0)
         expr2 = ctx.expr(1)
         n_flips = len(ctx.flip())

@@ -7,3 +7,6 @@ eq0 mod2 i. 6
 
 square =: *:
 square 1 2 3 
+
+parell =: eq0 @: mod2
+parell i. 6 

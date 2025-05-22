@@ -29,11 +29,6 @@ class gVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by gParser#FilterOP.
-    def visitFilterOP(self, ctx:gParser.FilterOPContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by gParser#BinaryOP.
     def visitBinaryOP(self, ctx:gParser.BinaryOPContext):
         return self.visitChildren(ctx)
@@ -54,18 +49,18 @@ class gVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by gParser#List.
-    def visitList(self, ctx:gParser.ListContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by gParser#UnitaryOP.
     def visitUnitaryOP(self, ctx:gParser.UnitaryOPContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by gParser#Identity.
-    def visitIdentity(self, ctx:gParser.IdentityContext):
+    # Visit a parse tree produced by gParser#FilterOP.
+    def visitFilterOP(self, ctx:gParser.FilterOPContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by gParser#List.
+    def visitList(self, ctx:gParser.ListContext):
         return self.visitChildren(ctx)
 
 
@@ -74,13 +69,18 @@ class gVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by gParser#Prio.
-    def visitPrio(self, ctx:gParser.PrioContext):
+    # Visit a parse tree produced by gParser#Id.
+    def visitId(self, ctx:gParser.IdContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by gParser#Id.
-    def visitId(self, ctx:gParser.IdContext):
+    # Visit a parse tree produced by gParser#Identity.
+    def visitIdentity(self, ctx:gParser.IdentityContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by gParser#Prio.
+    def visitPrio(self, ctx:gParser.PrioContext):
         return self.visitChildren(ctx)
 
 
