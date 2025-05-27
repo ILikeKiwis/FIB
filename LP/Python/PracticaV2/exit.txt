@@ -1,0 +1,182 @@
+    123
+1 2 3
+    111+123
+Entro en binary op con +111123
+BOP[2 3 4]
+2 3 4
+    1+123
+Entro en binary op con +1123
+BOP[2 3 4]
+2 3 4
+    11+123
+Entro en binary op con +11123
+lenght error
+0
+    5+2*3
+Entro en binary op con +52*3
+Entro en binary op con *23
+BOP[6]
+BOP[11]
+11
+    5*2+3
+Entro en binary op con *52+3
+Entro en binary op con +23
+BOP[5]
+BOP[25]
+25
+    (5*2)+3
+Entro en binary op con +(5*2)3
+Entro en binary op con *52
+BOP[10]
+BOP[13]
+13
+    _1*23
+Entro en binary op con *_123
+BOP[-2 -3]
+_2 _3
+    5-2
+Entro en binary op con -52
+BOP[3]
+3
+    2*3
+Entro en binary op con *23
+BOP[6]
+6
+    6%2
+Entro en binary op con %62
+BOP[3]
+3
+    2|7
+Entro en binary op con |27
+BOP[1]
+1
+    2^3
+Entro en binary op con ^23
+BOP[8]
+8
+    ]1
+1
+    1,23
+Entro en binary op con ,123
+BOP[1 2 3]
+1 2 3
+    #12
+2
+    1010#1234
+1 3
+    02{234
+Entro en binary op con {02234
+BOP[2 4]
+2 4
+    i.4
+0 1 2 3
+    +:123
+UOP[2 4 6]
+2 4 6
+    i.4
+0 1 2 3
+    +:123
+UOP[2 4 6]
+2 4 6
+    +/123
+UOP6
+6
+    7|~2
+Entro en binary op con |72
+BOP[1]
+1
+    1+x
+Entro en binary op con +1x
+x
+[1 2 3]
+BOP[2 3 4]
+2 3 4
+    square1234
+*:1
+Ejecuto square en 1234
+UOU[ 1  4  9 16]
+ID[ 1  4  9 16]
+1 4 9 16
+    mod2i.4
+2|]1
+Ejecuto mod2 en i.4
+Entro en binary op con |2]
+BOP[0 1 0 1]
+ID[0 1 0 1]
+0 1 0 1
+    parelli.6
+eq0@:mod21
+Ejecuto parell en i.6
+Entro en binary op con @:eq0mod2
+eq0
+Entro en binary op con =0]
+BOP[1 0 0 0 0 0]
+[1 0 0 0 0 0]
+mod2
+Entro en binary op con |2]
+BOP[0 1 0 1 0 1]
+[0 1 0 1 0 1]
+lenght error
+ID[0]
+0
+    square1+i.3
+Entro en binary op con +square1i.3
+*:1
+Ejecuto square en 1
+UOU[1]
+ID[1]
+BOP[1 2 3]
+1 2 3
+    eq0mod2i.6
+0=]1
+2|]1
+Ejecuto mod2 en i.6
+Entro en binary op con |2]
+BOP[0 1 0 1 0 1]
+ID[0 1 0 1 0 1]
+Ejecuto eq0 en mod2i.6
+Entro en binary op con =0]
+BOP[1 0 1 0 1 0]
+ID[1 0 1 0 1 0]
+1 0 1 0 1 0
+    parelli.6
+eq0@:mod21
+Ejecuto parell en i.6
+Entro en binary op con @:eq0mod2
+eq0
+Entro en binary op con =0]
+BOP[1 0 0 0 0 0]
+[1 0 0 0 0 0]
+mod2
+Entro en binary op con |2]
+BOP[0 1 0 1 0 1]
+[0 1 0 1 0 1]
+lenght error
+ID[0]
+0
+    parelli.6
+0=]@:2|]1
+Ejecuto parell en i.6
+Entro en binary op con =0]@:2|]
+Entro en binary op con @:]2|]
+Entro en binary op con |2]
+BOP[0 1 0 1 0 1]
+lenght error
+BOP[1]
+ID[1]
+1
+    test3
++/@:inc@:i.1
+Ejecuto test en 3
+Entro en binary op con @:+/inc@:i.
+UOU3
+Entro en binary op con @:inci.
+inc
+Entro en binary op con +1]
+BOP[4]
+[4]
+lenght error
+lenght error
+ID[0]
+0
+(program (statement (expr (minor (numList (num 1) (num 2) (num 3)))) \n\n) (statement (expr (expr (minor (numList (num 1) (num 1) (num 1)))) + (expr (minor (numList (num 1) (num 2) (num 3))))) \n\n) (statement (expr (expr (minor (numList (num 1)))) + (expr (minor (numList (num 1) (num 2) (num 3))))) \n\n) (statement (expr (expr (minor (numList (num 1) (num 1)))) + (expr (minor (numList (num 1) (num 2) (num 3))))) \n\n) (statement (expr (expr (minor (numList (num 5)))) + (expr (expr (minor (numList (num 2)))) * (expr (minor (numList (num 3)))))) \n\n) (statement (expr (expr (minor (numList (num 5)))) * (expr (expr (minor (numList (num 2)))) + (expr (minor (numList (num 3)))))) \n\n) (statement (expr (expr (minor ( (expr (expr (minor (numList (num 5)))) * (expr (minor (numList (num 2))))) ))) + (expr (minor (numList (num 3))))) \n\n) (statement (expr (expr (minor (numList (num (neg _) 1)))) * (expr (minor (numList (num 2) (num 3))))) \n\n) (statement (expr (expr (minor (numList (num 5)))) - (expr (minor (numList (num 2))))) \n\n) (statement (expr (expr (minor (numList (num 2)))) * (expr (minor (numList (num 3))))) \n\n) (statement (expr (expr (minor (numList (num 6)))) % (expr (minor (numList (num 2))))) \n\n) (statement (expr (expr (minor (numList (num 2)))) | (expr (minor (numList (num 7))))) \n\n) (statement (expr (expr (minor (numList (num 2)))) ^ (expr (minor (numList (num 3))))) \n\n) (statement (expr (minor (uop ]) (minor (numList (num 1))))) \n\n) (statement (expr (expr (minor (numList (num 1)))) , (expr (minor (numList (num 2) (num 3))))) \n\n) (statement (expr (minor (uop #) (minor (numList (num 1) (num 2))))) \n\n) (statement (expr (minor (minor (numList (num 1) (num 0) (num 1) (num 0))) # (minor (numList (num 1) (num 2) (num 3) (num 4))))) \n\n) (statement (expr (expr (minor (numList (num 0) (num 2)))) { (expr (minor (numList (num 2) (num 3) (num 4))))) \n\n) (statement (expr (minor (uop i.) (minor (numList (num 4))))) \n\n) (statement (expr (minor (uop + :) (minor (numList (num 1) (num 2) (num 3))))) \n\n) (statement (expr (minor (uop i.) (minor (numList (num 4))))) \n\n) (statement (expr (minor (uop + :) (minor (numList (num 1) (num 2) (num 3))))) \n\n) (statement (expr (minor (uop + /) (minor (numList (num 1) (num 2) (num 3))))) \n\n) (statement (expr (expr (minor (numList (num 7)))) | (flip ~) (expr (minor (numList (num 2))))) \n\n) (statement (assign x =: (expr (minor (numList (num 1) (num 2) (num 3))))) \n) (statement (expr (expr (minor (numList (num 1)))) + (expr (minor x))) \n\n) (statement (assign square =: (expr (minor (uop * :)))) \n) (statement (expr square (expr (minor (numList (num 1) (num 2) (num 3) (num 4))))) \n\n) (statement (assign mod2 =: (expr (expr (minor (numList (num 2)))) | (expr (minor ])))) \n) (statement (expr mod2 (expr (minor (uop i.) (minor (numList (num 4)))))) \n\n) (statement (assign eq0 =: (expr (expr (minor (numList (num 0)))) = (expr (minor ])))) \n) (statement (assign parell =: (expr (expr (minor eq0)) @: (expr (minor mod2)))) \n) (statement (expr parell (expr (minor (uop i.) (minor (numList (num 6)))))) \n\n) (statement (assign square =: (expr (minor (uop * :)))) \n) (statement (expr (expr square (expr (minor (numList (num 1))))) + (expr (minor (uop i.) (minor (numList (num 3)))))) \n\n) (statement (assign mod2 =: (expr (expr (minor (numList (num 2)))) | (expr (minor ])))) \n) (statement (assign eq0 =: (expr (expr (minor (numList (num 0)))) = (expr (minor ])))) \n\n) (statement (expr eq0 (expr mod2 (expr (minor (uop i.) (minor (numList (num 6))))))) \n\n) (statement (assign parell =: (expr (expr (minor eq0)) @: (expr (minor mod2)))) \n) (statement (expr parell (expr (minor (uop i.) (minor (numList (num 6)))))) \n\n) (statement (assign parell =: (expr (expr (minor (numList (num 0)))) = (expr (expr (minor ])) @: (expr (expr (minor (numList (num 2)))) | (expr (minor ])))))) \n) (statement (expr parell (expr (minor (uop i.) (minor (numList (num 6)))))) \n\n) (statement (assign inc =: (expr (expr (minor (numList (num 1)))) + (expr (minor ])))) \n) (statement (assign test =: (expr (expr (minor (uop + /))) @: (expr (expr (minor inc)) @: (expr (minor (uop i.)))))) \n) (statement (expr test (expr (minor (numList (num 3)))))) <EOF>)
