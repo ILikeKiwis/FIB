@@ -25,21 +25,19 @@ class Evaler(gVisitor):
         def visitAssignSt(self, ctx):               #Regla AssignSt
             self.visit(ctx.assign())
 
-        def visitExprSt(self, ctx):                 #Regla ExprSt
-            print("   ", ctx.expr().getText())               
+        def visitExprSt(self, ctx):                 #Regla ExprSt               
             ret = self.visit(ctx.expr())
-            print (*ret)
+            form = ["_"+str(abs(x)) if x < 0 else str(abs(x)) for x in ret] #Els valors negatius es representen amb un _
+            print(*form)                            
 
         def visitCom(self, ctx):                    #Regla Com
             ret = self.visit(ctx.comment())
-            print(ret)
 
         #Context Assign, on assignem valors a diferents IDs
         
         def visitAssign(self, ctx):
             id = ctx.ID().getText()
             value = ctx.assign_expr()
-            print("    " + id + " =: " + value.getText()  + "\n" )
             self.vars[id] = value
 
         def visitAsExpr(self, ctx):                 #Regla AsExpr

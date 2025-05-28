@@ -76,6 +76,3 @@ parell i. 6
 inc =: 1 + ]
 test =: +/ @: inc @: i.
 test 3 
-
-m =: +/ 3 + i. 4 NB.Hola
-m
