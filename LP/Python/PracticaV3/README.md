@@ -14,8 +14,8 @@ Els jocs de proves es troven dins el directori `/JocsDeProva`. Quan executem amb
 4. **Proves_Assignacio**. Són proves amb assignacions, per comprobar el correcte funcionament d'aquesta funcionalitat.
 5. **Errors**. Proves d'errors per veure el comportament del intèrpret davant d'aquests.  
 ## 3. Documentació
-L'intèrpret té una estructura molt bàsica. L'arxiu `g.py`, `Evaler.py` i la gramàtica que es troba a `g.g4`.
-1. g.g4
+L'intèrpret té una estructura molt bàsica. La gramàtica que es troba a `g.g4`, la classe `Evaler.py` i el programa principal `g.py`.
+1. **`g.g4`**
     En aquest arxiu com hem dit abans es troba la gramàtica del subconjunt de J que es demanava. Tracta els operadors demanats, i l'asignació de variables i funcions (que les tractarem igual per simplicitat).  
     Per començar tractarem el nostre programa con un conjunt de *sentències* fins el `EOF`.
     
@@ -79,4 +79,33 @@ L'intèrpret té una estructura molt bàsica. L'arxiu `g.py`, `Evaler.py` i la g
     
     \
     Per més detalls es recomana visitar l'arxiu `g.g4`.
+2. **`Evaler.py`**
+    En aquesta classe trobem l'implementació de totes les operacions fent servir el **visitador**.
+    Hi trobem definides les funcions següents (seguint el mateix ordre que a l'arxiu): 
+    * `__init__`. Aquí el que fem és inicialitzar el diccionari d'assignacions anomenat `self.vars`.
+    * `visitProgram`. Aquesta funció recull la llista de *statements* i evalúa cada un.
+    * `visitAssignSt`. És una funció que simplement recull el fill `assign` del contexte *AssignSt* i el visita per fer l'assignació.
+    * `visitExprSt`. Recull el fill `expr` del contexte *ExprSt* i recull el resultat d'evaluar aquesta expressió. Posteriorment l'envia per la sortida estandar.
+    * `visitCom`. Simplement ignora els comentaris. Recull el text ja que en el J Playground els comentaris es veien a la consola, pero per indicació del professorat aquests s'ignoren. Si es volgués veure per la sortida estandar simplement hem de fer print de la variable `ret` que recull el text del comentari.
+    * `visitAssign`. S'encarrega de fer **l'assignació** de variables i funcions. Guarda al diccionari `self.vars` la clau `ID` i el valor `expr`.
+    * `visitAsExpr`. Aquí passa tota la *màgia* de les funcions. S'encarrega de executar correctament les funcions creades per composició. Com ho fa? Per tal de respectar l'associativitat cap a la dreta, recull ambdues *expressions* i executa primer la de la **dreta**, guardant el resultat a una variable arbitrària `__identity__` (per veure més informació d'aquesta variable, anar a l'apartat adient), i seguidament executa *l'expressió* de **l'esquerra**. També abans d'executar aquesta segona *expressió* guarda l'estat de `self.vars` per poder recuperar-lo més tard en cas que hi hagi més funcions compostes dins *l'expresió* de l'esquerra. Finalment retorna el **resultat** de la funció.
+    * `visitOnlyUnitary`. És la funció encarregada de tractar les funcions que contenen operadors unaris. El que fem és fer servir com a valor el contingut de la variable `__identity__`, ja que abans d'entrar en aquest node hem passat per un node que guarda el *paràmetre* de la funció (*l'expressió* que te a la **dreta**), ja sigui `visitAsExpr` o `visitIdValue` o `visitBinaryOP`. Entés això, la funció és trivial, aplica la lògica de l'operador que hi ha dins de `uop`, i si n'hi ha a `BOP` dins del contexte *uop*, al valor que hem trobat a la variable com hem explicat anteriorment.
+    * `visitBinaryOP`. Funció encarregada de les operacions **binàries**. Evalua les *expressions* que té, aplica els `flip` que pertoquin per canviar els operands d'ordre, i finalment, aplica la lògica que pertoca pel operador que ve donat per `BOP`. 
+    * `visitUnitaryOP`. Idèntica a `visitOnlyUnitary` però pren com a valor l'evaluació del `expr` que ve donat. 
+    * `visitIdValue`. És la funció encarregada de la **crida** a funcions. El que fem és evaluar `expr` i guardar el resultat dins de `__identity__`. Després visitem el que hi hagi dins de `self.vars[ID]`, i gràcies a `__identity__` tenim sobre que aplicar la funció. 
+    * `visitPrio`. Trivial. S'encarrega de lús de `()`.
+    * `visitList`. Ens retorna el tipus base de **G**. Evalua la `numList` que té dins del *context* i la transforma en un `np.array`.
+    * `visitFilterOP`. Com fem servir `#` tant com operador unari com binari, necesitem donar precedència a l'operació binària, sinó aquesta operació es tractaria dins de `visitBinaryOP`.
+    * `visitIdentity`. Funció que fem servir quan les funcions acaben en `]`. Ens retorna el valor de la variable `__identity__`. És el que ens permet que les funcions es passin els resultats.
+    * `visitId`. Encarregada de retornar el valor de les variables. Molt simple, `self.vars[ID]`.
+    * `visitNum`. Ens retorna cada número a `numList`.
+    * `visitComment`. Tracta el text dels comentaris per si es volguesin treure per sortida estandar com ho fa el **J Playground**. 
+    
+    * **`__identity__`**. És una variable que trobem definida dins de `self.vars[__identity__]`. Porta els `__` ja que la **expressió regular** que captura els *IDs* no permet que comencin amb `_` entre altres. És l'encarregada de passar els *paràmetres* a les funcions que es poden definir a **G**. És a dir, ens ajuda a aplicar una funció al valor que te a la **dreta**.
 
+3. **`g.py`**
+    El programa principal de l'intèrpret. 
+    1. Llegiex l'arxiu `.j` que rep com a paràmentre. 
+    2. Amb `gLexer` fem l'**analisi lèxic**.
+    3. Després conjuntament amb el `token stream` creem l'`AST` amb el `gParser`.
+    4. Agafem l'arrel del progama `tree.program()` i li pasem a l'`Evaler`.
