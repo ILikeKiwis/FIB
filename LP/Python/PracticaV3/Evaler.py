@@ -235,7 +235,11 @@ class Evaler(gVisitor):
                 return [-0]
 
         def visitIdentity(self, ctx):               #Regla Identity
-            return self.vars["__identity__"]
+            try:
+                return self.vars["__identity__"]
+            except KeyError:
+                print("Error: No hi ha sobre que aplicar la identitat")
+                return [0]
 
         def visitId(self, ctx):                     #Regla Id
             value = self.vars[ctx.ID().getText()]

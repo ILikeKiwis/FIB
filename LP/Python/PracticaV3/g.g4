@@ -20,7 +20,6 @@ assign_expr
     :   <assoc=right> assign_expr '@:' assign_expr  #AsExpr
     |   expr                                        #NormalExpr
     |   uop                                         #OnlyUnitary
-
     ;
   
 
@@ -30,7 +29,7 @@ expr
     |   <assoc=right> ID expr                       #IdValue  
     |   '('expr')'                                  #Prio
     |   numList                                     #List  
-    |   expr '#' flip* expr                         #FilterOP
+    |   <assoc=right> expr '#' flip* expr           #FilterOP
     |   ']'                                         #Identity
     |   ID                                          #Id
     ;   
