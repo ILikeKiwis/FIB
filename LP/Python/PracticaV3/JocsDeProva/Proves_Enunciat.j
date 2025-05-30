@@ -76,3 +76,4 @@ parell i. 6
 inc =: 1 + ]
 test =: +/ @: inc @: i.
 test 3 
+

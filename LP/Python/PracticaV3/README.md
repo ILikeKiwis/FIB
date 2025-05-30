@@ -4,8 +4,8 @@
 1. `make` Prepara l'intèrpret.
 2. `make tests_all` Executa tots els tests de **/JocsDeProva**, i desa el resultat en els fitxers `.out` respectius, si aquests no existeixen, els crea. 
 3. `make clean` Esborra tots els `.out` dels tests i els fitxers creats per `antlr`.
-4. `make acti` En cas que la màquina a la qual s'està executant el programa no hi siguin les dependències necessàries per a l'execució, aquesta regla crea un **venv**, instal·la les dependències i activa l'entorn virtual per poder executar el programa. 
-5. `make deact` En cas que s'hagi activat el **venv** el desactiva.
+4. `make venv` En cas que la màquina a la qual s'està executant el programa no hi siguin les dependències necessàries per a l'execució, aquesta regla crea un **venv** i instal·la les dependències.
+5. `make tests_all_venv` En cas que calgui fer servir el **venv** per executar el programa. Es recomana, en cas que es vulgui executar manualment, s'activi el **venv** amb `source venv/bin/activate`, i procedir amb normalitat. Per exemple `python3 g.py nom_fitxer.j > nom_fitxer.out`.
 ## 2. Jocs de proves
 Els jocs de proves es troben dins el directori `/JocsDeProva`. Quan executem amb `make tests_all` es creen els `.out` corresponents. 
 1. **Proves_Enunciat**. Són totes les operacions de prova que surten a l'enunciat de la pràctica. 

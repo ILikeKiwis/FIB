@@ -1,19 +1,33 @@
-from antlr4 import *
+"""
+El programa principal de l'intèrpret:
+    1. Llegeix l'arxiu .j que rep com a paràmetre.
+    2. Amb gLexer fem l'anàlisi lèxic.
+    3. Després conjuntament amb el token stream creem l'AST amb el gParser.
+    4. Agafem l'arrel del programa tree.program() i li passem a l'Evaler.
+"""
+
+
+import sys
+
+
+from antlr4 import CommonTokenStream, FileStream
+
+
 from gLexer import gLexer
 from gParser import gParser
 from Evaler import Evaler
-import sys
 
-stream = FileStream(sys.argv[1], encoding='utf-8')
 
-lexer = gLexer(stream)
+if __name__ == "__main__":
+    stream = FileStream(sys.argv[1], encoding='utf-8')
 
-t_stream = CommonTokenStream(lexer)
+    lexer = gLexer(stream)
 
-parser = gParser(t_stream)
+    t_stream = CommonTokenStream(lexer)
 
-tree = parser.program()
+    parser = gParser(t_stream)
 
-ev = Evaler()
-ev.visit(tree)
+    tree = parser.program()
 
+    ev = Evaler()
+    ev.visit(tree)
