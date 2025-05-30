@@ -1,10 +1,10 @@
 # Intèrpret G
 
 ## 1. Makefile
-1. `make`  Prepara l'intèrpret.
-2. `make tests_all` Executa tots els tests de **/JocsDeProva**, i desa el resultat en els fitxers `.out`   respectius, si aquests no existeixen, els crea. 
+1. `make` Prepara l'intèrpret.
+2. `make tests_all` Executa tots els tests de **/JocsDeProva**, i desa el resultat en els fitxers `.out` respectius, si aquests no existeixen, els crea. 
 3. `make clean` Esborra tots els `.out` dels tests i els fitxers creats per `antlr`.
-4. `make acti` En cas que la màquina a la que s'està executant el programa no hi siguin les dependències necessàries per a l'execució, aquesta regla crea un **venv**, instal·la les dependències i activa l'entorn virtual per poder executar el programa. 
+4. `make acti` En cas que la màquina a la qual s'està executant el programa no hi siguin les dependències necessàries per a l'execució, aquesta regla crea un **venv**, instal·la les dependències i activa l'entorn virtual per poder executar el programa. 
 5. `make deact` En cas que s'hagi activat el **venv** el desactiva.
 ## 2. Jocs de proves
 Els jocs de proves es troben dins el directori `/JocsDeProva`. Quan executem amb `make tests_all` es creen els `.out` corresponents. 
@@ -78,7 +78,7 @@ L'intèrpret té una estructura molt bàsica. La gramàtica que es troba a `g.g4
         Són els comentaris de G. Comencen per `NB.` i s'ignoren durant l'execució.
     
     \
-    Per més detalls es recomana visitar l'arxiu `g.g4`.
+    Per a més detalls es recomana veure l'arxiu `g.g4`.
 2. **`Evaler.py`**
     En aquesta classe trobem la implementació de totes les operacions fent servir el **visitor**.  
     Hi trobem definides les funcions següents (seguint el mateix ordre que a l'arxiu): 
@@ -102,6 +102,9 @@ L'intèrpret té una estructura molt bàsica. La gramàtica que es troba a `g.g4
     * `visitComment`. Tracta el text dels comentaris per si es volguessin treure per sortida estàndard com ho fa el **J Playground**. 
     
     * **`__identity__`**. És una variable que trobem definida dins de `self.vars[__identity__]`. Porta els `__`, ja que l'**expressió regular** que captura els *IDs* no permet que comencin amb `_` entre altres. És l'encarregada de passar els *paràmetres* a les funcions que es poden definir a **G**. És a dir, ens ajuda a aplicar una funció al valor que té a la **dreta**.
+
+    \
+    Per a més detalls es recomana veure l'arxiu `Evaler.py`.
 
 3. **`g.py`**
     El programa principal de l'intèrpret. 
