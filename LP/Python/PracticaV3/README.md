@@ -13,6 +13,7 @@ Els jocs de proves es troben dins el directori `/JocsDeProva`. Quan executem amb
 3. **Proves_OpUnaris**. Molt semblant a *Proves_OpBinaris*, però amb els unaris.
 4. **Proves_Assignacio**. Són proves amb assignacions, per comprovar el correcte funcionament d'aquesta funcionalitat.
 5. **Errors**. Proves d'errors per veure el comportament de l'intèrpret davant d'aquests.  
+6. **Errors_sint**. Demostra que el programa capta els errors sintàctics. 
 ## 3. Documentació
 L'intèrpret té una estructura molt bàsica. La gramàtica que es troba a `g.g4`, la classe `Evaler.py` i el programa principal `g.py`.
 1. **`g.g4`**
@@ -42,7 +43,7 @@ L'intèrpret té una estructura molt bàsica. La gramàtica que es troba a `g.g4
     
         * `#AsExpr` serveix per als casos de composició (operador `@`) i ens assegura respectar l'associativitat a la dreta. 
         * `#NormalExpr` ens ajuda a guardar les expressions normals, tant per fer-les servir a les funcions per qualsevol mena de motiu, o per guardar-les com variables. Per exemple `a =: 1 2 3 + 1` és una variable vàlida. 
-        * `#OnlyUnitary` ens serveix per guardar operadors unitaris que farem servir a les funcions. Per exemple `inc =: 1 + ]`. 
+        * `#OnlyUnitary` ens serveix per guardar operadors unaris que farem servir a les funcions. Per exemple `inc =: 1 + ]`. 
     2. **Expr**. 
         Les expressions s'encarreguen de llegir correctament les diferents operacions que hi ha dins del programa, fent servir com a operands el tipus base de G o bé variables i funcions. 
         

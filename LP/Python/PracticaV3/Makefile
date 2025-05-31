@@ -42,7 +42,7 @@ tests_all_venv: tests_all
 
 
 $(T_DIR)/%.out: $(T_DIR)/%.j
-	@echo "==== Executant tests ===="
+	@echo "==== Executant test ===="
 	$(if $(filter 1,$(VENV)),$(V_DIR)/bin/python3,python3) g.py "$<" > "$@"
 
 

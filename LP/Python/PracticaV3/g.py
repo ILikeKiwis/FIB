@@ -27,7 +27,13 @@ if __name__ == "__main__":
 
     parser = gParser(t_stream)
 
+    parser.removeErrorListeners()
+
     tree = parser.program()
 
-    ev = Evaler()
-    ev.visit(tree)
+    if parser.getNumberOfSyntaxErrors() == 0:
+        ev = Evaler()
+        ev.visit(tree)
+    else:
+        print(parser.getNumberOfSyntaxErrors(), " errors de sintaxi")
+        print(tree.toStringTree(recog=parser))

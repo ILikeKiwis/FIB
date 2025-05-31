@@ -96,7 +96,7 @@ class Evaler(gVisitor):
             op = ctx.uop().getText()
             match op:
                 case '#':
-                    return len(self.vars["__identity__"])
+                    return [len(self.vars["__identity__"])]
                 case 'i.':
                     return np.arange(self.vars["__identity__"])
 
@@ -245,8 +245,12 @@ class Evaler(gVisitor):
             return [0]
 
     def visitId(self, ctx):                     # Regla Id
-        value = self.vars[ctx.ID().getText()]
-        return self.visit(value)
+        try:
+            value = self.vars[ctx.ID().getText()]
+            return self.visit(value)
+        except KeyError:
+            print("value error: " + ctx.ID().getText())
+            return [0]
 
     # Context numList, serveix per llegir el tipus basic de G
     def visitNum(self, ctx):
