@@ -1,11 +1,16 @@
 # Intèrpret G
-
+En aquest directori podem trobar: 
+1. Un **Makefile**, que ens serveix per preparar l'intèrpret, executar tots els jocs de prova (creant els fitxers `.out` adients), crear un `venv` en cas que la màquina no tingui les llibreries necessàries per executar el programa i netejar el directori.
+2. Els fitxers `.py` necessaris per l'intèrpret. 
+3. Un subdirectori amb els jocs de prova. 
+4. Evidentment, aquest mateix **README**.
 ## 1. Makefile
 1. `make` Prepara l'intèrpret.
 2. `make tests_all` Executa tots els tests de **/JocsDeProva**, i desa el resultat en els fitxers `.out` respectius, si aquests no existeixen, els crea. 
 3. `make clean` Esborra tots els `.out` dels tests i els fitxers creats per `antlr`.
 4. `make venv` En cas que la màquina a la qual s'està executant el programa no hi siguin les dependències necessàries per a l'execució, aquesta regla crea un **venv** i instal·la les dependències.
 5. `make tests_all_venv` En cas que calgui fer servir el **venv** per executar el programa. Es recomana, en cas que es vulgui executar manualment, s'activi el **venv** amb `source venv/bin/activate`, i procedir amb normalitat. Per exemple `python3 g.py nom_fitxer.j > nom_fitxer.out`.
+6. `make clean_tests` Serveix per esborrar els fitxers `.out` dels tests, en cas que es vulguin tornar a generar. 
 ## 2. Jocs de proves
 Els jocs de proves es troben dins el directori `/JocsDeProva`. Quan executem amb `make tests_all` es creen els `.out` corresponents. 
 1. **Proves_Enunciat**. Són totes les operacions de prova que surten a l'enunciat de la pràctica. 

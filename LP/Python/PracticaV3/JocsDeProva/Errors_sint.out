@@ -1,2 +1,0 @@
-2  errors de sintaxi
-(program (statement (assign x =: (assign_expr (expr (numList (num 1) (num 2) (num 3))))) \n\n) (statement (expr (expr x) + (expr uop (expr (uop |) (expr x)))) \n\n) (statement (expr (numList (num 1) (num 2) (num 3))) x \n\n\n) <EOF>)

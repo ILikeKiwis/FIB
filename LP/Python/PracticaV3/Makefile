@@ -47,9 +47,11 @@ $(T_DIR)/%.out: $(T_DIR)/%.j
 
 
 
-clean:
+clean: 
 	rm -rf $(OUT_TESTS)
 	rm -rf $(INT_TEMP)
 
+clean_tests:
+	rm -rf $(OUT_TESTS)
 
-.PHONY: all venv tests_all clean tests_all_venv
+.PHONY: all venv tests_all clean tests_all_venv clean_tests

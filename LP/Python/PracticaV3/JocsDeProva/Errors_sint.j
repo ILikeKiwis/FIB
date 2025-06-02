@@ -1,7 +1,5 @@
 x =: 1 2 3
 
-x + | x
+x + | x     
 
-1 2 3 x 
-
-
+NB. diferents tipus d'errors sintàctics.
