@@ -3,7 +3,7 @@
 in vec4 frontColor;
 out vec4 fragColor;
 
-uniform int N = 2;
+uniform int N = 3;
 
 in vec2 vtexCoord;
 
@@ -19,18 +19,17 @@ void main()
 	vec2 delta = st-C;
 	float d = length(delta);
 	if (d < R && N > 0) {
-		//float r = R / N ;
-		//st = delta / r;
-		//st += (1.0 * N);
-		//st /= 2*N;
-		for (int i = 1; i <= N; i++) {
+		for (int i = 0; i < N; i++) {
 			if (d < R/i) {
 				float r = R/i;
 				st = delta / r;
-				st += 1.0;
-				st /= 2.0;
+				st += 1;
+				st /= 2;
 			}
 		}
 	}
+	
+	
 	fragColor = texture(colorMap, st);
+	//if (d < 0.1) fragColor = vec4(1);
 }
