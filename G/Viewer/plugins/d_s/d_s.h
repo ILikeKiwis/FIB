@@ -1,10 +1,10 @@
-#ifndef _DEFERRED_SHADING_H
-#define _DEFERRED_SHADING_H
+#ifndef _D_S_H
+#define _D_S_H
 
 #include "plugin.h" 
 #include <QPainter>
 
-class Deferred_shading: public QObject, public Plugin
+class D_s: public QObject, public Plugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "Plugin") 
@@ -36,3 +36,4 @@ class Deferred_shading: public QObject, public Plugin
 };
 
 #endif
+

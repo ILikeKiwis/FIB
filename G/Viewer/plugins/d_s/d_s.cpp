@@ -1,10 +1,10 @@
-#include "deferred_shading.h"
+#include "d_s.h"
 #include "glwidget.h"
 
 const int IMAGE_WIDTH = 1024;
 const int IMAGE_HEIGHT = IMAGE_WIDTH;
 
-void Deferred_shading::compileAndLinkShaders()
+void D_s::compileAndLinkShaders()
 {
     GLWidget & g = *glwidget();
     g.makeCurrent();
@@ -13,9 +13,9 @@ void Deferred_shading::compileAndLinkShaders()
     // this shader will calculate the lighting based on the G buffer information,
     // that is, the position, normal and color textures.
     QOpenGLShader* vs = new QOpenGLShader(QOpenGLShader::Vertex, this);
-    vs->compileSourceFile(g.getPluginPath() + "/../deferred_shading/deferredshading.vert");
+    vs->compileSourceFile(g.getPluginPath() + "/../d_s/deferredshading.vert");
     QOpenGLShader* fs = new QOpenGLShader(QOpenGLShader::Fragment, this);
-    fs->compileSourceFile(g.getPluginPath() + "/../deferred_shading/deferredshading.frag");
+    fs->compileSourceFile(g.getPluginPath() + "/../d_s/deferredshading.frag");
     deferredProgram = new QOpenGLShaderProgram(this);
     deferredProgram->addShader(vs);
     deferredProgram->addShader(fs);
@@ -26,9 +26,9 @@ void Deferred_shading::compileAndLinkShaders()
     // this shader will store in the color buffer the color information (diffuse material)
     // in the RGB components, and the specular information (material shininess) in the Alpha component
     vs = new QOpenGLShader(QOpenGLShader::Vertex, this);
-    vs->compileSourceFile(g.getPluginPath() + "/../deferred_shading/gbuffer_colorAndSpecular.vert");
+    vs->compileSourceFile(g.getPluginPath() + "/../d_s/gbuffer_colorAndSpecular.vert");
     fs = new QOpenGLShader(QOpenGLShader::Fragment, this);
-    fs->compileSourceFile(g.getPluginPath() + "/../deferred_shading/gbuffer_colorAndSpecular.frag");
+    fs->compileSourceFile(g.getPluginPath() + "/../d_s/gbuffer_colorAndSpecular.frag");
     gbuffer_colorAndSpecularProgram = new QOpenGLShaderProgram(this);
     gbuffer_colorAndSpecularProgram->addShader(vs);
     gbuffer_colorAndSpecularProgram->addShader(fs);
@@ -37,9 +37,9 @@ void Deferred_shading::compileAndLinkShaders()
     // Compile and link the Normal Map shader --------------------
     // this shader will store in the color buffer the normal information (per fragment)
     vs = new QOpenGLShader(QOpenGLShader::Vertex, this);
-    vs->compileSourceFile(g.getPluginPath() + "/../deferred_shading/gbuffer_normal.vert");
+    vs->compileSourceFile(g.getPluginPath() + "/../d_s/gbuffer_normal.vert");
     fs = new QOpenGLShader(QOpenGLShader::Fragment, this);
-    fs->compileSourceFile(g.getPluginPath() + "/../deferred_shading/gbuffer_normal.frag");
+    fs->compileSourceFile(g.getPluginPath() + "/../d_s/gbuffer_normal.frag");
     gbuffer_normalProgram = new QOpenGLShaderProgram(this);
     gbuffer_normalProgram->addShader(vs);
     gbuffer_normalProgram->addShader(fs);
@@ -48,16 +48,16 @@ void Deferred_shading::compileAndLinkShaders()
     // Compile and link the Position Map shader --------------------
     // this shader will store in the color buffer the normal information (per fragment)
     vs = new QOpenGLShader(QOpenGLShader::Vertex, this);
-    vs->compileSourceFile(g.getPluginPath() + "/../deferred_shading/gbuffer_position.vert");
+    vs->compileSourceFile(g.getPluginPath() + "/../d_s/gbuffer_position.vert");
     fs = new QOpenGLShader(QOpenGLShader::Fragment, this);
-    fs->compileSourceFile(g.getPluginPath() + "/../deferred_shading/gbuffer_position.frag");
+    fs->compileSourceFile(g.getPluginPath() + "/../d_s/gbuffer_position.frag");
     gbuffer_positionProgram = new QOpenGLShaderProgram(this);
     gbuffer_positionProgram->addShader(vs);
     gbuffer_positionProgram->addShader(fs);
     gbuffer_positionProgram->link();
 }
 
-void Deferred_shading::initGbuffer()
+void D_s::initGbuffer()
 {
     GLWidget & g = *glwidget();
     g.makeCurrent();
@@ -93,7 +93,7 @@ void Deferred_shading::initGbuffer()
     g.glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-void Deferred_shading::initScreenQuad()
+void D_s::initScreenQuad()
 {
     GLWidget & g = *glwidget();
     g.makeCurrent();
@@ -117,7 +117,7 @@ void Deferred_shading::initScreenQuad()
     g.glBindVertexArray(0);
 }
 
-void Deferred_shading::onPluginLoad()
+void D_s::onPluginLoad()
 {
     mode = 0;
     compileAndLinkShaders();
@@ -125,7 +125,7 @@ void Deferred_shading::onPluginLoad()
     initScreenQuad();
 }
 
-bool Deferred_shading::paintGL()
+bool D_s::paintGL()
 {
     GLWidget & g = *glwidget();
     g.makeCurrent();
@@ -206,7 +206,7 @@ bool Deferred_shading::paintGL()
     return true;
 }
 
-void Deferred_shading::keyPressEvent(QKeyEvent* event)
+void D_s::keyPressEvent(QKeyEvent* event)
 {
     if (event->key() == Qt::Key_E) 
     {
@@ -215,7 +215,7 @@ void Deferred_shading::keyPressEvent(QKeyEvent* event)
     } 
 }
 
-void Deferred_shading::postFrame()
+void D_s::postFrame()
 {
     QFont font;
     font.setPixelSize(32);
