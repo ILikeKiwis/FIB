@@ -1,6 +1,0 @@
-{
-    "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "Prob5-Monedes/lib/AIMA.jar"
-    ]
-}
