@@ -1,6 +1,6 @@
 # 🎓 FIB — Facultat d'Informàtica de Barcelona (UPC)
 
-Trabajos académicos de mi grado en Ingeniería Informática en la FIB (UPC, Barcelona).
+Trabajos de Ingeniería Informática.
 
 ## 📚 Asignaturas
 
