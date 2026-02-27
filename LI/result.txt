@@ -1,0 +1,55 @@
+Llamada nueva
+Llamada nueva
+Miramos el : 0
+Miramos la clausula: 0
+Miramos la clausula: 1
+Miramos la clausula: 2
+Miramos la clausula: 3
+Miramos la clausula: 4
+Miramos el : 0
+Miramos la clausula: 0
+Miramos la clausula: 1
+Miramos la clausula: 2
+Miramos la clausula: 3
+Miramos la clausula: 4
+Llamada nueva
+Miramos el : 0
+Miramos la clausula: 0
+Miramos la clausula: 1
+Miramos la clausula: 2
+Miramos la clausula: 3
+Miramos la clausula: 4
+Miramos el : 7
+Miramos la clausula: 0
+Miramos la clausula: 1
+Miramos la clausula: 2
+Miramos la clausula: 3
+Miramos la clausula: 4
+Miramos el : 0
+Miramos la clausula: 0
+Miramos la clausula: 1
+Miramos la clausula: 2
+Miramos la clausula: 3
+Miramos la clausula: 4
+Llamada nueva
+Miramos el : 0
+Miramos la clausula: 0
+Miramos la clausula: 1
+Miramos la clausula: 2
+Miramos la clausula: 3
+Miramos la clausula: 4
+Llamada nueva
+Miramos el : -5
+Miramos la clausula: 0
+Miramos la clausula: 1
+Miramos la clausula: 2
+Miramos la clausula: 3
+Miramos la clausula: 4
+Llamada nueva
+Miramos el : 0
+Miramos la clausula: 0
+Miramos la clausula: 1
+Miramos la clausula: 2
+Miramos la clausula: 3
+Miramos la clausula: 4
+SATISFIABLE
