@@ -9,10 +9,10 @@ c [reorder-3] reordered decisions in focused search mode
 c [reorder-4] reordered decisions in stable search mode
 c decisions:                           186873                1.83 per conflict
 c warming_decisions:                      103               34.33 per walk
-2 s
+1 s
 misat:
 SATISFIABLE
-31 s
+38 s
 
 ------------------
 random3SAT/vars-300-02.cnf
@@ -36,7 +36,7 @@ c warming_decisions:                      250               31.25 per walk
 16 s
 misat:
 UNSATISFIABLE
-77 s
+41 s
 
 ------------------
 random3SAT/vars-300-03.cnf
@@ -54,10 +54,10 @@ c [reorder-9] reordered decisions in focused search mode
 c [reorder-10] reordered decisions in focused search mode
 c decisions:                           729710                1.53 per conflict
 c warming_decisions:                      178               29.67 per walk
-8 s
+7 s
 misat:
 UNSATISFIABLE
-36 s
+29 s
 
 ------------------
 random3SAT/vars-300-04.cnf
@@ -80,7 +80,7 @@ c warming_decisions:                      217               31.00 per walk
 11 s
 misat:
 UNSATISFIABLE
-52 s
+32 s
 
 ------------------
 random3SAT/vars-300-05.cnf
@@ -95,7 +95,7 @@ c warming_decisions:                      120               40.00 per walk
 1 s
 misat:
 SATISFIABLE
-70 s
+5 s
 
 ------------------
 random3SAT/vars-300-06.cnf
@@ -113,10 +113,10 @@ c [reorder-9] reordered decisions in focused search mode
 c [reorder-10] reordered decisions in focused search mode
 c decisions:                           737495                1.52 per conflict
 c warming_decisions:                      167               27.83 per walk
-7 s
+8 s
 misat:
 UNSATISFIABLE
-26 s
+15 s
 
 ------------------
 random3SAT/vars-300-07.cnf
@@ -127,7 +127,7 @@ c warming_decisions:                       33               33.00 per walk
 0 s
 misat:
 SATISFIABLE
-18 s
+0 s
 
 ------------------
 random3SAT/vars-300-08.cnf
@@ -149,10 +149,10 @@ c [reorder-13] reordered decisions in stable search mode
 c [reorder-14] reordered decisions in stable search mode
 c decisions:                          1537231                1.56 per conflict
 c warming_decisions:                      198               24.75 per walk
-16 s
+17 s
 misat:
 UNSATISFIABLE
-54 s
+62 s
 
 ------------------
 random3SAT/vars-300-09.cnf
@@ -166,7 +166,7 @@ c warming_decisions:                       95               31.67 per walk
 0 s
 misat:
 SATISFIABLE
-12 s
+2 s
 
 ------------------
 random3SAT/vars-300-10.cnf
@@ -179,4 +179,4 @@ c warming_decisions:                       93               46.50 per walk
 0 s
 misat:
 SATISFIABLE
-19 s
+5 s

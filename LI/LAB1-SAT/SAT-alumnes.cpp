@@ -2,10 +2,8 @@
 #include <stdlib.h>
 #include <algorithm>
 #include <vector>
-#include <list>
 #include <unordered_map>
-#include <map>
-
+#include <list>
 using namespace std;
 
 #define UNDEF -1
@@ -20,8 +18,9 @@ vector<int> modelStack;
 uint indexOfNextLitToPropagate;
 uint decisionLevel;
 unordered_map<int, list<uint>> occurList;
-unordered_map<int, int> apariciones;
-multimap<int, uint, std::greater<int>> apOrder;
+vector<int> confPos;
+vector<int> confNeg;
+int conflictCount;
 
 
 void readClauses()
@@ -42,20 +41,11 @@ void readClauses()
     for (uint i = 0; i < numClauses; ++i)
     {
         int lit;
-        while (cin >> lit and lit != 0)
-        {
+        while (cin >> lit and lit != 0) {
             clauses[i].push_back(lit);
             occurList[lit].push_back(i);
-            if (lit > 0) apariciones[lit]++;
-            else apariciones[-lit]++;
         }
     }
-    
-    for (auto i : apariciones) {
-        apOrder.insert({i.second, i.first});
-    }
-
-
 }
 
 int currentValueInModel(int lit)
@@ -103,6 +93,18 @@ bool propagateGivesConflict()
                 }
             }
             if (not someLitTrue and numUndefs == 0){
+                for (uint k = 0; k < clauses[i].size(); ++k){
+                    if (clauses[i][k] < 0) confNeg[abs(clauses[i][k])]++;
+                    else confPos[clauses[i][k]]++;
+                }
+                conflictCount++;
+                if (conflictCount >= 16000) {
+                    for (uint k = 1; k <= numVars; k++) {
+                        confPos[k] /= 2;
+                        confNeg[k] /= 2;
+                    }
+                    conflictCount = 0;
+                }
                 return true; // conflict! all lits false
             }
             else if (not someLitTrue and numUndefs == 1)
@@ -136,12 +138,15 @@ void backtrack()
 // Heuristic for finding the next decision literal:
 int getNextDecisionLiteral()
 {
-    for (auto i : apOrder) {
-        if (model[i.second] == UNDEF) return i.second;
-    }
-    return 0;
+    int aux_cont = 0; 
+    int aux_var = 0;
+    for (uint i = 1; i <= numVars; ++i) // stupid heuristic:
+        if (confNeg[i] + confPos[i] >= aux_cont && model[i] == UNDEF) {
+            aux_cont = confNeg[i] + confPos[i];
+            aux_var = confNeg[i] > confPos[i] ? -i : i;
+        }
+    return aux_var;
 }
-
 
 void checkmodel()
 {
@@ -165,8 +170,11 @@ int main()
 {
     readClauses(); // reads numVars, numClauses and clauses
     model.resize(numVars + 1, UNDEF);
+    confNeg.resize(numVars + 1, 0);
+    confPos.resize(numVars + 1, 0);
     indexOfNextLitToPropagate = 0;
     decisionLevel = 0;
+    conflictCount = 0;
 
     // Take care of initial unit clauses, if any
     for (uint i = 0; i < numClauses; ++i)

@@ -29,7 +29,7 @@ do
     show_elapsed_time
     echo "misat:"
     start_measuring_time
-    ./misat3 < $f
+    ./misat4 < $f
     stop_measuring_time
     show_elapsed_time
 done
