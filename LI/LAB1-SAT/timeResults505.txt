@@ -1,0 +1,19 @@
+
+------------------
+random3SAT/vars-300-01.cnf
+KisSAT:
+SATISFIABLE
+c [reorder-1] reordered decisions in focused search mode
+c [reorder-2] reordered decisions in focused search mode
+c [reorder-3] reordered decisions in focused search mode
+c [reorder-4] reordered decisions in stable search mode
+c decisions:                           186873                1.83 per conflict
+c warming_decisions:                      103               34.33 per walk
+2 s
+misat:
+SATISFIABLE
+31 s
+
+------------------
+random3SAT/vars-300-02.cnf
+KisSAT:

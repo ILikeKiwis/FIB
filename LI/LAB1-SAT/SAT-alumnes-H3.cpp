@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <algorithm>
 #include <vector>
+#include <map>
+#include <unordered_map>
+#include <list>
 using namespace std;
 
 #define UNDEF -1
@@ -15,6 +18,73 @@ vector<int> model;
 vector<int> modelStack;
 uint indexOfNextLitToPropagate;
 uint decisionLevel;
+unordered_map<int, list<uint>> occurList;
+
+class ConflictCounter {
+
+    private:
+    multimap<int, int> order;   // counter, id // ordered counters
+    unordered_map<int, int> lookup; // id, counter // lookup table for faster updates
+    int updates = 0;
+    public:
+
+    void insert(const int& id, const int& c = 0) {
+        if (lookup.find(id) != lookup.end()) return;
+        order.emplace(c, id);
+        lookup[id] = c;
+    }
+
+    void update(const int& id, const int& c) {
+        auto pos = lookup.find(id);
+        if (pos == lookup.end()) return;
+        auto range = order.equal_range(pos->second);
+        for(auto it = range.first; it != range.second; ++it) {
+            if (it->second == id){
+                order.erase(it);
+                order.emplace(c, id);
+                lookup[id]=c;
+                break;
+            }
+        }
+        
+        updates++;
+
+        if (updates >= 500000)  this->divideOlder();
+    }
+
+    void inc(const int& id) {
+        int c = lookup[id];
+        this->update(id, c+1);
+    }
+
+    void divideOlder() {
+        for (auto it = lookup.begin(); it != lookup.end(); ++it) {
+            updates = 0;
+            this->update(it->first, it->second / 2);
+        }
+    }
+
+    int nextToDecide() {
+        if (order.empty()) return 0;
+        for (auto it = order.rbegin(); it != order.rend(); ++it) {
+            if (model[it->second] == UNDEF) return it ->second;
+        }
+        return 0;
+    }
+
+    void print() {
+        for (auto it = order.rbegin(); it != order.rend(); ++it){
+            cout << it->second << " : " << it->first << endl;
+        }
+    }
+
+    /*void printUp() {
+        cout << updates << endl;
+    }*/
+
+};
+
+ConflictCounter ConfCtr;
 
 void readClauses()
 {
@@ -34,8 +104,12 @@ void readClauses()
     for (uint i = 0; i < numClauses; ++i)
     {
         int lit;
-        while (cin >> lit and lit != 0)
+        while (cin >> lit and lit != 0) {
             clauses[i].push_back(lit);
+            occurList[lit].push_back(i);
+            ConfCtr.insert(abs(lit));
+        }
+
     }
 }
 
@@ -65,14 +139,13 @@ bool propagateGivesConflict()
 {
     while (indexOfNextLitToPropagate < modelStack.size())
     {
-        ++indexOfNextLitToPropagate;
         // Miramos clausulas que aparece el lit
-        for (uint i = 0; i < numClauses; ++i)
+        for (uint i : occurList[-modelStack[indexOfNextLitToPropagate]])
         {
             bool someLitTrue = false;
             int numUndefs = 0;
-            int lastLitUndef = 0;  
-            // Comprobaremos si alguno es true o si hay alguno indef
+            int lastLitUndef = 0;
+            // Comprobamos si ninguno es True 
             for (uint k = 0; not someLitTrue and k < clauses[i].size(); ++k)
             {
                 int val = currentValueInModel(clauses[i][k]);
@@ -84,15 +157,21 @@ bool propagateGivesConflict()
                     lastLitUndef = clauses[i][k];
                 }
             }
-            if (not someLitTrue and numUndefs == 0)
+            if (not someLitTrue and numUndefs == 0){
+                for (uint k = 0; k < clauses[i].size(); ++k) {
+                    ConfCtr.inc(abs(clauses[i][k]));
+                }
                 return true; // conflict! all lits false
+            }
             else if (not someLitTrue and numUndefs == 1)
-                setLiteralToTrue(lastLitUndef); // unitario
+            {
+                setLiteralToTrue(lastLitUndef);
+            }
         }
+        ++indexOfNextLitToPropagate;
     }
     return false;
 }
-
 void backtrack()
 {
     uint i = modelStack.size() - 1;
@@ -114,10 +193,7 @@ void backtrack()
 // Heuristic for finding the next decision literal:
 int getNextDecisionLiteral()
 {
-    for (uint i = 1; i <= numVars; ++i) // stupid heuristic:
-        if (model[i] == UNDEF)
-            return i; // returns first UNDEF var, positively
-    return 0;         // reurns 0 when all literals are defined
+    return ConfCtr.nextToDecide();        // reurns 0 when all literals are defined
 }
 
 void checkmodel()
@@ -154,7 +230,8 @@ int main()
             if (val == FALSE)
             {
                 cout << "UNSATISFIABLE" << endl;
-                return 10;
+                //ConfCtr.printUp();
+                return 20;
             }
             else if (val == UNDEF)
                 setLiteralToTrue(lit);
@@ -168,7 +245,8 @@ int main()
             if (decisionLevel == 0)
             {
                 cout << "UNSATISFIABLE" << endl;
-                return 10;
+                //ConfCtr.printUp();
+                return 20;
             }
             backtrack();
         }
@@ -177,7 +255,8 @@ int main()
         {
             checkmodel();
             cout << "SATISFIABLE" << endl;
-            return 20;
+            //ConfCtr.printUp();
+            return 10;
         }
         // start new decision level:
         modelStack.push_back(0); // push mark indicating new DL

@@ -1,0 +1,182 @@
+
+------------------
+random3SAT/vars-300-01.cnf
+KisSAT:
+SATISFIABLE
+c [reorder-1] reordered decisions in focused search mode
+c [reorder-2] reordered decisions in focused search mode
+c [reorder-3] reordered decisions in focused search mode
+c [reorder-4] reordered decisions in stable search mode
+c decisions:                           186873                1.83 per conflict
+c warming_decisions:                      103               34.33 per walk
+2 s
+misat:
+SATISFIABLE
+22 s
+
+------------------
+random3SAT/vars-300-02.cnf
+KisSAT:
+UNSATISFIABLE
+c [reorder-1] reordered decisions in focused search mode
+c [reorder-2] reordered decisions in focused search mode
+c [reorder-3] reordered decisions in focused search mode
+c [reorder-4] reordered decisions in focused search mode
+c [reorder-5] reordered decisions in focused search mode
+c [reorder-6] reordered decisions in focused search mode
+c [reorder-7] reordered decisions in focused search mode
+c [reorder-8] reordered decisions in focused search mode
+c [reorder-9] reordered decisions in stable search mode
+c [reorder-10] reordered decisions in focused search mode
+c [reorder-11] reordered decisions in stable search mode
+c [reorder-12] reordered decisions in stable search mode
+c [reorder-13] reordered decisions in stable search mode
+c decisions:                          1436197                1.55 per conflict
+c warming_decisions:                      250               31.25 per walk
+16 s
+misat:
+UNSATISFIABLE
+85 s
+
+------------------
+random3SAT/vars-300-03.cnf
+KisSAT:
+UNSATISFIABLE
+c [reorder-1] reordered decisions in focused search mode
+c [reorder-2] reordered decisions in focused search mode
+c [reorder-3] reordered decisions in stable search mode
+c [reorder-4] reordered decisions in focused search mode
+c [reorder-5] reordered decisions in focused search mode
+c [reorder-6] reordered decisions in focused search mode
+c [reorder-7] reordered decisions in focused search mode
+c [reorder-8] reordered decisions in focused search mode
+c [reorder-9] reordered decisions in focused search mode
+c [reorder-10] reordered decisions in focused search mode
+c decisions:                           729710                1.53 per conflict
+c warming_decisions:                      178               29.67 per walk
+8 s
+misat:
+UNSATISFIABLE
+42 s
+
+------------------
+random3SAT/vars-300-04.cnf
+KisSAT:
+UNSATISFIABLE
+c [reorder-1] reordered decisions in focused search mode
+c [reorder-2] reordered decisions in focused search mode
+c [reorder-3] reordered decisions in stable search mode
+c [reorder-4] reordered decisions in focused search mode
+c [reorder-5] reordered decisions in focused search mode
+c [reorder-6] reordered decisions in focused search mode
+c [reorder-7] reordered decisions in focused search mode
+c [reorder-8] reordered decisions in focused search mode
+c [reorder-9] reordered decisions in focused search mode
+c [reorder-10] reordered decisions in focused search mode
+c [reorder-11] reordered decisions in focused search mode
+c [reorder-12] reordered decisions in focused search mode
+c decisions:                          1132061                1.56 per conflict
+c warming_decisions:                      217               31.00 per walk
+11 s
+misat:
+UNSATISFIABLE
+53 s
+
+------------------
+random3SAT/vars-300-05.cnf
+KisSAT:
+SATISFIABLE
+c [reorder-1] reordered decisions in focused search mode
+c [reorder-2] reordered decisions in focused search mode
+c [reorder-3] reordered decisions in focused search mode
+c [reorder-4] reordered decisions in focused search mode
+c decisions:                           198940                1.82 per conflict
+c warming_decisions:                      120               40.00 per walk
+2 s
+misat:
+SATISFIABLE
+88 s
+
+------------------
+random3SAT/vars-300-06.cnf
+KisSAT:
+UNSATISFIABLE
+c [reorder-1] reordered decisions in focused search mode
+c [reorder-2] reordered decisions in focused search mode
+c [reorder-3] reordered decisions in stable search mode
+c [reorder-4] reordered decisions in stable search mode
+c [reorder-5] reordered decisions in focused search mode
+c [reorder-6] reordered decisions in focused search mode
+c [reorder-7] reordered decisions in focused search mode
+c [reorder-8] reordered decisions in focused search mode
+c [reorder-9] reordered decisions in focused search mode
+c [reorder-10] reordered decisions in focused search mode
+c decisions:                           737495                1.52 per conflict
+c warming_decisions:                      167               27.83 per walk
+7 s
+misat:
+UNSATISFIABLE
+40 s
+
+------------------
+random3SAT/vars-300-07.cnf
+KisSAT:
+SATISFIABLE
+c decisions:                             4468                1.59 per conflict
+c warming_decisions:                       33               33.00 per walk
+0 s
+misat:
+SATISFIABLE
+20 s
+
+------------------
+random3SAT/vars-300-08.cnf
+KisSAT:
+UNSATISFIABLE
+c [reorder-1] reordered decisions in focused search mode
+c [reorder-2] reordered decisions in focused search mode
+c [reorder-3] reordered decisions in focused search mode
+c [reorder-4] reordered decisions in stable search mode
+c [reorder-5] reordered decisions in stable search mode
+c [reorder-6] reordered decisions in focused search mode
+c [reorder-7] reordered decisions in focused search mode
+c [reorder-8] reordered decisions in focused search mode
+c [reorder-9] reordered decisions in focused search mode
+c [reorder-10] reordered decisions in stable search mode
+c [reorder-11] reordered decisions in focused search mode
+c [reorder-12] reordered decisions in focused search mode
+c [reorder-13] reordered decisions in stable search mode
+c [reorder-14] reordered decisions in stable search mode
+c decisions:                          1537231                1.56 per conflict
+c warming_decisions:                      198               24.75 per walk
+17 s
+misat:
+UNSATISFIABLE
+46 s
+
+------------------
+random3SAT/vars-300-09.cnf
+KisSAT:
+SATISFIABLE
+c [reorder-1] reordered decisions in focused search mode
+c [reorder-2] reordered decisions in focused search mode
+c [reorder-3] reordered decisions in focused search mode
+c decisions:                           124997                1.90 per conflict
+c warming_decisions:                       95               31.67 per walk
+1 s
+misat:
+SATISFIABLE
+15 s
+
+------------------
+random3SAT/vars-300-10.cnf
+KisSAT:
+SATISFIABLE
+c [reorder-1] reordered decisions in focused search mode
+c [reorder-2] reordered decisions in focused search mode
+c decisions:                            34170                1.41 per conflict
+c warming_decisions:                       93               46.50 per walk
+0 s
+misat:
+SATISFIABLE
+20 s

@@ -15,7 +15,7 @@ show_elapsed_time() {
 }
 
 #for f in vars-100*.cnf
-for f in random3SAT/vars-150*.cnf
+for f in random3SAT/vars-300*.cnf
 do
     echo
     echo "------------------"
@@ -29,7 +29,7 @@ do
     show_elapsed_time
     echo "misat:"
     start_measuring_time
-    ./misat < $f
+    ./misat3 < $f
     stop_measuring_time
     show_elapsed_time
 done
