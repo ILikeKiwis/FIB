@@ -38,11 +38,10 @@
 % elements de la llista de enters donada L. Ha de poder generar la
 % P i també comprovar una P donada
 
-prod([],?).
-prod([H|T],P) :- prod(T,R), P is H*R.
-
-
-
+prod([],1).
+prod([H|T],P) :- 
+    prod(T, P1), 
+    P is H*P1.
 
 
 % PROB. B =========================================================
@@ -52,9 +51,11 @@ prod([H|T],P) :- prod(T,R), P is H*R.
 % d'enters. El predicat ha de fallar si els dos vectors
 % tenen longituds diferents.
 
-
-
-
+pescalar([], [], 0).
+pescalar([H1|T1], [H2|T2], P) :-
+    length(T1) = length(T2),
+    pescalar(T1, T2, P1),
+    P is P1 + H1*H2.
 
 
 
@@ -64,16 +65,19 @@ prod([H|T],P) :- prod(T,R), P is H*R.
 
 % interseccio(+L1,+L2,?L3)
 
-
-
+interseccio([], _, []).
+interseccio([H|T], L2, [H|I]) :- % H in L2
+    member(H, L2), 
+    !, 
+    interseccio(T, L2, I).
+interseccio([_|T], L2, I) :-  % H not in L2
+    interseccio(T, L2, I). 
 
 % unio(+L1,+L2,?L3)
 
 unio([],L,L).   % caso base
-unio([H|T],L2,U) :- member(H,L2),!, unio(T,L,U)% caso H in L2
-unio([H|T],L2, [H|U]) :- unio(T,L2,U) % caso H not in L2
-
-
+unio([H|T],L2,U) :- member(H,L2),!, unio(T,L2,U).% caso H in L2
+unio([H|T],L2, [H|U]) :- unio(T,L2,U). % caso H not in L2
 
 
 % PROB. D =========================================================
@@ -82,15 +86,15 @@ unio([H|T],L2, [H|U]) :- unio(T,L2,U) % caso H not in L2
 % inversa d'una llista donada.
 
 % ultim(+L,?E)
-
-
-
+ultim(L, E):-
+    append(_, [E], L).
 
 % inversa(+L1,?L2)
 
-
-
-
+inversa([], []).
+inversa([H|L], I) :- 
+    inversa(L, I1),
+    append(I1, [H], I).
 
 
 % PROB. E =========================================================
@@ -100,7 +104,15 @@ unio([H|T],L2, [H|U]) :- unio(T,L2,U) % caso H not in L2
 % fib(1) = 1, fib(2) = 1, i si N > 2 llavors
 % fib(N) = fib(N-1) + fib(N-2)
 
-
+fib(1, 1).
+fib(2, 1).
+fib(N, F):-
+    N > 2,
+    N1 is N-1,
+    N2 is N-2,
+    fib(N1, F1), 
+    fib(N2, F2), 
+    F is F1 + F2.
 
 
 
@@ -113,6 +125,13 @@ unio([H|T],L2, [H|U]) :- unio(T,L2,U) % caso H not in L2
 % Tant P com N venen instanciats. El predicat deu ser capaç de
 % generar totes les solucions possibles,
 
+dados(0, 0, []).
+dados(P, N, [X|L]):-
+    between(1, 6, X), 
+    N1 is N-1, 
+    PX is P-X,
+    PX >= 0,
+    dados(PX, N1, L).
 
 
 
@@ -129,12 +148,18 @@ unio([H|T],L2, [H|U]) :- unio(T,L2,U) % caso H not in L2
 
 % suma(+L,?S)
 
-
+suma([], 0).
+suma([H|T], S) :-
+    suma(T, S1), 
+    S is H+S1.
 
 
 % suma_la_resta(+L)
 
-
+suma_la_resta(L):-
+    select(E, L, R),
+    suma(R, S),
+    E is S.  
 
 
 
@@ -147,6 +172,32 @@ unio([H|T],L2, [H|U]) :- unio(T,L2,U) % caso H not in L2
 % Per exemple, si fem la consulta
 % card( [1,2,1,5,1,3,3,7] )  l'intèrpret escriurà:
 % [[1,3],[2,1],[5,1],[3,2],[7,1]].
+
+count(E, [E|L], N) :-
+    count(E, L, N1), 
+    N is N1+1. 
+
+count(E, [X|L], N) :-
+    X \= E, 
+    count(E, L, N). 
+
+count(_, [], 0).
+
+card(L) :-
+    card(L, L, [], Res), 
+    write(Res), 
+    nl.
+
+
+card([], _, _, []).
+
+card([H|T], OG, V, Res):- % H tratado
+    member(H, V), !,
+    card(T, OG, V, Res).
+
+card([H|T], OG, V,[[H,N]|Res]) :- % H no tratado
+    count(H, OG, N), 
+    card(T, OG, [H|V], Res). 
 
 
 
@@ -164,11 +215,17 @@ unio([H|T],L2, [H|U]) :- unio(T,L2,U) % caso H not in L2
 % ?- esta_ordenada([3,67,45]).
 % respon no.
 
+esta_ordenada([]) :- write('yes'), nl.
+esta_ordenada([H|T]) :-
+    esta_ordenada(H, T),
+    write('yes'), nl.
 
+esta_ordenada(_, []).
 
-
-
-
+esta_ordenada(H, [HT|T]):-
+    H =< HT,
+    esta_ordenada(HT, T).
+    
 
 
 % PROB. J ========================================================
@@ -180,7 +237,10 @@ unio([H|T],L2, [H|U]) :- unio(T,L2,U) % caso H not in L2
 % (possiblement diverses vegades, no cal que eviteu les repeticions).
 
 
-
+palindrom(L) :- 
+    permutation(L, P), 
+    reverse(P, P), 
+    write(P), nl, fail.
 
 
 
@@ -216,7 +276,10 @@ dom(_) :- write('no hi ha cadena'), nl.
 % a) Escriu el predicat ok(+P) que falta.
 
 
-
+ok([]).
+ok([-]).
+ok([f(_,Y),f(Y,_)|L]) :- 
+    ok([f(Y,_)|L]).
 
 
 
