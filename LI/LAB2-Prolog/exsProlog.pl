@@ -277,16 +277,18 @@ dom(_) :- write('no hi ha cadena'), nl.
 
 
 ok([]).
-ok([-]).
-ok([f(_,Y),f(Y,_)|L]) :- 
-    ok([f(Y,_)|L]).
+ok([_]).
+ok([f(_,Y),f(Y,Z)|L]) :- 
+    ok([f(Y,Z)|L]).
 
 
 
 % b) Estén el predicat p/2 per a que el programa també pugui
 %    fer cadenes girant alguna de les fitxes de l'entrada.
 
-
+p(L, [f(Y, X)|P]):- 
+    select(f(X,Y), L, R), 
+    p(R, P).
 
 
 
@@ -298,9 +300,16 @@ ok([f(_,Y),f(Y,_)|L]) :-
 % ?- aplanada( [a,b,[c,[d],e,[]],f,[g,h]], F ).
 % F = [a,b,c,d,e,f,g,h]
 
+aplanada([], []).
 
+aplanada([H|T], F):-
+    is_list(H), 
+    aplanada(H, H1),
+    aplanada(T, T1),
+    append(H1, T1, F).
 
-
+aplanada([H|T], [H|F]):-
+    aplanada(T, F).
 
 
 
@@ -315,10 +324,20 @@ ok([f(_,Y),f(Y,_)|L]) :-
 % Can this be true? Write a little Prolog program to find it out.
 
 %% Descomenteu i completeu les linies de codi que veieu a continuació:
-%% main :-
-%%     between(0,4,SC1),    % SC1:   "no.    smokers with    cancer group 1"
-%%     between(0,4,SNC1),   % SNC1:  "no.    smokers with no cancer group 1"
-%%     between(0,4,NSC1),   % NSC1:  "no. no smokers with    cancer group 1"
-%%     between(0,4,NSNC1),  % NSNC1: "no. no smokers with no cancer group 1"
-%%     10 is SC1+SNC1+NSC1+NSNC1,  
-%%     ...
+main :-
+     between(0,4,SC1),    % SC1:   "no.    smokers with    cancer group 1"
+     between(0,4,SNC1),   % SNC1:  "no.    smokers with no cancer group 1"
+     between(0,4,NSC1),   % NSC1:  "no. no smokers with    cancer group 1"
+     between(0,4,NSNC1),  % NSNC1: "no. no smokers with no cancer group 1"
+     10 is SC1+SNC1+NSC1+NSNC1,  
+     between(0,4,SC2),    % SC2:   "no.    smokers with    cancer group 2"
+     between(0,4,SNC2),   % SNC2:  "no.    smokers with no cancer group 2"
+     between(0,4,NSC2),   % NSC2:  "no. no smokers with    cancer group 2"
+     between(0,4,NSNC2),  % NSNC2: "no. no smokers with no cancer group 2"
+     10 is SC2+SNC2+NSC2+NSNC2,  
+     % Las comprobaciones de los ratios se hacen asi para evitar divisiones, es simplemente cambiar de lado el denominador en la desigualdad
+     SC1*(NSC1 + NSNC1) > NSC1*(SC1 + SNC1), % Hay mas gente con cancer entre los fumadores 1
+     SC2*(NSC2 + NSNC2) > NSC2*(SC2 + SNC2), % Hay mas gente con cancer entre los fumadores 2
+     (SC1+SC2)*(NSC1 + NSC2 + NSNC1 + NSNC2) < (NSC1 + NSC2) * (SC1 + SC2 + SNC1 + SNC2),   % Hay mas gente con cancer entre no fumadores que fumadores.
+     write([SC1,SNC1,NSC1,NSNC1,SC2,SNC2,NSC2,NSNC2]), nl.
+
