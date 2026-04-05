@@ -66,6 +66,10 @@ frequency(C1-C2,F) :-        traject(C1,C2,F,_).
 % tooLongDist(C1-C2-C3) :-     trip(C1-C2), trip(C2-C3), C1 \= C3, dist(C1-C2,D1), dist(C2-C3,D2), maxDistance(Max), D1+D2 > Max.
 % CORRECT:
 tooLongDist(C1-C2-C3) :-     trip(C1-C2), trip(C2-C3), dist(C1-C2,D1), dist(C2-C3,D2), maxDistance(Max), D1+D2 > Max.
+city(C) :- 
+    findall(C, (trip(C-_) ; trip(_-C)), Cs),
+    sort(Cs, Cities), 
+    member(C, Cities).
 
 %%%%%%% End helpful definitions ===============================================================
 
@@ -74,20 +78,82 @@ tooLongDist(C1-C2-C3) :-     trip(C1-C2), trip(C2-C3), dist(C1-C2,D1), dist(C2-C
 
 satVariable( bdcc(B,D,C1,C2) ) :- bus(B), day(D), trip(C1-C2).  % bus B on day D does C1-C2
 % ... more variables may be needed
+satVariable( bds(B, D, S)) :- bus(B), day(D), city(S). % Bus B on day D starts in city S.
+satVariable( bde(B, D, E)) :- bus(B), day(D), city(E). % Bus B on day D ends in city S.
 
 
 %%%%%%%  2. Clause generation for the SAT solver: =============================================
 
 writeClauses :- 
-    exactlyOneTripPerBusAndDay,
-    ...
+    exactlyOneTripPerBusAndDay, % one traject per Bus and Day
+    respectNextDayStart,        % Respect that if bdcc(B, D, C1, C2) then bdcc(B, D-1, _, C1)
+    respectMaxDist,             % Respect trip too long
+    atMostOneTrajectPerDay,     % One traject at most once per D
+    atLeastKTimesTrajectPerWeek,% min times a traject per week
+    linkTripToEndStart,         % if bdcc(B, D, S, E) then bds(B, D, S) & bde(B, D, E)
+    startToTrip,                % if bds(B ,D, S) then exists some bdcc(B, D, S, _). 
     true,!.
 writeClauses :- told, nl, write('writeClauses failed!'), nl,nl, halt.
 
-exactlyOneTripPerBusAndDay :- ...
+exactlyOneTripPerBusAndDay :- 
+    day(D),
+    bus(B),
+    findall(bdcc(B, D, C1, C2), trip(C1-C2), Lits),
+    exactly(1, Lits),
+    fail.
 exactlyOneTripPerBusAndDay.
 
-...
+
+respectNextDayStart:-
+    bus(B),
+    consecutiveDays(D, D2),
+    city(C),
+    writeOneClause([-bde(B, D, C), bds(B, D2, C)]),
+    fail.
+respectNextDayStart.
+
+respectMaxDist :-
+    bus(B),  
+    consecutiveDays(D, D2),
+    trip(C1-C2),
+    trip(C2-C3),
+    tooLongDist(C1-C2-C3), 
+    writeOneClause([-bdcc(B, D, C1, C2), -bdcc(B, D2, C2, C3)]),
+    fail.
+respectMaxDist.
+
+atMostOneTrajectPerDay:-
+    day(D), 
+    trip(C1-C2),
+    findall(bdcc(B, D, C1, C2), bus(B), Lits),
+    atMost(1, Lits),
+    fail. 
+atMostOneTrajectPerDay.
+
+atLeastKTimesTrajectPerWeek :-
+    frequency(C1-C2, F),
+    findall(bdcc(B, D, C1, C2), (bus(B) , day(D)), Lits),
+    atLeast(F, Lits),
+    fail.
+atLeastKTimesTrajectPerWeek.
+
+linkTripToEndStart:-
+    bus(B),
+    day(D),
+    trip(C1-C2),
+    writeOneClause([-bdcc(B, D, C1, C2), bds(B, D, C1)]),
+    writeOneClause([-bdcc(B, D, C1, C2), bde(B, D, C2)]),
+    fail.
+linkTripToEndStart.
+
+startToTrip:-
+    bus(B),
+    day(D),
+    city(C),
+    findall(bdcc(B, D, C, CE), trip(C-CE), Lits),
+    expressOr(bds(B, D, C), Lits),
+    fail.
+startToTrip.
 
 
 %%%%%%%  3. DisplaySol: show the solution. Here M contains the literals that are true in the model:

@@ -52,17 +52,78 @@ moderator(M) :-         numModerators(N), between(1,N,M).
 
 %%%%%%%  1. SAT Variables: ====================================================================
 
-satVariable( ed(E,D) ) :-  ...   %% Complete this!
-% ... more variables may be needed
+satVariable( ed(E,D) ) :- % Event E in day D
+    eventDays(E, LD),
+    day(D),
+    event(E),
+    member(D, LD).
+
+
+satVariable( em(E, M) ) :-   % Event E moderated by M
+    eventModerators(E, LM), 
+    event(E), 
+    moderator(M),
+    member(M, LM).
+
+satVariable( md(M, D) ) :-  % Moderator M works day D      
+    event(_, LM, LD),
+    moderator(M),
+    day(D), 
+    member(M, LM),
+    member(D, LD).
+
 
 
 %%%%%%%  2. Clause generation for the SAT solver: =============================================
 
 writeClauses :-  
-    .... %% Complete this!  
+    eachEventExactlyOneTime,
+    eachDayAtMostKEvents,
+    eachModeratorAtMostKDays,
+    linkModeratorDays,
     true,!.
 writeClauses :- told, nl, write('writeClauses failed!'), nl,nl, halt.
 
+eachEventExactlyOneTime :- 
+    event(E), 
+    eventDays(E, LD),
+    eventModerators(E, LM),
+    findall(ed(E, D), member(D, LD), LitsD),
+    findall(em(E, M), member(M, LM), LitsM),
+    exactly(1, LitsD),
+    exactly(1, LitsM),
+    fail.
+
+eachEventExactlyOneTime.
+
+eachDayAtMostKEvents :-
+    day(D), 
+    findall(ed(E,D), (event(E), eventDays(E, LD) , member(D, LD)), Lits),
+    maxEventsPerDay(K), 
+    atMost(K, Lits),
+    fail.
+
+eachDayAtMostKEvents.
+
+eachModeratorAtMostKDays :-
+    moderator(M),
+    findall(md(M, D), day(D), Lits),
+    maxDaysPerModerator(K),
+    atMost(K, Lits),
+    fail.
+
+eachModeratorAtMostKDays.
+
+linkModeratorDays :-
+    event(E), 
+    eventDays(E, LD),
+    eventModerators(E, LM),
+    member(D, LD),
+    member(M, LM), 
+    writeOneClause([-ed(E, D), -em(E, M), md(M, D)]),
+    fail.
+
+linkModeratorDays.
 
 %%%%%%%  3. DisplaySol: show the solution. Here M contains the literals that are true in the model:
 

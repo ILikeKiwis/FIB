@@ -100,10 +100,9 @@ eachWorkerExactlyOneTeam.
 noIncWorkers :- 
         incompatibleWorkers(W1, W2),
         team(T), 
-        findall(wt(W, T), (W = W1 | W = W2), Lits),
+        findall(wt(W, T), (W = W1 ; W = W2), Lits),
         negateAll(Lits, NLits), 
-        expressOr(wt(W1, T), NLits),
-        expressOr(wt(W2, T), NLits),
+        writeOneClause(NLits),
         fail.
 noIncWorkers.
 %%%%%%%  3. DisplaySol: show the solution. Here M contains the literals that are true in the model:
