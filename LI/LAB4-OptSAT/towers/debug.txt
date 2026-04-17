@@ -1,0 +1,3 @@
+Looking for initial solution with arbitrary cost...
+ERROR: generating clause with undeclared variable in literal towerPos(2,1)
+
