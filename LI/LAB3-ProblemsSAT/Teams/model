@@ -15,7 +15,7 @@ c opened and reading DIMACS file:
 c
 c   infile.cnf
 c
-c parsed 'p cnf 100 389730' header
+c parsed 'p cnf 100 388930' header
 c [arena] enlarged to 16 16-byte-words 256 bytes (moved)
 c [vectors] enlarged to 8 entries 32 bytes (moved)
 c [vectors] enlarged to 16 entries 64 bytes (in place)
@@ -54,7 +54,8 @@ c [vectors] enlarged to 2^21 entries 8388608 bytes (8 MB) (in place)
 c [arena] enlarged to 2^20 16-byte-words 16777216 bytes (16 MB) (moved)
 c [vectors] enlarged to 2^22 entries 16777216 bytes (16 MB) (moved)
 c [arena] enlarged to 2^21 16-byte-words 33554432 bytes (32 MB) (in place)
-c closing input after reading 11474525 bytes (11 MB)
+c [defrag] freed 2289852 usable entries 60% thus 9159408 bytes (9 MB)
+c closing input after reading 11466669 bytes (11 MB)
 c finished parsing after 0.04 seconds
 c
 c ---- [ options ] -----------------------------------------------------------
@@ -224,35 +225,46 @@ c no time, conflict nor decision limit set
 c
 c ---- [ solving ] -----------------------------------------------------------
 c
-c seconds switched rate     size/glue tier1 binary       remaining
+c seconds switched rate     size/glue tier1 binary        remaining
 c        MB reductions conflicts size  tier2   irredundant
-c         level restarts redundant glue  trail       variables
+c         level restarts redundant glue  trail        variables
 c
-c *  0.04 37 0 0 0  0 0   0   0 0.0 0 0 0 0 0% 200 388570 94 94%
-c 0  0.04 37 0 0 0  0 0   0   0 0.0 0 0 0 0 0% 200 388570 94 94%
+c *  0.04 29 0 0 0  0 0   0   0 0.0 0 0 0 0 0% 360 388570 100 100%
+c found all negative large clause
+c found all positive large clause
+c [vectors] enlarged to 2^22 entries 16777216 bytes (16 MB) (in place)
+c lucky in forward setting literals to false
+c l  0.05 31 0 0 0  0 0   0   0 0.0 0 0 0 0 0% 360 388570 100 100%
+c 1  0.05 31 0 0 0  0 0   0   0 0.0 0 0 0 0 0% 360 388570 100 100%
 c
 c ---- [ result ] ------------------------------------------------------------
 c
-s UNSATISFIABLE
+s SATISFIABLE
+v -1 -2 -3 -4 -5 -6 -7 -8 -9 -10 -11 -12 -13 -14 -15 -16 -17 18 19 20 -21 -22
+v -23 -24 -25 -26 -27 -28 -29 -30 -31 -32 -33 -34 35 36 37 -38 -39 -40 -41 -42
+v -43 -44 -45 -46 -47 -48 -49 -50 -51 52 53 54 -55 -56 -57 -58 -59 -60 -61 -62
+v -63 -64 -65 66 67 68 69 70 -71 -72 -73 -74 -75 -76 -77 -78 -79 -80 81 82 83
+v 84 85 -86 -87 -88 -89 -90 91 -92 -93 -94 -95 -96 -97 -98 -99 -100 0
 c
 c ---- [ profiling ] ---------------------------------------------------------
 c
-c           0.04   99.26 %  parse
+c           0.04   96.65 %  parse
+c           0.00    2.67 %  lucky
 c           0.00    0.00 %  search
 c           0.00    0.00 %  simplify
 c =============================================
-c           0.04  100.00 %  total
+c           0.05  100.00 %  total
 c
 c ---- [ statistics ] --------------------------------------------------------
 c
 c backbone_computations:                    0                0    interval
 c backbone_ticks:                           0 
 c chronological:                            0                0 %  conflicts
-c clauses_added:                       388770              100 %  added
-c clauses_binary:                         200                0 %  added
+c clauses_added:                       388930              100 %  added
+c clauses_binary:                         360                0 %  added
 c clauses_irredundant:                 388570              100 %  added
 c clauses_learned:                          0                0 %  conflicts
-c clauses_original:                    388770              100 %  added
+c clauses_original:                    388930              100 %  added
 c clauses_redundant:                        0 
 c clauses_used:                             0                0 %  learned
 c clauses_used_focused:                     0                0 %  used
@@ -286,8 +298,8 @@ c kitten_solved:                            0
 c kitten_ticks:                             0                0.00 per prop
 c literals_factor:                        200                2.00 per variable
 c probings:                                 0                0    interval
-c probing_ticks:                            0 
-c propagations:                             6              137    per second
+c probing_ticks:                       300048 
+c propagations:                           100             2148    per second
 c random_sequences:                         0                0    interval
 c reductions:                               0                0    interval
 c reordered:                                0                0    interval
@@ -295,7 +307,7 @@ c rephased:                                 0                0    interval
 c restarts:                                 0                0    interval
 c retiered:                                 0                0    interval
 c searches:                                 0                0    interval
-c search_ticks:                         57385 
+c search_ticks:                             0 
 c strengthened:                             0                0 %  checks
 c substituted:                              0                0 %  variables
 c substitute_ticks:                         0 
@@ -308,7 +320,7 @@ c sweep_solved:                             0                0 %  kitten_solved
 c sweep_units:                              0                0 %  variables
 c switched:                                 0                0    interval
 c transitive_ticks:                         0 
-c units:                                    6                6 %  variables
+c units:                                    0                0 %  variables
 c variables_activated:                    100                1.00 per variable
 c variables_eliminate:                    100                1.00 variables
 c variables_extension:                      0                0.00 per variable
@@ -332,9 +344,9 @@ c no clauses used at all
 c
 c ---- [ resources ] ---------------------------------------------------------
 c
-c maximum-resident-set-size:         38273024 bytes         36 MB
-c process-time:                                              0.04 seconds
+c maximum-resident-set-size:         37486592 bytes         36 MB
+c process-time:                                              0.05 seconds
 c
 c ---- [ shutting down ] -----------------------------------------------------
 c
-c exit 20
+c exit 10
