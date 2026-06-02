@@ -1,0 +1,2020 @@
+c ---- [ banner ] ------------------------------------------------------------
+c
+c Kissat SAT Solver
+c 
+c Copyright (c) 2021-2024 Armin Biere University of Freiburg
+c Copyright (c) 2019-2021 Armin Biere Johannes Kepler University Linz
+c 
+c Version 4.0.4 8af8e56f174b778aef3aa45af9f739b2a5f492c2
+c gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0 -W -Wall -O3 -DNDEBUG
+c Sat Feb 21 04:11:02 CET 2026 Linux kris-ubuntu 6.8.0-90-generic x86_64
+c
+c ---- [ parsing ] -----------------------------------------------------------
+c
+c opened and reading DIMACS file:
+c
+c   infile.cnf
+c
+c parsed 'p cnf 3300 85831' header
+c [arena] enlarged to 16 16-byte-words 256 bytes (moved)
+c [vectors] enlarged to 8 entries 32 bytes (moved)
+c [vectors] enlarged to 16 entries 64 bytes (in place)
+c [vectors] enlarged to 32 entries 128 bytes (in place)
+c [arena] enlarged to 32 16-byte-words 512 bytes (moved)
+c [vectors] enlarged to 64 entries 256 bytes (moved)
+c [vectors] enlarged to 2^7 entries 512 bytes (in place)
+c [arena] enlarged to 64 16-byte-words 1024 bytes (1 KB) (moved)
+c [vectors] enlarged to 2^8 entries 1024 bytes (1 KB) (moved)
+c [vectors] enlarged to 2^9 entries 2048 bytes (2 KB) (in place)
+c [arena] enlarged to 2^7 16-byte-words 2048 bytes (2 KB) (moved)
+c [vectors] enlarged to 2^10 entries 4096 bytes (4 KB) (moved)
+c [arena] enlarged to 2^8 16-byte-words 4096 bytes (4 KB) (moved)
+c [vectors] enlarged to 2^11 entries 8192 bytes (8 KB) (moved)
+c [arena] enlarged to 2^9 16-byte-words 8192 bytes (8 KB) (moved)
+c [vectors] enlarged to 2^12 entries 16384 bytes (16 KB) (in place)
+c [arena] enlarged to 2^10 16-byte-words 16384 bytes (16 KB) (moved)
+c [arena] enlarged to 2^11 16-byte-words 32768 bytes (32 KB) (in place)
+c [vectors] enlarged to 2^13 entries 32768 bytes (32 KB) (moved)
+c [vectors] enlarged to 2^14 entries 65536 bytes (64 KB) (in place)
+c [arena] enlarged to 2^12 16-byte-words 65536 bytes (64 KB) (moved)
+c [vectors] enlarged to 2^15 entries 131072 bytes (128 KB) (moved)
+c [arena] enlarged to 2^13 16-byte-words 131072 bytes (128 KB) (in place)
+c [vectors] enlarged to 2^16 entries 262144 bytes (256 KB) (moved)
+c [arena] enlarged to 2^14 16-byte-words 262144 bytes (256 KB) (moved)
+c [vectors] enlarged to 2^17 entries 524288 bytes (512 KB) (moved)
+c [arena] enlarged to 2^15 16-byte-words 524288 bytes (512 KB) (in place)
+c [vectors] enlarged to 2^18 entries 1048576 bytes (1 MB) (moved)
+c [arena] enlarged to 2^16 16-byte-words 1048576 bytes (1 MB) (moved)
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (moved)
+c [arena] enlarged to 2^17 16-byte-words 2097152 bytes (2 MB) (moved)
+c [vectors] enlarged to 2^20 entries 4194304 bytes (4 MB) (moved)
+c [arena] enlarged to 2^18 16-byte-words 4194304 bytes (4 MB) (in place)
+c [defrag] freed 405360 usable entries 56% thus 1621440 bytes (2 MB)
+c closing input after reading 2243736 bytes (2 MB)
+c finished parsing after 0.01 seconds
+c
+c ---- [ options ] -----------------------------------------------------------
+c
+c --ands=true                      (same as default 'true')
+c --backbone=1                     (same as default '1')
+c --backboneeffort=20              (same as default '20')
+c --backbonemaxrounds=1e3          (same as default '1e3')
+c --backbonerounds=100             (same as default '100')
+c --bigbigfraction=990             (same as default '990')
+c --bump=true                      (same as default 'true')
+c --bumpreasons=true               (same as default 'true')
+c --bumpreasonslimit=10            (same as default '10')
+c --bumpreasonsrate=10             (same as default '10')
+c --chrono=true                    (same as default 'true')
+c --chronolevels=100               (same as default '100')
+c --compact=true                   (same as default 'true')
+c --compactlim=10                  (same as default '10')
+c --congruence=true                (same as default 'true')
+c --congruenceandarity=1e6         (same as default '1e6')
+c --congruenceands=true            (same as default 'true')
+c --congruencebinaries=true        (same as default 'true')
+c --congruenceites=true            (same as default 'true')
+c --congruenceonce=false           (same as default 'false')
+c --congruencexorarity=4           (same as default '4')
+c --congruencexorcounts=2          (same as default '2')
+c --congruencexors=true            (same as default 'true')
+c --decay=50                       (same as default '50')
+c --definitioncores=2              (same as default '2')
+c --definitions=true               (same as default 'true')
+c --definitionticks=1e6            (same as default '1e6')
+c --defraglim=75                   (same as default '75')
+c --defragsize=2^18                (same as default '2^18')
+c --eagersubsume=4                 (same as default '4')
+c --eliminate=true                 (same as default 'true')
+c --eliminatebound=16              (same as default '16')
+c --eliminateclslim=100            (same as default '100')
+c --eliminateeffort=100            (same as default '100')
+c --eliminateinit=500              (same as default '500')
+c --eliminateint=500               (same as default '500')
+c --eliminateocclim=2e3            (same as default '2e3')
+c --eliminaterounds=2              (same as default '2')
+c --emafast=33                     (same as default '33')
+c --emaslow=1e5                    (same as default '1e5')
+c --equivalences=true              (same as default 'true')
+c --extract=true                   (same as default 'true')
+c --factor=true                    (same as default 'true')
+c --factorcandrounds=2             (same as default '2')
+c --factordelay=4                  (same as default '4')
+c --factoreffort=50                (same as default '50')
+c --factorhops=3                   (same as default '3')
+c --factoriniticks=700             (same as default '700')
+c --factorsize=5                   (same as default '5')
+c --factorstructural=false         (same as default 'false')
+c --fastel=false                   (same as default 'false')
+c --fastelclslim=100               (same as default '100')
+c --fastelim=8                     (same as default '8')
+c --fasteloccs=100                 (same as default '100')
+c --fastelrounds=4                 (same as default '4')
+c --fastelsub=true                 (same as default 'true')
+c --flushproof=false               (same as default 'false')
+c --focusedtiers=true              (same as default 'true')
+c --forcephase=false               (same as default 'false')
+c --forward=true                   (same as default 'true')
+c --forwardeffort=100              (same as default '100')
+c --ifthenelse=true                (same as default 'true')
+c --incremental=false              (same as default 'false')
+c --jumpreasons=true               (same as default 'true')
+c --lucky=true                     (same as default 'true')
+c --luckyearly=true                (same as default 'true')
+c --luckylate=true                 (same as default 'true')
+c --mineffort=10                   (same as default '10')
+c --minimize=true                  (same as default 'true')
+c --minimizedepth=1e3              (same as default '1e3')
+c --minimizeticks=true             (same as default 'true')
+c --modeinit=1e3                   (same as default '1e3')
+c --modeint=1e3                    (same as default '1e3')
+c --otfs=true                      (same as default 'true')
+c --phase=true                     (same as default 'true')
+c --phasesaving=true               (same as default 'true')
+c --preprocess=true                (same as default 'true')
+c --preprocessbackbone=true        (same as default 'true')
+c --preprocesscongruence=true      (same as default 'true')
+c --preprocessfactor=true          (same as default 'true')
+c --preprocessprobe=true           (same as default 'true')
+c --preprocessrounds=1             (same as default '1')
+c --preprocessweep=true            (same as default 'true')
+c --probe=true                     (same as default 'true')
+c --probeinit=100                  (same as default '100')
+c --probeint=100                   (same as default '100')
+c --proberounds=2                  (same as default '2')
+c --profile=2                      (same as default '2')
+c --promote=true                   (same as default 'true')
+c --quiet=false                    (same as default 'false')
+c --randec=true                    (same as default 'true')
+c --randecfocused=true             (same as default 'true')
+c --randecinit=500                 (same as default '500')
+c --randecint=500                  (same as default '500')
+c --randeclength=10                (same as default '10')
+c --randecstable=false             (same as default 'false')
+c --reduce=true                    (same as default 'true')
+c --reducehigh=900                 (same as default '900')
+c --reduceinit=1e3                 (same as default '1e3')
+c --reduceint=1e3                  (same as default '1e3')
+c --reducelow=500                  (same as default '500')
+c --reluctant=true                 (same as default 'true')
+c --reluctantint=2^10              (same as default '2^10')
+c --reluctantlim=2^20              (same as default '2^20')
+c --reorder=2                      (same as default '2')
+c --reorderinit=1e4                (same as default '1e4')
+c --reorderint=1e4                 (same as default '1e4')
+c --reordermaxsize=100             (same as default '100')
+c --rephase=true                   (same as default 'true')
+c --rephaseinit=1e3                (same as default '1e3')
+c --rephaseint=1e3                 (same as default '1e3')
+c --restart=true                   (same as default 'true')
+c --restartint=1                   (same as default '1')
+c --restartmargin=10               (same as default '10')
+c --restartreusetrail=true         (same as default 'true')
+c --seed=0                         (same as default '0')
+c --shrink=3                       (same as default '3')
+c --simplify=true                  (same as default 'true')
+c --smallclauses=1e5               (same as default '1e5')
+c --stable=1                       (same as default '1')
+c --statistics=false               (same as default 'false')
+c --substitute=true                (same as default 'true')
+c --substituteeffort=10            (same as default '10')
+c --substituterounds=2             (same as default '2')
+c --subsumeclslim=1e3              (same as default '1e3')
+c --subsumeocclim=1e3              (same as default '1e3')
+c --sweep=true                     (same as default 'true')
+c --sweepclauses=2^10              (same as default '2^10')
+c --sweepcomplete=false            (same as default 'false')
+c --sweepdepth=2                   (same as default '2')
+c --sweepeffort=100                (same as default '100')
+c --sweepfliprounds=1              (same as default '1')
+c --sweepmaxclauses=2^15           (same as default '2^15')
+c --sweepmaxdepth=3                (same as default '3')
+c --sweepmaxvars=2^13              (same as default '2^13')
+c --sweeprand=false                (same as default 'false')
+c --sweepvars=2^8                  (same as default '2^8')
+c --target=1                       (same as default '1')
+c --tier1=2                        (same as default '2')
+c --tier1relative=500              (same as default '500')
+c --tier2=6                        (same as default '6')
+c --tier2relative=900              (same as default '900')
+c --transitive=true                (same as default 'true')
+c --transitiveeffort=20            (same as default '20')
+c --transitivekeep=true            (same as default 'true')
+c --tumble=true                    (same as default 'true')
+c --verbose=1                      (different from default '0')
+c --vivify=true                    (same as default 'true')
+c --vivifyeffort=100               (same as default '100')
+c --vivifyfocusedtiers=true        (same as default 'true')
+c --vivifyirr=3                    (same as default '3')
+c --vivifysort=true                (same as default 'true')
+c --vivifytier1=3                  (same as default '3')
+c --vivifytier2=3                  (same as default '3')
+c --vivifytier3=1                  (same as default '1')
+c --walkeffort=50                  (same as default '50')
+c --walkinitially=false            (same as default 'false')
+c --warmup=true                    (same as default 'true')
+c
+c ---- [ limits ] ------------------------------------------------------------
+c
+c no time, conflict nor decision limit set
+c
+c ---- [ solving ] -----------------------------------------------------------
+c
+c seconds switched rate     size/glue tier1  binary         remaining
+c        MB reductions conflicts size  tier2     irredundant
+c         level restarts redundant glue  trail         variables
+c
+c *  0.01  8 0 0 0  0 0   0   0 0.0 0 0 0 0 0% 13746 72085 3300 100%
+c found all negative large clause
+c found all positive large clause
+c inconsistency after 2 conflicts forward assigning 250 variables to false
+c [vectors] enlarged to 2^20 entries 4194304 bytes (4 MB) (in place)
+c inconsistency after 2 conflicts forward assigning 202 variables to true
+c inconsistency after 324 conflicts backward assigning 709 variables to false
+c inconsistency after 11 conflicts backward assigning 578 variables to true
+c (  0.01  9 0 0 0  0 0   0   0 0.0 0 0 0 0 0% 13746 72085 3300 100%
+c [preprocess] running at most 1 preprocesing rounds
+c [preprocess] initially 3300 variables 100% and 85831 clauses 100%
+c .  0.01  9 0 0 0  0 0   0   0 0.0 0 0 0 0 0% 13746 72085 3300 100%
+c [preprocess-1] started preprocessing round 1
+c [probe-1] initial probing
+c extracted 0 binaries (plus 0 duplicated)
+c [vectors] enlarged to 8 entries 32 bytes (moved)
+c [vectors] enlarged to 16 entries 64 bytes (in place)
+c [vectors] enlarged to 32 entries 128 bytes (in place)
+c [vectors] enlarged to 64 entries 256 bytes (in place)
+c [vectors] enlarged to 2^7 entries 512 bytes (in place)
+c [vectors] enlarged to 2^8 entries 1024 bytes (1 KB) (in place)
+c [vectors] enlarged to 2^9 entries 2048 bytes (2 KB) (in place)
+c [vectors] enlarged to 2^10 entries 4096 bytes (4 KB) (moved)
+c [vectors] enlarged to 2^11 entries 8192 bytes (8 KB) (in place)
+c [vectors] enlarged to 2^12 entries 16384 bytes (16 KB) (in place)
+c [vectors] enlarged to 2^13 entries 32768 bytes (32 KB) (in place)
+c [vectors] enlarged to 2^14 entries 65536 bytes (64 KB) (in place)
+c [vectors] enlarged to 2^15 entries 131072 bytes (128 KB) (in place)
+c [vectors] enlarged to 2^16 entries 262144 bytes (256 KB) (in place)
+c [congruence-1] found 4077 AND gates (4077 extracted 100% + 0 matched 0%)
+c [vectors] enlarged to 2^17 entries 524288 bytes (512 KB) (moved)
+c [vectors] enlarged to 2^18 entries 1048576 bytes (1 MB) (in place)
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c [vectors] enlarged to 2^20 entries 4194304 bytes (4 MB) (in place)
+c [congruence-1] found 0 XOR gates (0 extracted 0% + 0 matched 0%)
+c [congruence-1] found 0 ITE gates (0 extracted 0% + 0 matched 0%)
+c [congruence-1] found 4077 gates (123.55% variables)
+c [congruence-1] merged 0 equivalent variables 0.00%
+c [sweep-1] scheduled 3300 variables 100% (0 rescheduled 0%, 0 incomplete 0%)
+c [sweep-1] found 0 equivalences and 0 units
+c [sweep-1] swept 286 variables (3014 remain 91%)
+c [substitute] round 1 removed 0 variables 0%
+c [factorization-1] binary clause bounded variable addition
+c [defrag] freed 738237 usable entries 75% thus 2952948 bytes (3 MB)
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c [vectors] enlarged to 2^20 entries 4194304 bytes (4 MB) (in place)
+c [defrag] freed 429288 usable entries 75% thus 1717152 bytes (2 MB)
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c [defrag] freed 264170 usable entries 75% thus 1056680 bytes (1 MB)
+c [vectors] enlarged to 2^18 entries 1048576 bytes (1 MB) (in place)
+c f  0.12 12 0 0 0  0 0   0   0 0.0 0 0 0 0 0% 12795 20844 5770 175%
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c [factorization-1] introduced 2470 extension variables 75%
+c [factorization-1] removed 951 binary clauses 7%
+c [factorization-1] removed 51241 large clauses 71%
+c [preprocess-1] added 2470 variables 75% in round 1
+c [preprocess-1] removed 52192 irredundant and binary clauses 61% in round 1
+c [preprocess] finished after 1 rounds
+c [preprocess] added 2470 variables 75% (5770 remain 175%)
+c [preprocess] removed 52192 irredundant and binary clauses 61% (33639 remain 39%)
+c )  0.12 12 0 0 0  0 0   0   0 0.0 0 0 0 0 0% 12795 20844 5770 175%
+c found all negative large clause
+c found all positive large clause
+c inconsistency after 2 conflicts forward assigning 250 variables to false
+c inconsistency after 2 conflicts forward assigning 202 variables to true
+c inconsistency after 36 conflicts backward assigning 632 variables to false
+c inconsistency after 57 conflicts backward assigning 304 variables to true
+c [search-1] initializing focus search after 0 conflicts
+c {  0.12 12 0 0 0  0 0   0   0 0.0 0 0 2 6 0% 12795 20844 5770 175%
+c [defrag] freed 356737 usable entries 77% thus 1426948 bytes (1 MB)
+c [vectors] enlarged to 2^18 entries 1048576 bytes (1 MB) (in place)
+c [retiered-1] recomputed focused tier1 limit 6 and tier2 limit 11 after 139 conflicts
+c [retiered-2] recomputed focused tier1 limit 6 and tier2 limit 12 after 184 conflicts
+c [retiered-3] recomputed focused tier1 limit 7 and tier2 limit 12 after 285 conflicts
+c [retiered-4] recomputed focused tier1 limit 7 and tier2 limit 12 after 303 conflicts
+c [retiered-5] recomputed focused tier1 limit 7 and tier2 limit 12 after 338 conflicts
+c [retiered-6] recomputed focused tier1 limit 7 and tier2 limit 12 after 469 conflicts
+c [retiered-7] recomputed focused tier1 limit 7 and tier2 limit 11 after 640 conflicts
+c [randec-1] new limit of 1218 after 500 conflicts
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c [retiered-8] recomputed focused tier1 limit 8 and tier2 limit 12 after 930 conflicts
+c [reduce-1] reduce limit 1000 hit after 1001 conflicts
+c [retiered-8] recomputed focused tier1 limit 8 and tier2 limit 11 after 1001 conflicts
+c [reduce-1] reducing clauses after offset 216971 in arena
+c [reduce-1] reducing 5325 words 42600 bytes (42 KB) 2%
+c [reduce-1] reducing 166 (50%) out of 332 (2%) reducible clauses
+c [collect] flushed 361 large garbage clauses 100%
+c [collect] collected 31840 bytes (31 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 84% with 220306 16-byte-words 3524896 bytes (3 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-1] new limit of 2001 after 1e3 conflicts
+c -  0.13 12 33 0 1 209 8 1001 586 2.1 18 9 8 11 5% 12795 20844 5770 175%
+c }  0.13 12 33 1 1 209 8 1001 586 2.1 18 9 8 11 5% 12795 20844 5770 175%
+c [stable] switched to stable mode after 1001 conflicts
+c [stable] new stable mode switching limit of 1447136 after 723568 ticks
+c [  0.13 12 0 1 1 209 0 1001 586 0.0 0 0 2 6 0% 12795 20844 5770 175%
+c [rephase-1] best phases in stable search mode
+c [rephase-1] new limit of 2001 after 1e3 conflicts
+c B  0.13 12 0 1 1 209 0 1001 586 0.0 0 0 2 6 0% 12795 20844 5770 175%
+c [retiered-9] recomputed stable tier1 limit 7 and tier2 limit 11 after 1444 conflicts
+c ]  0.14 12 90 2 1 209 2 1957 1238 2.5 20 8 7 11 8% 12795 20844 5770 175%
+c [focus] switching to focused mode after 1957 conflicts
+c [focused] new focused mode switching limit of 2957 after 1e3 conflicts
+c {  0.14 12 33 2 1 209 8 1957 1238 2.1 18 9 8 11 5% 12795 20844 5770 175%
+c [randec-2] new limit of 2477 after 520 conflicts
+c [reduce-2] reduce limit 2001 hit after 2001 conflicts
+c [retiered-9] recomputed focused tier1 limit 8 and tier2 limit 11 after 2001 conflicts
+c [reduce-2] reducing clauses after offset 216971 in arena
+c [reduce-2] reducing 9216 words 73728 bytes (72 KB) 4%
+c [reduce-2] reducing 44 (51%) out of 86 (0%) reducible clauses
+c [collect] flushed 306 large garbage clauses 100%
+c [collect] collected 29968 bytes (29 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 86% with 224314 16-byte-words 3589024 bytes (3 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-2] new limit of 3415 after 1414 conflicts
+c -  0.14 12 37 2 2 212 8 2001 1227 2.1 18 9 8 11 5% 12795 20844 5770 175%
+c [retiered-10] recomputed focused tier1 limit 7 and tier2 limit 11 after 2472 conflicts
+c [probe-2] probing limit hit after 2600 conflicts
+c [substitute] round 1 removed 0 variables 0%
+c [vivify-tier1-1] prioritizing all 1057 scheduled clauses
+c [vivify-tier1-1] scheduled 1057 clauses 63% of 1671
+c [vivify-tier1-1] vivified 121 clauses 70% out of 172 tried
+c [vivify-tier1-1] 885 clauses remain 84% out of 1057 scheduled
+c [vivify-tier1-1] keeping all 885 remaining clauses prioritized 100%
+c u  0.15 13 50 2 2 212 6 2601 1663 2.6 19 8 7 11 6% 12795 20844 5770 175%
+c [vivify-tier2-1] prioritizing all 572 scheduled clauses
+c [vivify-tier2-1] scheduled 572 clauses 34% of 1663
+c [vivify-tier2-1] vivified 45 clauses 49% out of 91 tried
+c [vivify-tier2-1] 481 clauses remain 84% out of 572 scheduled
+c [vivify-tier2-1] keeping all 481 remaining clauses prioritized 100%
+c v  0.15 13 50 2 2 212 6 2601 1661 2.6 19 8 7 11 6% 12795 20844 5770 175%
+c [vivify-tier3-1] prioritizing all 42 scheduled clauses
+c [vivify-tier3-1] scheduled 42 clauses 3% of 1661
+c [vivify-tier3-1] vivified 17 clauses 52% out of 33 tried
+c [vivify-tier3-1] 9 clauses remain 21% out of 42 scheduled
+c [vivify-tier3-1] keeping all 9 remaining clauses prioritized 100%
+c w  0.15 13 50 2 2 212 6 2601 1660 2.6 19 8 7 11 6% 12795 20844 5770 175%
+c [vivify-irredundant-1] prioritizing all 20844 scheduled clauses
+c [vivify-irredundant-1] scheduled 20844 clauses 100% of 20844
+c [vivify-irredundant-1] vivified 0 clauses 0% out of 817 tried
+c [vivify-irredundant-1] 20027 clauses remain 96% out of 20844 scheduled
+c [vivify-irredundant-1] keeping all 20027 remaining clauses prioritized 100%
+c [vivify-limit-1] exceeded by 1285 ticks 0.13%
+c [substitute] round 1 removed 0 variables 0%
+c [transitive-2] probed 9898 (86%): reduced 0, units 0
+c [probe-2] new limit of 8010 after 5409 conflicts
+c [randec-3] new limit of 3140 after 539 conflicts
+c [defrag] freed 354600 usable entries 75% thus 1418400 bytes (1 MB)
+c [vectors] enlarged to 2^18 entries 1048576 bytes (1 MB) (in place)
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c }  0.16 13 48 3 2 305 5 2957 1909 2.3 18 8 7 11 7% 12796 20844 5770 175%
+c [stable] switched to stable mode after 2957 conflicts
+c [stable] new stable mode switching limit of 3454021 after 1003076 ticks
+c [  0.16 13 90 3 2 305 2 2957 1909 2.5 20 8 7 11 8% 12796 20844 5770 175%
+c all variables assigned at decision level 914 during warming-up saved phases
+c [walk-1] imported 5770 decision phases 100%
+c [vectors] enlarged to 8 entries 32 bytes (moved)
+c [vectors] enlarged to 16 entries 64 bytes (moved)
+c [vectors] enlarged to 32 entries 128 bytes (moved)
+c [vectors] enlarged to 64 entries 256 bytes (moved)
+c [vectors] enlarged to 2^7 entries 512 bytes (in place)
+c [vectors] enlarged to 2^8 entries 1024 bytes (1 KB) (moved)
+c [vectors] enlarged to 2^9 entries 2048 bytes (2 KB) (in place)
+c [vectors] enlarged to 2^10 entries 4096 bytes (4 KB) (in place)
+c [vectors] enlarged to 2^11 entries 8192 bytes (8 KB) (moved)
+c [vectors] enlarged to 2^12 entries 16384 bytes (16 KB) (in place)
+c [vectors] enlarged to 2^13 entries 32768 bytes (32 KB) (moved)
+c [vectors] enlarged to 2^14 entries 65536 bytes (64 KB) (moved)
+c [vectors] enlarged to 2^15 entries 131072 bytes (128 KB) (moved)
+c [vectors] enlarged to 2^16 entries 262144 bytes (256 KB) (in place)
+c [walk-1] initially 18 unsatisfied binary clauses 0% out of 12796
+c [vectors] enlarged to 2^17 entries 524288 bytes (512 KB) (in place)
+c [vectors] enlarged to 2^18 entries 1048576 bytes (1 MB) (in place)
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c [walk-1] initially 775 unsatisfied large clauses 4% out of 20844
+c [walk-1] initially 793 unsatisfied irredundant clauses 2% out of 33640
+c [walk-1] average clause size 5.06
+c [walk-1] CB 3.78 with inverse 0.26 as base
+c [walk-1] table size 561 and epsilon 4.94066e-324
+c [walk-1] new minimum 111 after 7434 flips
+c [walk-1] saving improved assignment of 111 unsatisfied clauses
+c [rephase-2] walking phases in stable search mode
+c [rephase-2] new limit of 5215 after 2258 conflicts
+c W  0.16 13 90 3 2 305 2 2957 1909 2.5 20 8 7 11 8% 12796 20844 5770 175%
+c [reduce-3] reduce limit 3415 hit after 3415 conflicts
+c [retiered-10] recomputed stable tier1 limit 8 and tier2 limit 14 after 3415 conflicts
+c [reduce-3] reducing clauses after offset 216971 in arena
+c [reduce-3] reducing 15425 words 123400 bytes (121 KB) 7%
+c [reduce-3] reducing 185 (53%) out of 351 (2%) reducible clauses
+c [collect] flushed 513 large garbage clauses 100%
+c [collect] collected 48384 bytes (47 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 87% with 229372 16-byte-words 3669952 bytes (3 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-3] new limit of 5147 after 1732 conflicts
+c -  0.17 13 66 3 3 305 2 3415 2073 2.2 21 10 8 14 7% 12796 20844 5770 175%
+c
+c seconds  switched  rate       size/glue  tier1    binary         remaining
+c        MB reductions conflicts      size   tier2      irredundant
+c         level restarts   redundant     glue   trail         variables
+c
+c ]  0.17 13 52 4 3 306 2 4072 2606 1.9 22 11 8 14 6% 12796 20844 5770 175%
+c [focus] switching to focused mode after 4072 conflicts
+c [focused] new focused mode switching limit of 6424 after 2352 conflicts
+c {  0.17 13 48 4 3 306 5 4072 2606 2.3 18 8 7 11 7% 12796 20844 5770 175%
+c [randec-4] new limit of 4628 after 556 conflicts
+c [randec-5] new limit of 5292 after 573 conflicts
+c [retiered-11] recomputed focused tier1 limit 8 and tier2 limit 12 after 4742 conflicts
+c [reduce-4] reduce limit 5147 hit after 5148 conflicts
+c [retiered-11] recomputed focused tier1 limit 8 and tier2 limit 12 after 5148 conflicts
+c [reduce-4] reducing clauses after offset 216971 in arena
+c [reduce-4] reducing 22066 words 176528 bytes (172 KB) 9%
+c [reduce-4] reducing 285 (54%) out of 528 (2%) reducible clauses
+c [collect] flushed 633 large garbage clauses 100%
+c [collect] collected 62016 bytes (61 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 90% with 235161 16-byte-words 3762576 bytes (4 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-4] new limit of 7148 after 2e3 conflicts
+c -  0.18 13 39 4 4 585 6 5148 3157 1.9 17 9 8 12 6% 12796 20844 5770 175%
+c [randec-6] new limit of 6435 after 588 conflicts
+c [defrag] freed 371488 usable entries 75% thus 1485952 bytes (1 MB)
+c [vectors] enlarged to 2^18 entries 1048576 bytes (1 MB) (in place)
+c }  0.19 13 32 5 4 758 5 6424 4032 1.7 15 9 8 12 5% 12796 20844 5770 175%
+c [stable] switched to stable mode after 6424 conflicts
+c [stable] new stable mode switching limit of 7301276 after 1923381 ticks
+c [  0.19 13 52 5 4 758 2 6424 4032 1.9 22 11 8 14 6% 12796 20844 5770 175%
+c [rephase-3] inverted phases in stable search mode
+c [rephase-3] new limit of 10194 after 3770 conflicts
+c I  0.19 13 52 5 4 758 2 6424 4032 1.9 22 11 8 14 6% 12796 20844 5770 175%
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c [reduce-5] reduce limit 7148 hit after 7149 conflicts
+c [retiered-11] recomputed stable tier1 limit 10 and tier2 limit 20 after 7149 conflicts
+c [reduce-5] reducing clauses after offset 216971 in arena
+c [reduce-5] reducing 28660 words 229280 bytes (224 KB) 12%
+c [reduce-5] reducing 451 (55%) out of 820 (3%) reducible clauses
+c [collect] flushed 1020 large garbage clauses 100%
+c [collect] collected 102800 bytes (100 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 91% with 239206 16-byte-words 3827296 bytes (4 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-5] new limit of 9385 after 2236 conflicts
+c -  0.20 13 46 5 5 758 1 7149 4107 1.7 23 13 10 20 5% 12796 20844 5770 175%
+c [probe-3] probing limit hit after 8010 conflicts
+c extracted 0 binaries (plus 0 duplicated)
+c [vectors] enlarged to 8 entries 32 bytes (moved)
+c [vectors] enlarged to 16 entries 64 bytes (moved)
+c [vectors] enlarged to 32 entries 128 bytes (moved)
+c [vectors] enlarged to 64 entries 256 bytes (moved)
+c [vectors] enlarged to 2^7 entries 512 bytes (moved)
+c [vectors] enlarged to 2^8 entries 1024 bytes (1 KB) (in place)
+c [vectors] enlarged to 2^9 entries 2048 bytes (2 KB) (in place)
+c [vectors] enlarged to 2^10 entries 4096 bytes (4 KB) (in place)
+c [vectors] enlarged to 2^11 entries 8192 bytes (8 KB) (moved)
+c [vectors] enlarged to 2^12 entries 16384 bytes (16 KB) (in place)
+c [vectors] enlarged to 2^13 entries 32768 bytes (32 KB) (moved)
+c [vectors] enlarged to 2^14 entries 65536 bytes (64 KB) (in place)
+c [vectors] enlarged to 2^15 entries 131072 bytes (128 KB) (moved)
+c [vectors] enlarged to 2^16 entries 262144 bytes (256 KB) (in place)
+c [congruence-2] found 384 AND gates (384 extracted 100% + 0 matched 0%)
+c [vectors] enlarged to 2^17 entries 524288 bytes (512 KB) (in place)
+c [congruence-2] found 0 XOR gates (0 extracted 0% + 0 matched 0%)
+c [congruence-2] found 0 ITE gates (0 extracted 0% + 0 matched 0%)
+c [vectors] enlarged to 2^18 entries 1048576 bytes (1 MB) (in place)
+c [congruence-2] found 384 gates (6.66% variables)
+c [congruence-2] merged 0 equivalent variables 0.00%
+c [substitute] round 1 removed 0 variables 0%
+c [vivify-tier1-2] prioritized 1082 clauses 47%
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c [vivify-tier1-2] scheduled 2321 clauses 49% of 4761
+c [vivify-tier1-2] vivified 84 clauses 57% out of 147 tried
+c [vivify-tier1-2] 2174 clauses remain 94% out of 2321 scheduled
+c [vivify-tier1-2] keeping all 935 remaining clauses prioritized 43%
+c u  0.21 13 40 5 5 759 1 8013 4747 1.6 23 14 10 20 5% 12796 20844 5770 175%
+c [vivify-tier2-2] prioritized 148 clauses 9%
+c [vivify-tier2-2] scheduled 1584 clauses 33% of 4747
+c [vivify-tier2-2] vivified 55 clauses 52% out of 106 tried
+c [vivify-tier2-2] 1478 clauses remain 93% out of 1584 scheduled
+c [vivify-tier2-2] keeping all 42 remaining clauses prioritized 3%
+c v  0.22 13 40 5 5 759 1 8013 4727 1.6 23 14 10 20 5% 12796 20844 5770 175%
+c [vivify-tier3-2] prioritizing all 853 scheduled clauses
+c [vivify-tier3-2] scheduled 853 clauses 18% of 4727
+c [vivify-tier3-2] vivified 17 clauses 65% out of 26 tried
+c [vivify-tier3-2] 827 clauses remain 97% out of 853 scheduled
+c [vivify-tier3-2] keeping all 827 remaining clauses prioritized 100%
+c w  0.22 13 40 5 5 759 1 8013 4725 1.6 23 14 10 20 5% 12796 20844 5770 175%
+c [vivify-limit-2] exceeded by 1748 ticks 0.17%
+c [sweep-2] scheduled 3014 variables 52% (3014 rescheduled 100%, 3014 incomplete 100%)
+c [sweep-2] found 0 equivalences and 0 units
+c [sweep-2] swept 379 variables (2635 remain 87%)
+c [substitute] round 1 removed 0 variables 0%
+c [transitive-3] probed 9942 (86%): reduced 1, units 0
+c t  0.23 13 40 5 5 759 1 8013 4725 1.6 23 14 10 20 5% 12795 20844 5770 175%
+c [factorization-2] binary clause bounded variable addition
+c [defrag] freed 453414 usable entries 89% thus 1813656 bytes (2 MB)
+c f  0.24 13 40 5 5 759 1 8013 4725 1.6 23 14 10 20 5% 12835 20754 5790 175%
+c [vectors] enlarged to 2^17 entries 524288 bytes (512 KB) (in place)
+c [vectors] enlarged to 2^18 entries 1048576 bytes (1 MB) (in place)
+c [factorization-2] introduced 20 extension variables 0%
+c [factorization-2] removed -40 binary clauses -0%
+c [factorization-2] removed 90 large clauses 0%
+c [probe-3] probing limit hit after 8010 conflicts
+c [substitute] round 1 removed 0 variables 0%
+c [vivify-tier1-3] prioritized 935 clauses 40%
+c [vivify-tier1-3] scheduled 2312 clauses 49% of 4725
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c [vivify-tier1-3] vivified 34 clauses 39% out of 88 tried
+c [vivify-tier1-3] 2224 clauses remain 96% out of 2312 scheduled
+c [vivify-tier1-3] keeping all 847 remaining clauses prioritized 38%
+c u  0.24 13 40 5 5 759 1 8013 4721 1.6 23 14 10 20 5% 12835 20754 5790 175%
+c [vivify-tier2-3] prioritized 43 clauses 3%
+c [vivify-tier2-3] scheduled 1563 clauses 33% of 4721
+c [vivify-tier2-3] vivified 46 clauses 50% out of 92 tried
+c [vivify-tier2-3] 1471 clauses remain 94% out of 1563 scheduled
+c [vivify-tier2-3] no remaining prioritized clauses
+c v  0.24 13 40 5 5 759 1 8013 4714 1.6 23 14 10 20 5% 12835 20754 5790 175%
+c [vivify-tier3-3] prioritized 826 clauses 97%
+c [vivify-tier3-3] scheduled 850 clauses 18% of 4714
+c [vivify-tier3-3] vivified 44 clauses 85% out of 52 tried
+c [vivify-tier3-3] 798 clauses remain 94% out of 850 scheduled
+c [vivify-tier3-3] keeping all 774 remaining clauses prioritized 97%
+c w  0.25 13 40 5 5 759 1 8013 4676 1.6 23 14 10 20 5% 12835 20754 5790 175%
+c [vivify-irredundant-3] prioritized 19847 clauses 96%
+c [vivify-irredundant-3] scheduled 20754 clauses 100% of 20754
+c [vivify-irredundant-3] vivified 0 clauses 0% out of 225 tried
+c [vivify-irredundant-3] 20529 clauses remain 99% out of 20754 scheduled
+c [vivify-irredundant-3] keeping all 19622 remaining clauses prioritized 96%
+c [vivify-limit-3] exceeded by 175 ticks 0.02%
+c [substitute] round 1 removed 0 variables 0%
+c [transitive-3] probed 9984 (86%): reduced 0, units 0
+c [probe-3] new limit of 16414 after 8401 conflicts
+c ]  0.26 13 38 6 5 760 1 8596 5117 1.5 23 15 10 20 5% 12835 20754 5790 175%
+c [focus] switching to focused mode after 8596 conflicts
+c [focused] new focused mode switching limit of 12665 after 4069 conflicts
+c {  0.26 13 32 6 5 760 5 8596 5117 1.7 15 9 8 12 5% 12835 20754 5790 175%
+c [randec-7] new limit of 9198 after 602 conflicts
+c [retiered-12] recomputed focused tier1 limit 8 and tier2 limit 12 after 8853 conflicts
+c [randec-8] new limit of 9819 after 615 conflicts
+c [reduce-6] reduce limit 9385 hit after 9385 conflicts
+c [retiered-12] recomputed focused tier1 limit 8 and tier2 limit 12 after 9385 conflicts
+c [reduce-6] reducing clauses after offset 216971 in arena
+c [reduce-6] reducing 36768 words 294144 bytes (287 KB) 14%
+c [reduce-6] reducing 777 (56%) out of 1389 (5%) reducible clauses
+c [collect] flushed 1262 large garbage clauses 100%
+c [collect] collected 139568 bytes (136 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 93% with 245016 16-byte-words 3920256 bytes (4 MB)
+c [arena] not shrinking since more than 25% filled
+c [move] moving redundant clauses of 448720 bytes (438 KB) to the end
+c [reduce-6] new limit of 11834 after 2449 conflicts
+c -  0.27 13 35 6 6 875 5 9385 4971 1.8 16 9 8 12 5% 12836 20754 5790 175%
+c [defrag] freed 389876 usable entries 75% thus 1559504 bytes (1 MB)
+c [vectors] enlarged to 2^18 entries 1048576 bytes (1 MB) (in place)
+c [randec-9] new limit of 10544 after 627 conflicts
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c [reorder-1] reorder limit 10000 hit a after 10015 conflicts in focused mode 
+c [reorder-1] reordered decisions in focused search mode
+c [reorder-1] new limit of 20015 after 1e4 conflicts
+c o  0.27 13 35 6 6 897 5 10015 5408 1.8 17 9 8 12 5% 12836 20754 5790 175%
+c [randec-10] new limit of 11190 after 639 conflicts
+c [randec-11] new limit of 12085 after 650 conflicts
+c [reduce-7] reduce limit 11834 hit after 11834 conflicts
+c [retiered-12] recomputed focused tier1 limit 8 and tier2 limit 12 after 11834 conflicts
+c [reduce-7] reducing clauses after offset 217151 in arena
+c [reduce-7] reducing 40888 words 327104 bytes (319 KB) 16%
+c [reduce-7] reducing 675 (57%) out of 1190 (4%) reducible clauses
+c [collect] flushed 1072 large garbage clauses 100%
+c [collect] collected 104800 bytes (102 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 96% with 251489 16-byte-words 4023824 bytes (4 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-7] new limit of 14479 after 2645 conflicts
+c -  0.29 13 38 6 7 999 5 11834 5981 1.9 18 9 8 12 5% 12836 20754 5790 175%
+c [randec-12] new limit of 12795 after 661 conflicts
+c
+c seconds  switched   rate        size/glue tier1    binary         remaining
+c        MB reductions  conflicts       size  tier2      irredundant
+c         level  restarts    redundant    glue   trail         variables
+c
+c }  0.29 13 38 7 7 1037 5 12665 6647 2.0 18 9 8 12 5% 12836 20754 5790 175%
+c [stable] switched to stable mode after 12665 conflicts
+c [stable] new stable mode switching limit of 14940871 after 3819497 ticks
+c [  0.29 13 38 7 7 1037 1 12665 6647 1.5 23 15 10 20 5% 12836 20754 5790 175%
+c [rephase-4] best phases in stable search mode
+c [rephase-4] new limit of 18194 after 5529 conflicts
+c B  0.29 13 38 7 7 1037 1 12665 6647 1.5 23 15 10 20 5% 12836 20754 5790 175%
+c [vectors] enlarged to 2^20 entries 4194304 bytes (4 MB) (in place)
+c [defrag] freed 408155 usable entries 75% thus 1632620 bytes (2 MB)
+c [eliminate-1] elimination limit of 13003 conflicts hit
+c [forward] scheduled 20754 irredundant clauses 100%
+c [forward] no clause subsumed nor strengthened out of 17468 checked 84%
+c [forward] 3286 unchecked clauses remain 16%
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c [eliminate-1] scheduled 5790 variables 100%
+c [collect] flushed 80955 large garbage clauses
+c [collect] collected 2606928 bytes (2 MB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 38% with 98486 16-byte-words 1575776 bytes (2 MB)
+c [arena] not shrinking since more than 25% filled
+c [eliminate-1] eliminated 249 variables 4% in round 1
+c e  0.31 13 38 7 7 1037 1 13003 6920 1.5 23 15 10 20 5% 12330 20986 5541 168%
+c [forward] scheduled 10212 irredundant clauses 49%
+c [forward] subsumed 4 clauses 0.04% of 10212 checked 100%
+c [forward] strengthened 89 clauses 0.87% of 10212 checked 100%
+c [forward] 89 unchecked clauses remain 1%
+c s  0.31 13 38 7 7 1037 1 13003 6920 1.5 23 15 10 20 5% 12330 20982 5541 168%
+c [eliminate-1] scheduled 63 variables 1%
+c [collect] flushed 6 large garbage clauses
+c [collect] collected 416 bytes in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 38% with 98484 16-byte-words 1575744 bytes (2 MB)
+c [arena] not shrinking since more than 25% filled
+c [eliminate-1] eliminated 1 variables 2% in round 2
+c e  0.31 13 38 7 7 1037 1 13003 6920 1.5 23 15 10 20 5% 12326 20986 5540 168%
+c [eliminate-1] eliminated 250 variables 4% out of 5790 in 2 rounds
+c [eliminate-1] completed elimination bound 0 next 1
+c ^  0.31 13 38 7 7 1037 1 13003 6920 1.5 23 15 10 20 5% 12326 20986 5540 168%
+c [eliminate-1] new limit of 26015 after 13012 conflicts
+c [reduce-8] reduce limit 14479 hit after 14480 conflicts
+c [retiered-12] recomputed stable tier1 limit 12 and tier2 limit 21 after 14480 conflicts
+c [reduce-8] reducing clauses after offset 55703 in arena
+c [reduce-8] reducing 52688 words 421504 bytes (412 KB) 49%
+c [reduce-8] reducing 1011 (57%) out of 1759 (6%) reducible clauses
+c [collect] flushed 2083 large garbage clauses 100%
+c [collect] collected 233408 bytes (228 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 36% with 93803 16-byte-words 1500848 bytes (1 MB)
+c [arena] not shrinking since more than 25% filled
+c [move] moving redundant clauses of 609600 bytes (595 KB) to the end
+c [reduce-8] new limit of 17308 after 2828 conflicts
+c -  0.33 13 34 7 8 1038 1 14480 6303 1.5 23 16 12 21 4% 12326 20986 5540 168%
+c [rescale] maximum score 1.00358e+150 increment 5.21448e+148
+c [rescale] rescaled by factor 9.96432e-151
+c [probe-4] probing limit hit after 16414 conflicts
+c [substitute] round 1 removed 0 variables 0%
+c [vivify-tier1-4] prioritized 826 clauses 21%
+c [vivify-tier1-4] scheduled 3945 clauses 50% of 7851
+c [vectors] enlarged to 2^20 entries 4194304 bytes (4 MB) (in place)
+c [vivify-tier1-4] vivified 44 clauses 41% out of 108 tried
+c [vivify-tier1-4] 3837 clauses remain 97% out of 3945 scheduled
+c [vivify-tier1-4] keeping all 718 remaining clauses prioritized 19%
+c u  0.35 13 30 7 8 1039 1 16415 7840 1.5 23 15 12 21 4% 12326 20986 5540 168%
+c [vivify-tier2-4] prioritized 6 clauses 0%
+c [vivify-tier2-4] scheduled 2170 clauses 28% of 7840
+c [vivify-tier2-4] vivified 49 clauses 57% out of 86 tried
+c [vivify-tier2-4] 2084 clauses remain 96% out of 2170 scheduled
+c [vivify-tier2-4] no remaining prioritized clauses
+c v  0.36 13 30 7 8 1039 1 16415 7817 1.5 23 15 12 21 4% 12326 20986 5540 168%
+c [vivify-tier3-4] prioritizing all 1735 scheduled clauses
+c [vivify-tier3-4] scheduled 1735 clauses 22% of 7817
+c [vivify-tier3-4] vivified 31 clauses 94% out of 33 tried
+c [vivify-tier3-4] 1702 clauses remain 98% out of 1735 scheduled
+c [vivify-tier3-4] keeping all 1702 remaining clauses prioritized 100%
+c w  0.36 13 30 7 8 1039 1 16415 7803 1.5 23 15 12 21 4% 12326 20986 5540 168%
+c [vivify-limit-4] exceeded by 1402 ticks 0.14%
+c [substitute] round 1 removed 0 variables 0%
+c [transitive-4] probed 9584 (86%): reduced 0, units 0
+c [factorization-3] binary clause bounded variable addition
+c [defrag] freed 499445 usable entries 90% thus 1997780 bytes (2 MB)
+c f  0.36 13 30 7 8 1039 1 16415 7803 1.5 23 15 12 21 4% 12332 20976 5542 168%
+c [vectors] enlarged to 2^17 entries 524288 bytes (512 KB) (in place)
+c [vectors] enlarged to 2^18 entries 1048576 bytes (1 MB) (in place)
+c [factorization-3] introduced 2 extension variables 0%
+c [factorization-3] removed -6 binary clauses -0%
+c [factorization-3] removed 10 large clauses 0%
+c [probe-4] probing limit hit after 16414 conflicts
+c extracted 0 binaries (plus 0 duplicated)
+c [vectors] enlarged to 8 entries 32 bytes (in place)
+c [vectors] enlarged to 16 entries 64 bytes (moved)
+c [vectors] enlarged to 32 entries 128 bytes (moved)
+c [vectors] enlarged to 64 entries 256 bytes (moved)
+c [vectors] enlarged to 2^7 entries 512 bytes (moved)
+c [vectors] enlarged to 2^8 entries 1024 bytes (1 KB) (moved)
+c [vectors] enlarged to 2^9 entries 2048 bytes (2 KB) (moved)
+c [vectors] enlarged to 2^10 entries 4096 bytes (4 KB) (moved)
+c [vectors] enlarged to 2^11 entries 8192 bytes (8 KB) (moved)
+c [vectors] enlarged to 2^12 entries 16384 bytes (16 KB) (moved)
+c [vectors] enlarged to 2^13 entries 32768 bytes (32 KB) (moved)
+c [vectors] enlarged to 2^14 entries 65536 bytes (64 KB) (moved)
+c [vectors] enlarged to 2^15 entries 131072 bytes (128 KB) (moved)
+c [vectors] enlarged to 2^16 entries 262144 bytes (256 KB) (in place)
+c [congruence-3] found 310 AND gates (310 extracted 100% + 0 matched 0%)
+c [congruence-3] found 0 XOR gates (0 extracted 0% + 0 matched 0%)
+c [congruence-3] found 0 ITE gates (0 extracted 0% + 0 matched 0%)
+c [vectors] enlarged to 2^17 entries 524288 bytes (512 KB) (in place)
+c [vectors] enlarged to 2^18 entries 1048576 bytes (1 MB) (in place)
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (moved)
+c [congruence-3] found 310 gates (5.59% variables)
+c [congruence-3] merged 0 equivalent variables 0.00%
+c [substitute] round 1 removed 0 variables 0%
+c [vivify-tier1-5] prioritized 718 clauses 18%
+c [vivify-tier1-5] scheduled 3937 clauses 50% of 7803
+c [vivify-tier1-5] vivified 36 clauses 38% out of 96 tried
+c [vivify-tier1-5] 3841 clauses remain 98% out of 3937 scheduled
+c [vivify-tier1-5] keeping all 622 remaining clauses prioritized 16%
+c u  0.37 13 30 7 8 1039 1 16415 7791 1.5 23 15 12 21 4% 12332 20976 5542 168%
+c [vivify-tier2-5] prioritized 1 clauses 0%
+c [vivify-tier2-5] scheduled 2146 clauses 28% of 7791
+c [vivify-tier2-5] vivified 27 clauses 37% out of 73 tried
+c [vivify-tier2-5] 2073 clauses remain 97% out of 2146 scheduled
+c [vivify-tier2-5] no remaining prioritized clauses
+c v  0.38 13 30 7 8 1039 1 16415 7778 1.5 23 15 12 21 4% 12332 20976 5542 168%
+c [vivify-tier3-5] prioritized 1700 clauses 99%
+c [vivify-tier3-5] scheduled 1719 clauses 22% of 7778
+c [vivify-tier3-5] vivified 35 clauses 90% out of 39 tried
+c [vivify-tier3-5] 1680 clauses remain 98% out of 1719 scheduled
+c [vivify-tier3-5] keeping all 1661 remaining clauses prioritized 99%
+c w  0.38 13 30 7 8 1039 1 16415 7751 1.5 23 15 12 21 4% 12332 20976 5542 168%
+c [vivify-limit-5] exceeded by 2089 ticks 0.21%
+c [vectors] enlarged to 2^20 entries 4194304 bytes (4 MB) (in place)
+c [sweep-3] scheduled 2583 variables 47% (2583 rescheduled 100%, 2583 incomplete 100%)
+c [sweep-3] found 0 equivalences and 0 units
+c [sweep-3] swept 245 variables (2338 remain 91%)
+c [substitute] round 1 removed 0 variables 0%
+c [transitive-4] probed 9594 (87%): reduced 0, units 0
+c [probe-4] new limit of 27996 after 11581 conflicts
+c [defrag] freed 429229 usable entries 75% thus 1716916 bytes (2 MB)
+c ]  0.40 13 29 8 8 1039 1 16504 7828 1.5 23 15 12 21 4% 12332 20976 5542 168%
+c [focus] switching to focused mode after 16504 conflicts
+c [focused] new focused mode switching limit of 22663 after 6159 conflicts
+c {  0.40 13 38 8 8 1039 5 16504 7828 2.0 18 9 8 12 5% 12332 20976 5542 168%
+c [randec-13] new limit of 17175 after 671 conflicts
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c [retiered-13] recomputed focused tier1 limit 8 and tier2 limit 12 after 17048 conflicts
+c [randec-14] new limit of 17857 after 680 conflicts
+c [vectors] enlarged to 2^20 entries 4194304 bytes (4 MB) (in place)
+c [reduce-9] reduce limit 17308 hit after 17309 conflicts
+c [retiered-13] recomputed focused tier1 limit 8 and tier2 limit 12 after 17309 conflicts
+c [reduce-9] reducing clauses after offset 57116 in arena
+c [reduce-9] reducing 53986 words 431888 bytes (422 KB) 49%
+c [reduce-9] reducing 672 (58%) out of 1156 (4%) reducible clauses
+c [collect] flushed 1276 large garbage clauses 100%
+c [collect] collected 121424 bytes (119 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 39% with 103513 16-byte-words 1656208 bytes (2 MB)
+c [arena] not shrinking since more than 25% filled
+c [move] moving redundant clauses of 742352 bytes (725 KB) to the end
+c [reduce-9] new limit of 20309 after 3e3 conflicts
+c -  0.41 13 38 8 9 1238 5 17309 7844 2.0 18 9 8 12 5% 12332 20976 5542 168%
+c [randec-15] new limit of 18816 after 690 conflicts
+c [defrag] freed 429969 usable entries 75% thus 1719876 bytes (2 MB)
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c [reduce-10] reduce limit 20309 hit after 20310 conflicts
+c [retiered-13] recomputed focused tier1 limit 8 and tier2 limit 12 after 20310 conflicts
+c [reduce-10] reducing clauses after offset 57128 in arena
+c [reduce-10] reducing 60556 words 484448 bytes (473 KB) 51%
+c [reduce-10] reducing 1062 (59%) out of 1810 (6%) reducible clauses
+c [collect] flushed 1911 large garbage clauses 100%
+c [collect] collected 178544 bytes (174 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 41% with 106525 16-byte-words 1704400 bytes (2 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-10] new limit of 23472 after 3162 conflicts
+c -  0.43 13 32 8 10 1395 4 20310 8921 1.9 17 9 8 12 5% 12332 20976 5542 168%
+c }  0.44 13 28 9 10 1420 4 22665 10566 1.8 16 9 8 12 5% 12332 20976 5542 168%
+c [stable] switched to stable mode after 22665 conflicts
+c [stable] new stable mode switching limit of 24683540 after 4870822 ticks
+c
+c seconds  switched    rate         size/glue  tier1     binary         remaining
+c        MB  reductions  conflicts        size    tier2      irredundant
+c         level   restarts     redundant     glue    trail         variables
+c
+c [  0.44 13 29 9 10 1420 1 22665 10566 1.5 23 15 12 21 4% 12332 20976 5542 168%
+c all variables assigned at decision level 930 during warming-up saved phases
+c [walk-2] imported 5542 decision phases 100%
+c [vectors] enlarged to 8 entries 32 bytes (moved)
+c [vectors] enlarged to 16 entries 64 bytes (moved)
+c [vectors] enlarged to 32 entries 128 bytes (moved)
+c [vectors] enlarged to 64 entries 256 bytes (moved)
+c [vectors] enlarged to 2^7 entries 512 bytes (moved)
+c [vectors] enlarged to 2^8 entries 1024 bytes (1 KB) (moved)
+c [vectors] enlarged to 2^9 entries 2048 bytes (2 KB) (moved)
+c [vectors] enlarged to 2^10 entries 4096 bytes (4 KB) (moved)
+c [vectors] enlarged to 2^11 entries 8192 bytes (8 KB) (moved)
+c [vectors] enlarged to 2^12 entries 16384 bytes (16 KB) (moved)
+c [vectors] enlarged to 2^13 entries 32768 bytes (32 KB) (moved)
+c [vectors] enlarged to 2^14 entries 65536 bytes (64 KB) (moved)
+c [vectors] enlarged to 2^15 entries 131072 bytes (128 KB) (moved)
+c [vectors] enlarged to 2^16 entries 262144 bytes (256 KB) (in place)
+c [walk-2] initially 10 unsatisfied binary clauses 0% out of 12332
+c [vectors] enlarged to 2^17 entries 524288 bytes (512 KB) (in place)
+c [vectors] enlarged to 2^18 entries 1048576 bytes (1 MB) (in place)
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c [walk-2] initially 6102 unsatisfied large clauses 29% out of 20976
+c [walk-2] initially 6112 unsatisfied irredundant clauses 18% out of 33308
+c [walk-2] average clause size 5.14
+c [walk-2] CB 2.00 with inverse 0.50 as base
+c [walk-2] table size 1075 and epsilon 4.94066e-324
+c [walk-2] new minimum 237 after 7814 flips
+c [walk-2] saving improved assignment of 237 unsatisfied clauses
+c [rephase-5] walking phases in stable search mode
+c [rephase-5] new limit of 30192 after 7527 conflicts
+c W  0.45 13 29 9 10 1420 1 22665 10566 1.5 23 15 12 21 4% 12332 20976 5542 168%
+c [reorder-2] reorder limit 20015 hit a after 22665 conflicts in stable mode 
+c [rescale] maximum score 3.09573e+30 increment 1.62946e+29
+c [rescale] rescaled by factor 3.23025e-31
+c [reorder-2] reordered decisions in stable search mode
+c [reorder-2] new limit of 42665 after 2e4 conflicts
+c o  0.45 13 29 9 10 1420 1 22665 10566 1.5 23 15 12 21 4% 12332 20976 5542 168%
+c [reduce-11] reduce limit 23472 hit after 23472 conflicts
+c [retiered-13] recomputed stable tier1 limit 11 and tier2 limit 20 after 23472 conflicts
+c [reduce-11] reducing clauses after offset 57128 in arena
+c [reduce-11] reducing 64107 words 512856 bytes (501 KB) 53%
+c [reduce-11] reducing 1622 (59%) out of 2739 (9%) reducible clauses
+c [collect] flushed 2502 large garbage clauses 100%
+c [collect] collected 228960 bytes (224 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 41% with 106925 16-byte-words 1710800 bytes (2 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-11] new limit of 26788 after 3316 conflicts
+c -  0.46 13 32 9 11 1420 1 23472 9575 1.5 22 14 11 20 5% 12332 20976 5542 168%
+c [vectors] enlarged to 2^20 entries 4194304 bytes (4 MB) (in place)
+c [eliminate-2] elimination limit of 26015 conflicts hit
+c [forward] scheduled 390 irredundant clauses 2%
+c [forward] subsumed 2 clauses 0.51% of 390 checked 100%
+c [forward] strengthened 89 clauses 22.82% of 390 checked 100%
+c [forward] 89 unchecked clauses remain 23%
+c s  0.48 13 28 9 11 1422 1 26017 11347 1.5 21 13 11 20 4% 12332 20974 5542 168%
+c [eliminate-2] scheduled 5542 variables 100%
+c [collect] flushed 1720 large garbage clauses
+c [collect] collected 87920 bytes (86 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 45% with 117813 16-byte-words 1885008 bytes (2 MB)
+c [arena] not shrinking since more than 25% filled
+c [eliminate-2] eliminated 561 variables 10% in round 1
+c e  0.49 13 28 9 11 1422 1 26017 11347 1.5 21 13 11 20 4% 12045 21801 4981 151%
+c [forward] scheduled 15823 irredundant clauses 73%
+c [forward] subsumed 12 clauses 0.08% of 15823 checked 100%
+c [forward] strengthened 235 clauses 1.49% of 15823 checked 100%
+c [forward] 235 unchecked clauses remain 1%
+c s  0.49 13 28 9 11 1422 1 26017 11347 1.5 21 13 11 20 4% 12045 21789 4981 151%
+c [eliminate-2] scheduled 265 variables 5%
+c [collect] flushed 38 large garbage clauses
+c [collect] collected 1872 bytes (2 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 45% with 117860 16-byte-words 1885760 bytes (2 MB)
+c [arena] not shrinking since more than 25% filled
+c [eliminate-2] eliminated 7 variables 3% in round 2
+c e  0.49 13 28 9 11 1422 1 26017 11347 1.5 21 13 11 20 4% 12020 21815 4974 151%
+c [eliminate-2] eliminated 568 variables 10% out of 5542 in 2 rounds
+c [eliminate-2] completed elimination bound 1 next 2
+c ^  0.49 13 28 9 11 1422 1 26017 11347 1.5 21 13 11 20 4% 12020 21815 4974 151%
+c [eliminate-2] new limit of 54196 after 28179 conflicts
+c [defrag] freed 438630 usable entries 75% thus 1754520 bytes (2 MB)
+c [reduce-12] reduce limit 26788 hit after 26788 conflicts
+c [retiered-13] recomputed stable tier1 limit 10 and tier2 limit 18 after 26788 conflicts
+c [reduce-12] reducing clauses after offset 0 in arena
+c [reduce-12] reducing 121836 words 974688 bytes (952 KB) 100%
+c [reduce-12] reducing 849 (60%) out of 1422 (5%) reducible clauses
+c [compact] compacting garbage collection (818 inactive variables 14.12%)
+c [collect] flushed 4353 large garbage clauses 100%
+c [collect] collected 386528 bytes (377 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 37% with 97678 16-byte-words 1562848 bytes (1 MB)
+c [arena] not shrinking since more than 25% filled
+c [move] moving redundant clauses of 681776 bytes (666 KB) to the end
+c [reduce-12] new limit of 30252 after 3464 conflicts
+c -  0.50 13 27 9 12 1423 1 26788 7761 1.5 20 13 10 18 4% 12020 21815 4974 151%
+c [probe-5] probing limit hit after 27996 conflicts
+c [substitute] round 1 removed 0 variables 0%
+c [vivify-tier1-6] prioritized 451 clauses 8%
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c [vivify-tier1-6] scheduled 5758 clauses 66% of 8689
+c [vivify-tier1-6] vivified 80 clauses 50% out of 160 tried
+c [vivify-tier1-6] 5598 clauses remain 97% out of 5758 scheduled
+c [vivify-tier1-6] keeping all 291 remaining clauses prioritized 5%
+c u  0.51 13 26 9 12 1424 1 27997 8658 1.5 20 13 10 18 4% 12020 21815 4974 151%
+c [vivify-tier2-6] prioritizing all 2376 scheduled clauses
+c [vivify-tier2-6] scheduled 2376 clauses 27% of 8658
+c [vivify-tier2-6] vivified 199 clauses 96% out of 208 tried
+c [vivify-tier2-6] 2168 clauses remain 91% out of 2376 scheduled
+c [vivify-tier2-6] keeping all 2168 remaining clauses prioritized 100%
+c v  0.52 13 26 9 12 1424 1 27997 8519 1.5 20 13 10 18 4% 12020 21815 4974 151%
+c [vivify-tier3-6] prioritizing all 552 scheduled clauses
+c [vivify-tier3-6] scheduled 552 clauses 6% of 8519
+c [vivify-tier3-6] vivified 121 clauses 100% out of 121 tried
+c [vivify-tier3-6] 431 clauses remain 78% out of 552 scheduled
+c [vivify-tier3-6] keeping all 431 remaining clauses prioritized 100%
+c w  0.52 13 26 9 12 1424 1 27997 8420 1.5 20 13 10 18 4% 12020 21815 4974 151%
+c [vivify-irredundant-6] prioritized 18662 clauses 86%
+c [vivify-irredundant-6] scheduled 21815 clauses 100% of 21815
+c [vivify-irredundant-6] vivified 4 clauses 2% out of 225 tried
+c [vivify-irredundant-6] 21590 clauses remain 99% out of 21815 scheduled
+c [vivify-irredundant-6] keeping all 18437 remaining clauses prioritized 85%
+c x  0.52 13 26 9 12 1424 1 27997 8420 1.5 20 13 10 18 4% 12020 21815 4974 151%
+c [vivify-limit-6] exceeded by 890 ticks 0.09%
+c [substitute] round 1 removed 0 variables 0%
+c [transitive-5] probed 6856 (69%): reduced 0, units 0
+c [factorization-4] binary clause bounded variable addition
+c [factorization-4] introduced 0 extension variables 0%
+c [factorization-4] removed 0 binary clauses 0%
+c [factorization-4] removed 0 large clauses 0%
+c [probe-5] new limit of 42892 after 14895 conflicts
+c ]  0.53 13 25 10 12 1424 1 28374 8664 1.5 20 13 10 18 4% 12020 21815 4974 151%
+c [focus] switching to focused mode after 28374 conflicts
+c [focused] new focused mode switching limit of 37001 after 8627 conflicts
+c {  0.53 13 28 10 12 1424 4 28374 8664 1.8 16 9 8 12 5% 12020 21815 4974 151%
+c [randec-16] new limit of 29072 after 698 conflicts
+c [vectors] enlarged to 2^20 entries 4194304 bytes (4 MB) (in place)
+c [reduce-13] reduce limit 30252 hit after 30252 conflicts
+c [retiered-13] recomputed focused tier1 limit 7 and tier2 limit 11 after 30252 conflicts
+c [reduce-13] reducing clauses after offset 58930 in arena
+c [reduce-13] reducing 55501 words 444008 bytes (434 KB) 49%
+c [reduce-13] reducing 1225 (60%) out of 2035 (6%) reducible clauses
+c [collect] flushed 2509 large garbage clauses 100%
+c [collect] collected 203408 bytes (199 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 39% with 101718 16-byte-words 1627488 bytes (2 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-13] new limit of 33857 after 3605 conflicts
+c -  0.54 13 26 10 13 1509 4 30252 8700 1.8 16 9 7 11 4% 12020 21815 4974 151%
+c [randec-17] new limit of 32473 after 707 conflicts
+c [defrag] freed 457175 usable entries 75% thus 1828700 bytes (2 MB)
+c [randec-18] new limit of 33190 after 715 conflicts
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c [randec-19] new limit of 33948 after 723 conflicts
+c [retiered-14] recomputed focused tier1 limit 7 and tier2 limit 12 after 33483 conflicts
+c [reduce-14] reduce limit 33857 hit after 33858 conflicts
+c [retiered-14] recomputed focused tier1 limit 7 and tier2 limit 12 after 33858 conflicts
+c [reduce-14] reducing clauses after offset 58930 in arena
+c [reduce-14] reducing 59913 words 479304 bytes (468 KB) 50%
+c [reduce-14] reducing 1188 (61%) out of 1960 (6%) reducible clauses
+c [collect] flushed 2044 large garbage clauses 100%
+c [collect] collected 162848 bytes (159 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 41% with 108665 16-byte-words 1738640 bytes (2 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-14] new limit of 37599 after 3741 conflicts
+c -  0.57 13 26 10 14 1884 4 33858 10223 1.7 16 9 7 12 4% 12021 21815 4974 151%
+c [vectors] enlarged to 2^20 entries 4194304 bytes (4 MB) (in place)
+c [randec-20] new limit of 35455 after 731 conflicts
+c [randec-21] new limit of 36259 after 738 conflicts
+c [randec-22] new limit of 37041 after 745 conflicts
+c [defrag] freed 478984 usable entries 75% thus 1915936 bytes (2 MB)
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c }  0.60 13 25 11 14 2199 4 37003 12527 1.7 15 9 7 12 4% 12021 21815 4974 151%
+c [stable] switched to stable mode after 37003 conflicts
+c [stable] new stable mode switching limit of 38064819 after 6690074 ticks
+c [  0.60 13 25 11 14 2199 1 37003 12527 1.5 20 13 10 18 4% 12021 21815 4974 151%
+c [rephase-6] original phases in stable search mode
+c [rephase-6] new limit of 46763 after 9760 conflicts
+c
+c seconds   switched    rate         size/glue  tier1     binary         remaining
+c        MB   reductions  conflicts        size    tier2      irredundant
+c         level    restarts     redundant     glue    trail         variables
+c
+c O  0.60 13 25 11 14 2199 1 37003 12527 1.5 20 13 10 18 4% 12021 21815 4974 151%
+c [reduce-15] reduce limit 37599 hit after 37599 conflicts
+c [retiered-14] recomputed stable tier1 limit 10 and tier2 limit 18 after 37599 conflicts
+c [reduce-15] reducing clauses after offset 58930 in arena
+c [reduce-15] reducing 66654 words 533232 bytes (521 KB) 53%
+c [reduce-15] reducing 1584 (61%) out of 2597 (7%) reducible clauses
+c [collect] flushed 2624 large garbage clauses 100%
+c [collect] collected 208288 bytes (203 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 43% with 112566 16-byte-words 1801056 bytes (2 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-15] new limit of 41471 after 3872 conflicts
+c -  0.60 13 25 11 15 2199 1 37599 11318 1.5 20 13 10 18 4% 12021 21815 4974 151%
+c [rescale] maximum score 1.01093e+150 increment 5.10794e+148
+c [rescale] rescaled by factor 9.89191e-151
+c [reduce-16] reduce limit 41471 hit after 41471 conflicts
+c [retiered-14] recomputed stable tier1 limit 9 and tier2 limit 16 after 41471 conflicts
+c [reduce-16] reducing clauses after offset 58930 in arena
+c [reduce-16] reducing 70327 words 562616 bytes (549 KB) 54%
+c [reduce-16] reducing 1690 (61%) out of 2754 (8%) reducible clauses
+c [collect] flushed 3074 large garbage clauses 100%
+c [collect] collected 223968 bytes (219 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 44% with 115259 16-byte-words 1844144 bytes (2 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-16] new limit of 45471 after 4e3 conflicts
+c -  0.64 13 22 11 16 2202 1 41471 12099 1.5 18 12 9 16 4% 12021 21815 4974 151%
+c [probe-6] probing limit hit after 42892 conflicts
+c [substitute] round 1 removed 0 variables 0%
+c [vivify-tier1-7] prioritized 263 clauses 3%
+c [vivify-tier1-7] scheduled 8424 clauses 64% of 13080
+c [vectors] enlarged to 2^20 entries 4194304 bytes (4 MB) (in place)
+c [vivify-tier1-7] vivified 63 clauses 24% out of 264 tried
+c [vivify-tier1-7] 8160 clauses remain 97% out of 8424 scheduled
+c [vivify-tier1-7] no remaining prioritized clauses
+c u  0.66 13 21 11 16 2203 1 42894 13050 1.5 18 12 9 16 4% 12021 21815 4974 151%
+c [vivify-tier2-7] prioritized 42 clauses 1%
+c [vivify-tier2-7] scheduled 4314 clauses 33% of 13050
+c [vivify-tier2-7] vivified 1197 clauses 97% out of 1230 tried
+c [vivify-tier2-7] 3084 clauses remain 71% out of 4314 scheduled
+c [vivify-tier2-7] no remaining prioritized clauses
+c v  0.66 13 21 11 16 2203 1 42894 11963 1.5 18 12 9 16 4% 12021 21815 4974 151%
+c [vivify-tier3-7] prioritizing all 341 scheduled clauses
+c [vivify-tier3-7] scheduled 341 clauses 3% of 11963
+c [vivify-tier3-7] vivified 90 clauses 98% out of 92 tried
+c [vivify-tier3-7] 249 clauses remain 73% out of 341 scheduled
+c [vivify-tier3-7] keeping all 249 remaining clauses prioritized 100%
+c w  0.66 13 21 11 16 2203 1 42894 11890 1.5 18 12 9 16 4% 12021 21815 4974 151%
+c [vivify-limit-7] exceeded by 2782 ticks 0.22%
+c [substitute] round 1 removed 0 variables 0%
+c [transitive-6] probed 8522 (86%): reduced 1, units 0
+c t  0.67 13 21 11 16 2203 1 42894 11890 1.5 18 12 9 16 4% 12020 21815 4974 151%
+c [factorization-5] binary clause bounded variable addition
+c [factorization-5] introduced 0 extension variables 0%
+c [factorization-5] removed 0 binary clauses 0%
+c [factorization-5] removed 0 large clauses 0%
+c [probe-6] new limit of 61221 after 18327 conflicts
+c [reorder-3] reorder limit 42665 hit a after 42894 conflicts in stable mode 
+c [rescale] maximum score 7.74579e+107 increment 4.07738e+106
+c [rescale] rescaled by factor 1.29102e-108
+c [reorder-3] reordered decisions in stable search mode
+c [reorder-3] new limit of 72894 after 3e4 conflicts
+c o  0.67 13 21 11 16 2203 1 42894 11890 1.5 18 12 9 16 4% 12020 21815 4974 151%
+c [defrag] freed 500163 usable entries 76% thus 2000652 bytes (2 MB)
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c ]  0.68 13 20 12 16 2204 1 44824 13005 1.5 17 11 9 16 4% 12020 21815 4974 151%
+c [focus] switching to focused mode after 44824 conflicts
+c [focused] new focused mode switching limit of 56303 after 11479 conflicts
+c {  0.68 13 25 12 16 2204 4 44824 13005 1.7 15 9 7 12 4% 12020 21815 4974 151%
+c [randec-23] new limit of 45576 after 752 conflicts
+c [reduce-17] reduce limit 45471 hit after 45472 conflicts
+c [retiered-14] recomputed focused tier1 limit 8 and tier2 limit 12 after 45472 conflicts
+c [reduce-17] reducing clauses after offset 58930 in arena
+c [reduce-17] reducing 73718 words 589744 bytes (576 KB) 56%
+c [reduce-17] reducing 717 (62%) out of 1162 (3%) reducible clauses
+c [collect] flushed 3353 large garbage clauses 100%
+c [collect] collected 242048 bytes (236 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 45% with 117520 16-byte-words 1880320 bytes (2 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-17] new limit of 49595 after 4123 conflicts
+c -  0.68 13 26 12 17 2219 4 45472 12716 1.7 15 9 8 12 4% 12020 21815 4974 151%
+c [randec-24] new limit of 48893 after 759 conflicts
+c [vectors] enlarged to 2^20 entries 4194304 bytes (4 MB) (in place)
+c [randec-25] new limit of 49864 after 765 conflicts
+c [reduce-18] reduce limit 49595 hit after 49595 conflicts
+c [retiered-14] recomputed focused tier1 limit 7 and tier2 limit 11 after 49595 conflicts
+c [reduce-18] reducing clauses after offset 58930 in arena
+c [reduce-18] reducing 76741 words 613928 bytes (600 KB) 57%
+c [reduce-18] reducing 1566 (62%) out of 2525 (7%) reducible clauses
+c [collect] flushed 2570 large garbage clauses 100%
+c [collect] collected 186576 bytes (182 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 47% with 124010 16-byte-words 1984160 bytes (2 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-18] new limit of 53837 after 4242 conflicts
+c -  0.71 13 25 12 18 2496 4 49595 14227 1.6 15 9 7 11 4% 12020 21815 4974 151%
+c [reduce-19] reduce limit 53837 hit after 53837 conflicts
+c [retiered-14] recomputed focused tier1 limit 7 and tier2 limit 11 after 53837 conflicts
+c [reduce-19] reducing clauses after offset 58930 in arena
+c [reduce-19] reducing 82868 words 662944 bytes (647 KB) 58%
+c [reduce-19] reducing 1307 (62%) out of 2096 (5%) reducible clauses
+c [collect] flushed 2650 large garbage clauses 100%
+c [collect] collected 184736 bytes (180 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 50% with 130252 16-byte-words 2084032 bytes (2 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-19] new limit of 58195 after 4358 conflicts
+c -  0.74 13 23 12 19 2512 3 53837 15805 1.6 15 9 7 11 4% 12020 21815 4974 151%
+c [eliminate-3] elimination limit of 54196 conflicts hit
+c [forward] scheduled 4539 irredundant clauses 21%
+c [forward] subsumed 11 clauses 0.24% of 4539 checked 100%
+c [forward] strengthened 13 clauses 0.29% of 4539 checked 100%
+c [forward] 13 unchecked clauses remain 0%
+c s  0.75 13 23 12 19 2512 3 54199 16026 1.6 14 9 7 11 4% 12021 21804 4974 151%
+c [eliminate-3] scheduled 4974 variables 100%
+c [defrag] freed 555034 usable entries 76% thus 2220136 bytes (2 MB)
+c [collect] flushed 1065 large garbage clauses
+c [collect] collected 44384 bytes (43 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 51% with 133436 16-byte-words 2134976 bytes (2 MB)
+c [arena] not shrinking since more than 25% filled
+c [eliminate-3] eliminated 615 variables 12% in round 1
+c e  0.76 13 23 12 19 2512 3 54199 16026 1.6 14 9 7 11 4% 12227 22776 4359 132%
+c 2  0.76 13 23 12 19 2512 3 54199 16026 1.6 14 9 7 11 4% 12226 22776 4359 132%
+c [forward] scheduled 20483 irredundant clauses 90%
+c [forward] subsumed 40 clauses 0.20% of 20483 checked 100%
+c [forward] strengthened 154 clauses 0.75% of 20483 checked 100%
+c [forward] 154 unchecked clauses remain 1%
+c s  0.76 13 23 12 19 2512 3 54199 16026 1.6 14 9 7 11 4% 12226 22736 4359 132%
+c [eliminate-3] scheduled 234 variables 5%
+c [collect] flushed 50 large garbage clauses
+c [collect] collected 3296 bytes (3 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 51% with 133314 16-byte-words 2133024 bytes (2 MB)
+c [arena] not shrinking since more than 25% filled
+c [eliminate-3] eliminated 2 variables 1% in round 2
+c e  0.76 13 23 12 19 2512 3 54199 16026 1.6 14 9 7 11 4% 12214 22752 4357 132%
+c [eliminate-3] eliminated 617 variables 12% out of 4974 in 2 rounds
+c [eliminate-3] completed elimination bound 2 next 4
+c ^  0.76 13 23 12 19 2512 3 54199 16026 1.6 14 9 7 11 4% 12214 22752 4357 132%
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c [eliminate-3] new limit of 99484 after 45285 conflicts
+c [randec-26] new limit of 54971 after 772 conflicts
+c [randec-27] new limit of 55804 after 778 conflicts
+c }  0.78 13 23 13 19 2769 3 56304 10138 1.6 14 9 7 11 4% 12214 22752 4357 132%
+c [stable] switched to stable mode after 56304 conflicts
+c [stable] new stable mode switching limit of 53475580 after 7705293 ticks
+c
+c seconds   switched    rate         size/glue  tier1    binary         remaining
+c        MB   reductions  conflicts        size   tier2      irredundant
+c         level    restarts     redundant     glue   trail         variables
+c
+c [  0.78 13 20 13 19 2769 1 56304 10138 1.5 17 11 9 16 4% 12214 22752 4357 132%
+c [rephase-7] best phases in stable search mode
+c [rephase-7] new limit of 68525 after 12221 conflicts
+c B  0.78 13 20 13 19 2769 1 56304 10138 1.5 17 11 9 16 4% 12214 22752 4357 132%
+c [vectors] enlarged to 2^20 entries 4194304 bytes (4 MB) (in place)
+c [reduce-20] reduce limit 58195 hit after 58197 conflicts
+c [retiered-14] recomputed stable tier1 limit 9 and tier2 limit 16 after 58197 conflicts
+c [reduce-20] reducing clauses after offset 0 in arena
+c [reduce-20] reducing 154672 words 1237376 bytes (1 MB) 100%
+c [reduce-20] reducing 1056 (63%) out of 1687 (5%) reducible clauses
+c [compact] compacting garbage collection (617 inactive variables 12.40%)
+c [collect] flushed 9561 large garbage clauses 100%
+c [collect] collected 727696 bytes (711 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 42% with 109191 16-byte-words 1747056 bytes (2 MB)
+c [arena] not shrinking since more than 25% filled
+c [move] moving redundant clauses of 839008 bytes (819 KB) to the end
+c [reduce-20] new limit of 62669 after 4472 conflicts
+c -  0.79 14 20 13 20 2770 1 58197 10411 1.5 18 12 9 16 4% 12214 22752 4357 132%
+c [rescale] maximum score 1.00942e+150 increment 5.10836e+148
+c [rescale] rescaled by factor 9.90671e-151
+c [probe-7] probing limit hit after 61221 conflicts
+c [substitute] round 1 removed 0 variables 0%
+c [vivify-tier1-8] prioritizing all 7637 scheduled clauses
+c [vivify-tier1-8] scheduled 7637 clauses 60% of 12710
+c [vivify-tier1-8] vivified 52 clauses 35% out of 147 tried
+c [vivify-tier1-8] 7490 clauses remain 98% out of 7637 scheduled
+c [vivify-tier1-8] keeping all 7490 remaining clauses prioritized 100%
+c u  0.82 14 20 13 20 2772 1 61223 12682 1.5 18 12 9 16 4% 12214 22752 4357 132%
+c [vivify-tier2-8] prioritizing all 2823 scheduled clauses
+c [vivify-tier2-8] scheduled 2823 clauses 22% of 12682
+c [vivify-tier2-8] vivified 62 clauses 91% out of 68 tried
+c [vivify-tier2-8] 2755 clauses remain 98% out of 2823 scheduled
+c [vivify-tier2-8] keeping all 2755 remaining clauses prioritized 100%
+c v  0.82 14 20 13 20 2772 1 61223 12674 1.5 18 12 9 16 4% 12214 22752 4357 132%
+c [vivify-tier3-8] prioritizing all 2221 scheduled clauses
+c [vivify-tier3-8] scheduled 2221 clauses 18% of 12674
+c [vivify-tier3-8] vivified 67 clauses 100% out of 67 tried
+c [vivify-tier3-8] 2154 clauses remain 97% out of 2221 scheduled
+c [vivify-tier3-8] keeping all 2154 remaining clauses prioritized 100%
+c w  0.83 14 20 13 20 2772 1 61223 12614 1.5 18 12 9 16 4% 12214 22752 4357 132%
+c [vivify-irredundant-8] prioritized 18353 clauses 81%
+c [vivify-irredundant-8] scheduled 22752 clauses 100% of 22752
+c [vivify-irredundant-8] vivified 0 clauses 0% out of 372 tried
+c [vivify-irredundant-8] 22380 clauses remain 98% out of 22752 scheduled
+c [vivify-irredundant-8] keeping all 17981 remaining clauses prioritized 80%
+c [vivify-limit-8] exceeded by 407 ticks 0.03%
+c [substitute] round 1 removed 0 variables 0%
+c [transitive-7] probed 7486 (86%): reduced 1, units 0
+c t  0.83 14 20 13 20 2772 1 61223 12614 1.5 18 12 9 16 4% 12213 22752 4357 132%
+c [factorization-6] binary clause bounded variable addition
+c [factorization-6] introduced 0 extension variables 0%
+c [factorization-6] removed 0 binary clauses 0%
+c [factorization-6] removed 0 large clauses 0%
+c [probe-7] new limit of 83061 after 21838 conflicts
+c [defrag] freed 562442 usable entries 77% thus 2249768 bytes (2 MB)
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c [reduce-21] reduce limit 62669 hit after 62669 conflicts
+c [retiered-14] recomputed stable tier1 limit 9 and tier2 limit 17 after 62669 conflicts
+c [reduce-21] reducing clauses after offset 61132 in arena
+c [reduce-21] reducing 76689 words 613512 bytes (599 KB) 56%
+c [reduce-21] reducing 954 (63%) out of 1517 (4%) reducible clauses
+c [collect] flushed 2116 large garbage clauses 100%
+c [collect] collected 211824 bytes (207 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 48% with 124582 16-byte-words 1993312 bytes (2 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-21] new limit of 67251 after 4582 conflicts
+c -  0.85 14 20 13 21 2774 1 62669 12733 1.5 18 12 9 17 4% 12213 22752 4357 132%
+c ]  0.88 14 20 14 21 2775 1 65883 15026 1.5 19 12 9 17 4% 12213 22752 4357 132%
+c [focus] switching to focused mode after 65883 conflicts
+c [focused] new focused mode switching limit of 80598 after 14715 conflicts
+c {  0.88 14 23 14 21 2775 3 65883 15026 1.6 14 9 7 11 4% 12213 22752 4357 132%
+c [randec-28] new limit of 66667 after 784 conflicts
+c [retiered-15] recomputed focused tier1 limit 7 and tier2 limit 11 after 66617 conflicts
+c [reduce-22] reduce limit 67251 hit after 67251 conflicts
+c [retiered-15] recomputed focused tier1 limit 7 and tier2 limit 11 after 67251 conflicts
+c [reduce-22] reducing clauses after offset 61132 in arena
+c [reduce-22] reducing 88680 words 709440 bytes (693 KB) 59%
+c [reduce-22] reducing 1542 (63%) out of 2441 (6%) reducible clauses
+c [collect] flushed 2922 large garbage clauses 100%
+c [collect] collected 257008 bytes (251 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 51% with 133749 16-byte-words 2139984 bytes (2 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-22] new limit of 71941 after 4690 conflicts
+c -  0.89 14 22 14 22 2850 3 67251 14379 1.6 14 9 7 11 4% 12213 22752 4357 132%
+c [vectors] enlarged to 2^20 entries 4194304 bytes (4 MB) (in place)
+c [reduce-23] reduce limit 71941 hit after 71942 conflicts
+c [retiered-15] recomputed focused tier1 limit 7 and tier2 limit 11 after 71942 conflicts
+c [reduce-23] reducing clauses after offset 61132 in arena
+c [reduce-23] reducing 92007 words 736056 bytes (719 KB) 60%
+c [reduce-23] reducing 2008 (63%) out of 3167 (8%) reducible clauses
+c [collect] flushed 3572 large garbage clauses 100%
+c [collect] collected 310320 bytes (303 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 51% with 133744 16-byte-words 2139904 bytes (2 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-23] new limit of 76737 after 4795 conflicts
+c -  0.94 14 21 14 23 3035 3 71942 15488 1.6 14 9 7 11 4% 12213 22752 4357 132%
+c [randec-29] new limit of 73135 after 789 conflicts
+c [reduce-24] reduce limit 76737 hit after 76737 conflicts
+c [retiered-15] recomputed focused tier1 limit 7 and tier2 limit 11 after 76737 conflicts
+c [reduce-24] reducing clauses after offset 61132 in arena
+c [reduce-24] reducing 92882 words 743056 bytes (726 KB) 60%
+c [reduce-24] reducing 2433 (64%) out of 3822 (9%) reducible clauses
+c [collect] flushed 3971 large garbage clauses 100%
+c [collect] collected 328752 bytes (321 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 51% with 133467 16-byte-words 2135472 bytes (2 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-24] new limit of 81635 after 4898 conflicts
+c -  0.96 14 20 14 24 3472 3 76737 16283 1.5 14 9 7 11 4% 12213 22752 4357 132%
+c [defrag] freed 563072 usable entries 75% thus 2252288 bytes (2 MB)
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c }  0.99 14 19 15 24 3752 3 80598 18970 1.5 14 9 7 11 4% 12213 22752 4357 132%
+c [stable] switched to stable mode after 80598 conflicts
+c [stable] new stable mode switching limit of 73887420 after 10204781 ticks
+c [  0.99 14 20 15 24 3752 1 80598 18970 1.5 19 12 9 17 4% 12213 22752 4357 132%
+c all variables assigned at decision level 669 during warming-up saved phases
+c [walk-3] imported 4357 decision phases 100%
+c [vectors] enlarged to 8 entries 32 bytes (moved)
+c [vectors] enlarged to 16 entries 64 bytes (moved)
+c [vectors] enlarged to 32 entries 128 bytes (moved)
+c [vectors] enlarged to 64 entries 256 bytes (moved)
+c [vectors] enlarged to 2^7 entries 512 bytes (moved)
+c [vectors] enlarged to 2^8 entries 1024 bytes (1 KB) (moved)
+c [vectors] enlarged to 2^9 entries 2048 bytes (2 KB) (moved)
+c [vectors] enlarged to 2^10 entries 4096 bytes (4 KB) (moved)
+c [vectors] enlarged to 2^11 entries 8192 bytes (8 KB) (moved)
+c [vectors] enlarged to 2^12 entries 16384 bytes (16 KB) (moved)
+c [vectors] enlarged to 2^13 entries 32768 bytes (32 KB) (moved)
+c [vectors] enlarged to 2^14 entries 65536 bytes (64 KB) (moved)
+c [vectors] enlarged to 2^15 entries 131072 bytes (128 KB) (moved)
+c [vectors] enlarged to 2^16 entries 262144 bytes (256 KB) (in place)
+c [walk-3] initially 1 unsatisfied binary clauses 0% out of 12213
+c [vectors] enlarged to 2^17 entries 524288 bytes (512 KB) (in place)
+c [vectors] enlarged to 2^18 entries 1048576 bytes (1 MB) (in place)
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c [walk-3] initially 2166 unsatisfied large clauses 10% out of 22752
+c [walk-3] initially 2167 unsatisfied irredundant clauses 6% out of 34965
+c [walk-3] average clause size 5.11
+c [walk-3] CB 3.85 with inverse 0.26 as base
+c [walk-3] table size 553 and epsilon 4.94066e-324
+c [walk-3] new minimum 93 after 10826 flips
+c [walk-3] saving improved assignment of 93 unsatisfied clauses
+c [rephase-8] walking phases in stable search mode
+c [rephase-8] new limit of 95501 after 14903 conflicts
+c W  0.99 14 20 15 24 3752 1 80598 18970 1.5 19 12 9 17 4% 12213 22752 4357 132%
+c [reorder-4] reorder limit 72894 hit a after 80598 conflicts in stable mode 
+c [rescale] maximum score 7.0758e+105 increment 3.83632e+104
+c [rescale] rescaled by factor 1.41327e-106
+c [reorder-4] reordered decisions in stable search mode
+c [reorder-4] new limit of 120598 after 4e4 conflicts
+c o  0.99 14 20 15 24 3752 1 80598 18970 1.5 19 12 9 17 4% 12213 22752 4357 132%
+c [vectors] enlarged to 2^20 entries 4194304 bytes (4 MB) (in place)
+c [reduce-25] reduce limit 81635 hit after 81635 conflicts
+c [retiered-15] recomputed stable tier1 limit 9 and tier2 limit 16 after 81635 conflicts
+c [reduce-25] reducing clauses after offset 61132 in arena
+c [reduce-25] reducing 94576 words 756608 bytes (739 KB) 61%
+c [reduce-25] reducing 1957 (64%) out of 3064 (7%) reducible clauses
+c [collect] flushed 3328 large garbage clauses 100%
+c [collect] collected 250224 bytes (244 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 53% with 140069 16-byte-words 2241104 bytes (2 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-25] new limit of 86635 after 5e3 conflicts
+c -  1.00 14 25 15 25 3753 1 81635 17811 1.5 19 12 9 16 4% 12213 22752 4357 132%
+c [probe-8] probing limit hit after 83061 conflicts
+c extracted 0 binaries (plus 0 duplicated)
+c [vectors] enlarged to 8 entries 32 bytes (moved)
+c [vectors] enlarged to 16 entries 64 bytes (moved)
+c [vectors] enlarged to 32 entries 128 bytes (moved)
+c [vectors] enlarged to 64 entries 256 bytes (moved)
+c [vectors] enlarged to 2^7 entries 512 bytes (moved)
+c [vectors] enlarged to 2^8 entries 1024 bytes (1 KB) (moved)
+c [vectors] enlarged to 2^9 entries 2048 bytes (2 KB) (moved)
+c [vectors] enlarged to 2^10 entries 4096 bytes (4 KB) (moved)
+c [vectors] enlarged to 2^11 entries 8192 bytes (8 KB) (moved)
+c [vectors] enlarged to 2^12 entries 16384 bytes (16 KB) (moved)
+c [vectors] enlarged to 2^13 entries 32768 bytes (32 KB) (moved)
+c [vectors] enlarged to 2^14 entries 65536 bytes (64 KB) (moved)
+c [vectors] enlarged to 2^15 entries 131072 bytes (128 KB) (moved)
+c [vectors] enlarged to 2^16 entries 262144 bytes (256 KB) (in place)
+c [congruence-4] found 2480 AND gates (2480 extracted 100% + 0 matched 0%)
+c [vectors] enlarged to 2^17 entries 524288 bytes (512 KB) (moved)
+c [congruence-4] found 0 XOR gates (0 extracted 0% + 0 matched 0%)
+c [congruence-4] found 0 ITE gates (0 extracted 0% + 0 matched 0%)
+c [vectors] enlarged to 2^18 entries 1048576 bytes (1 MB) (in place)
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c [congruence-4] found 2480 gates (56.92% variables)
+c [congruence-4] merged 0 equivalent variables 0.00%
+c [substitute] round 1 removed 0 variables 0%
+c [vivify-tier1-9] prioritized 7591 clauses 59%
+c [vivify-tier1-9] scheduled 12782 clauses 68% of 18819
+c [vectors] enlarged to 2^20 entries 4194304 bytes (4 MB) (in place)
+c [vivify-tier1-9] vivified 981 clauses 94% out of 1041 tried
+c [vivify-tier1-9] 11741 clauses remain 92% out of 12782 scheduled
+c [vivify-tier1-9] keeping all 6550 remaining clauses prioritized 56%
+c u  1.02 14 24 15 25 3754 1 83062 17953 1.5 18 12 9 16 4% 12213 22752 4357 132%
+c [vivify-tier2-9] prioritized 677 clauses 13%
+c [vivify-tier2-9] scheduled 5166 clauses 29% of 17953
+c [vivify-tier2-9] vivified 403 clauses 82% out of 494 tried
+c [vivify-tier2-9] 4672 clauses remain 90% out of 5166 scheduled
+c [vivify-tier2-9] keeping all 183 remaining clauses prioritized 4%
+c v  1.03 14 24 15 25 3754 1 83062 17596 1.5 18 12 9 16 4% 12213 22752 4357 132%
+c [vivify-tier3-9] prioritizing all 867 scheduled clauses
+c [vivify-tier3-9] scheduled 867 clauses 5% of 17596
+c [vivify-tier3-9] vivified 324 clauses 96% out of 336 tried
+c [vivify-tier3-9] 531 clauses remain 61% out of 867 scheduled
+c [vivify-tier3-9] keeping all 531 remaining clauses prioritized 100%
+c
+c seconds   switched    rate         size/glue  tier1    binary         remaining
+c        MB   reductions  conflicts        size   tier2      irredundant
+c         level    restarts     redundant     glue   trail         variables
+c
+c w  1.03 14 24 15 25 3754 1 83062 17325 1.5 18 12 9 16 4% 12213 22752 4357 132%
+c [vivify-limit-9] exceeded by 2009 ticks 0.12%
+c [sweep-4] scheduled 2286 variables 52% (2286 rescheduled 100%, 2286 incomplete 100%)
+c [sweep-4] found 0 equivalences and 0 units
+c [sweep-4] swept 118 variables (2168 remain 95%)
+c [substitute] round 1 removed 0 variables 0%
+c [transitive-8] probed 8714 (100%): reduced 0, units 0
+c [factorization-7] binary clause bounded variable addition
+c [factorization-7] introduced 0 extension variables 0%
+c [factorization-7] removed 0 binary clauses 0%
+c [factorization-7] removed 0 large clauses 0%
+c [probe-8] new limit of 108583 after 25521 conflicts
+c [defrag] freed 684947 usable entries 79% thus 2739788 bytes (3 MB)
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c [reduce-26] reduce limit 86635 hit after 86635 conflicts
+c [retiered-15] recomputed stable tier1 limit 9 and tier2 limit 16 after 86635 conflicts
+c [reduce-26] reducing clauses after offset 61132 in arena
+c [reduce-26] reducing 100784 words 806272 bytes (787 KB) 62%
+c [reduce-26] reducing 1544 (64%) out of 2409 (6%) reducible clauses
+c [collect] flushed 4653 large garbage clauses 100%
+c [collect] collected 314480 bytes (307 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 54% with 142261 16-byte-words 2276176 bytes (2 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-26] new limit of 91734 after 5099 conflicts
+c -  1.08 14 23 15 26 3756 1 86635 18130 1.5 18 12 9 16 4% 12213 22752 4357 132%
+c [rescale] maximum score 1.03012e+150 increment 5.26145e+148
+c [rescale] rescaled by factor 9.70759e-151
+c [reduce-27] reduce limit 91734 hit after 91734 conflicts
+c [retiered-15] recomputed stable tier1 limit 8 and tier2 limit 15 after 91734 conflicts
+c [reduce-27] reducing clauses after offset 61132 in arena
+c [reduce-27] reducing 104089 words 832712 bytes (813 KB) 63%
+c [reduce-27] reducing 1905 (64%) out of 2963 (7%) reducible clauses
+c [collect] flushed 3477 large garbage clauses 100%
+c [collect] collected 255200 bytes (249 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 57% with 149271 16-byte-words 2388336 bytes (2 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-27] new limit of 96930 after 5196 conflicts
+c -  1.13 14 21 15 27 3758 1 91734 19702 1.5 17 11 8 15 4% 12214 22752 4357 132%
+c ]  1.14 14 21 16 27 3758 1 92387 20153 1.5 17 11 8 15 4% 12214 22752 4357 132%
+c [focus] switching to focused mode after 92387 conflicts
+c [focused] new focused mode switching limit of 110724 after 18337 conflicts
+c {  1.14 14 19 16 27 3758 3 92387 20153 1.5 14 9 7 11 4% 12214 22752 4357 132%
+c [randec-30] new limit of 93182 after 795 conflicts
+c [vectors] enlarged to 2^20 entries 4194304 bytes (4 MB) (in place)
+c [reduce-28] reduce limit 96930 hit after 96930 conflicts
+c [retiered-15] recomputed focused tier1 limit 7 and tier2 limit 11 after 96930 conflicts
+c [reduce-28] reducing clauses after offset 61132 in arena
+c [reduce-28] reducing 111467 words 891736 bytes (871 KB) 65%
+c [reduce-28] reducing 1938 (64%) out of 3006 (7%) reducible clauses
+c [collect] flushed 3471 large garbage clauses 100%
+c [collect] collected 252496 bytes (247 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 60% with 156818 16-byte-words 2509088 bytes (2 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-28] new limit of 102221 after 5291 conflicts
+c -  1.18 14 18 16 28 3817 3 96930 21415 1.5 14 9 7 11 4% 12214 22752 4357 132%
+c [eliminate-4] elimination limit of 99484 conflicts hit
+c [forward] scheduled 2884 irredundant clauses 13%
+c [forward] subsumed 19 clauses 0.66% of 2884 checked 100%
+c [forward] strengthened 72 clauses 2.50% of 2884 checked 100%
+c [forward] 72 unchecked clauses remain 2%
+c s  1.20 14 18 16 28 3823 3 99485 23077 1.5 13 9 7 11 4% 12215 22733 4357 132%
+c [eliminate-4] scheduled 4357 variables 100%
+c [defrag] freed 581283 usable entries 77% thus 2325132 bytes (2 MB)
+c [collect] flushed 2923 large garbage clauses
+c [collect] collected 116624 bytes (114 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 64% with 167875 16-byte-words 2686000 bytes (3 MB)
+c [arena] not shrinking since more than 25% filled
+c [eliminate-4] eliminated 440 variables 10% in round 1
+c e  1.21 14 18 16 28 3823 3 99485 23077 1.5 13 9 7 11 4% 11845 24602 3917 119%
+c [forward] scheduled 21343 irredundant clauses 87%
+c [forward] subsumed 96 clauses 0.45% of 21343 checked 100%
+c [forward] strengthened 102 clauses 0.48% of 21343 checked 100%
+c [forward] 102 unchecked clauses remain 0%
+c s  1.22 14 18 16 28 3823 3 99485 23077 1.5 13 9 7 11 4% 11845 24506 3917 119%
+c [eliminate-4] scheduled 280 variables 7%
+c [collect] flushed 128 large garbage clauses
+c [collect] collected 5488 bytes (5 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 64% with 167693 16-byte-words 2683088 bytes (3 MB)
+c [arena] not shrinking since more than 25% filled
+c [eliminate-4] eliminated 3 variables 1% in round 2
+c e  1.22 14 18 16 28 3823 3 99485 23077 1.5 13 9 7 11 4% 11812 24521 3914 119%
+c [eliminate-4] eliminated 443 variables 10% out of 4357 in 2 rounds
+c [eliminate-4] completed elimination bound 4 next 8
+c ^  1.22 14 18 16 28 3823 3 99485 23077 1.5 13 9 7 11 4% 11812 24521 3914 119%
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c [eliminate-4] new limit of 163667 after 64182 conflicts
+c [randec-31] new limit of 100286 after 801 conflicts
+c [vectors] enlarged to 2^20 entries 4194304 bytes (4 MB) (in place)
+c [reduce-29] reduce limit 102221 hit after 102223 conflicts
+c [retiered-15] recomputed focused tier1 limit 7 and tier2 limit 11 after 102223 conflicts
+c [reduce-29] reducing clauses after offset 0 in arena
+c [reduce-29] reducing 177966 words 1423728 bytes (1 MB) 100%
+c [reduce-29] reducing 1643 (65%) out of 2541 (5%) reducible clauses
+c [compact] compacting garbage collection (443 inactive variables 10.17%)
+c [collect] flushed 5134 large garbage clauses 100%
+c [collect] collected 384320 bytes (375 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 59% with 153946 16-byte-words 2463136 bytes (2 MB)
+c [arena] not shrinking since more than 25% filled
+c [move] moving redundant clauses of 1554128 bytes (1 MB) to the end
+c [reduce-29] new limit of 107608 after 5385 conflicts
+c -  1.24 14 18 16 29 3846 3 102223 20661 1.5 13 9 7 11 4% 11812 24521 3914 119%
+c [reduce-30] reduce limit 107608 hit after 107609 conflicts
+c [retiered-15] recomputed focused tier1 limit 7 and tier2 limit 10 after 107609 conflicts
+c [reduce-30] reducing clauses after offset 64856 in arena
+c [reduce-30] reducing 109711 words 877688 bytes (857 KB) 63%
+c [reduce-30] reducing 1598 (65%) out of 2465 (5%) reducible clauses
+c [collect] flushed 3312 large garbage clauses 100%
+c [collect] collected 226448 bytes (221 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 61% with 160414 16-byte-words 2566624 bytes (2 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-30] new limit of 113086 after 5477 conflicts
+c -  1.27 14 17 16 30 3882 2 107609 22689 1.5 13 9 7 10 4% 11812 24521 3914 119%
+c [probe-9] probing limit hit after 108583 conflicts
+c [substitute] round 1 removed 0 variables 0%
+c [vivify-tier1-10] prioritized 5689 clauses 29%
+c [vivify-tier1-10] scheduled 19923 clauses 85% of 23347
+c [vivify-tier1-10] vivified 353 clauses 65% out of 541 tried
+c [vivify-tier1-10] 19382 clauses remain 97% out of 19923 scheduled
+c [vivify-tier1-10] keeping all 5148 remaining clauses prioritized 27%
+c u  1.29 14 17 16 30 3882 2 108584 23172 1.5 13 9 7 10 4% 11812 24521 3914 119%
+c [vivify-tier2-10] prioritized 71 clauses 2%
+c [vivify-tier2-10] scheduled 3025 clauses 13% of 23172
+c [vivify-tier2-10] vivified 850 clauses 94% out of 902 tried
+c [vivify-tier2-10] 2123 clauses remain 70% out of 3025 scheduled
+c [vivify-tier2-10] no remaining prioritized clauses
+c v  1.30 14 17 16 30 3882 2 108584 22421 1.5 13 9 7 10 4% 11812 24521 3914 119%
+c [vivify-tier3-10] prioritizing all 394 scheduled clauses
+c [vivify-tier3-10] scheduled 394 clauses 2% of 22421
+c [vivify-tier3-10] vivified 322 clauses 96% out of 334 tried
+c [vivify-tier3-10] 60 clauses remain 15% out of 394 scheduled
+c [vivify-tier3-10] keeping all 60 remaining clauses prioritized 100%
+c w  1.30 14 17 16 30 3882 2 108584 22140 1.5 13 9 7 10 4% 11812 24521 3914 119%
+c [vivify-limit-10] exceeded by 661 ticks 0.03%
+c [substitute] round 1 removed 0 variables 0%
+c [transitive-9] probed 7828 (100%): reduced 0, units 0
+c [factorization-8] binary clause bounded variable addition
+c [factorization-8] introduced 0 extension variables 0%
+c [factorization-8] removed 0 binary clauses 0%
+c [factorization-8] removed 0 large clauses 0%
+c [probe-9] new limit of 137790 after 29206 conflicts
+c [randec-32] new limit of 109390 after 806 conflicts
+c [defrag] freed 707636 usable entries 77% thus 2830544 bytes (3 MB)
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c }  1.32 14 17 17 30 4098 2 110724 23362 1.5 13 9 7 10 4% 11812 24521 3914 119%
+c [stable] switched to stable mode after 110724 conflicts
+c [stable] new stable mode switching limit of 100484590 after 13297377 ticks
+c [  1.32 14 21 17 30 4098 1 110724 23362 1.5 17 11 8 15 4% 11812 24521 3914 119%
+c [rephase-9] inverted phases in stable search mode
+c [rephase-9] new limit of 128525 after 17801 conflicts
+c I  1.32 14 21 17 30 4098 1 110724 23362 1.5 17 11 8 15 4% 11812 24521 3914 119%
+c [rescale] maximum score 1.04077e+150 increment 5.21745e+148
+c [rescale] rescaled by factor 9.60824e-151
+c [reduce-31] reduce limit 113086 hit after 113086 conflicts
+c [retiered-15] recomputed stable tier1 limit 8 and tier2 limit 15 after 113086 conflicts
+c [reduce-31] reducing clauses after offset 64856 in arena
+c [reduce-31] reducing 120553 words 964424 bytes (942 KB) 65%
+c [reduce-31] reducing 837 (65%) out of 1288 (3%) reducible clauses
+c [collect] flushed 3566 large garbage clauses 100%
+c [collect] collected 252496 bytes (247 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 65% with 169628 16-byte-words 2714048 bytes (3 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-31] new limit of 118653 after 5567 conflicts
+c -  1.34 14 21 17 31 4100 1 113086 24409 1.5 17 11 8 15 4% 11812 24521 3914 119%
+c [vectors] enlarged to 2^20 entries 4194304 bytes (4 MB) (in place)
+c [reduce-32] reduce limit 118653 hit after 118653 conflicts
+c [retiered-15] recomputed stable tier1 limit 8 and tier2 limit 15 after 118653 conflicts
+c [reduce-32] reducing clauses after offset 64856 in arena
+c [reduce-32] reducing 135538 words 1084304 bytes (1 MB) 68%
+c [reduce-32] reducing 1237 (65%) out of 1898 (4%) reducible clauses
+c [collect] flushed 2269 large garbage clauses 100%
+c [collect] collected 185456 bytes (181 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 72% with 188803 16-byte-words 3020848 bytes (3 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-32] new limit of 124309 after 5656 conflicts
+c
+c seconds   switched    rate          size/glue  tier1    binary         remaining
+c        MB   reductions  conflicts         size   tier2      irredundant
+c         level    restarts      redundant     glue   trail         variables
+c
+c -  1.40 14 20 17 32 4103 1 118653 27512 1.6 17 11 8 15 4% 11812 24521 3914 119%
+c [rescale] maximum score 1.02416e+150 increment 5.12088e+148
+c [rescale] rescaled by factor 9.76412e-151
+c ]  1.44 14 19 18 32 4104 1 123049 30951 1.6 17 11 8 15 4% 11812 24521 3914 119%
+c [focus] switching to focused mode after 123049 conflicts
+c [focused] new focused mode switching limit of 145394 after 22345 conflicts
+c {  1.44 14 17 18 32 4104 2 123049 30951 1.5 13 9 7 10 4% 11812 24521 3914 119%
+c [randec-33] new limit of 123860 after 811 conflicts
+c [reduce-33] reduce limit 124309 hit after 124311 conflicts
+c [retiered-15] recomputed focused tier1 limit 7 and tier2 limit 10 after 124311 conflicts
+c [reduce-33] reducing clauses after offset 64856 in arena
+c [reduce-33] reducing 153964 words 1231712 bytes (1 MB) 70%
+c [reduce-33] reducing 1792 (65%) out of 2743 (5%) reducible clauses
+c [collect] flushed 2773 large garbage clauses 100%
+c [collect] collected 227024 bytes (222 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 78% with 204631 16-byte-words 3274096 bytes (3 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-33] new limit of 130055 after 5744 conflicts
+c -  1.46 14 17 18 33 4106 2 124311 30191 1.5 13 9 7 10 4% 11812 24521 3914 119%
+c [reduce-34] reduce limit 130055 hit after 130055 conflicts
+c [retiered-15] recomputed focused tier1 limit 7 and tier2 limit 10 after 130055 conflicts
+c [reduce-34] reducing clauses after offset 64856 in arena
+c [reduce-34] reducing 165970 words 1327760 bytes (1 MB) 72%
+c [reduce-34] reducing 2566 (65%) out of 3918 (7%) reducible clauses
+c [collect] flushed 3912 large garbage clauses 100%
+c [collect] collected 320752 bytes (313 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 80% with 210779 16-byte-words 3372464 bytes (3 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-34] new limit of 135885 after 5830 conflicts
+c -  1.52 14 16 18 34 4117 2 130055 32000 1.6 13 8 7 10 4% 11812 24521 3914 119%
+c [retiered-16] recomputed focused tier1 limit 7 and tier2 limit 10 after 132400 conflicts
+c [reduce-35] reduce limit 135885 hit after 135886 conflicts
+c [retiered-16] recomputed focused tier1 limit 7 and tier2 limit 10 after 135886 conflicts
+c [reduce-35] reducing clauses after offset 64856 in arena
+c [reduce-35] reducing 172387 words 1379096 bytes (1 MB) 73%
+c [reduce-35] reducing 2681 (66%) out of 4084 (7%) reducible clauses
+c [collect] flushed 4155 large garbage clauses 100%
+c [collect] collected 328432 bytes (321 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 83% with 216716 16-byte-words 3467456 bytes (3 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-35] new limit of 141802 after 5916 conflicts
+c -  1.59 15 15 18 35 4118 2 135886 33629 1.6 13 8 7 10 4% 11812 24521 3914 119%
+c [probe-10] probing limit hit after 137790 conflicts
+c [substitute] round 1 removed 0 variables 0%
+c [vivify-tier1-11] prioritized 5147 clauses 17%
+c [vectors] enlarged to 2^21 entries 8388608 bytes (8 MB) (moved)
+c [vivify-tier1-11] scheduled 30572 clauses 87% of 35085
+c [defrag] freed 885714 usable entries 77% thus 3542856 bytes (3 MB)
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c [vectors] enlarged to 2^20 entries 4194304 bytes (4 MB) (in place)
+c [vivify-tier1-11] vivified 181 clauses 96% out of 189 tried
+c [vivify-tier1-11] 30383 clauses remain 99% out of 30572 scheduled
+c [vivify-tier1-11] keeping all 4958 remaining clauses prioritized 16%
+c u  1.64 17 15 18 35 4119 2 137791 34954 1.6 13 8 7 10 4% 11815 24521 3914 119%
+c [vivify-tier2-11] prioritizing all 4416 scheduled clauses
+c [vivify-tier2-11] scheduled 4416 clauses 13% of 34954
+c [vivify-tier2-11] vivified 196 clauses 100% out of 196 tried
+c [vivify-tier2-11] 4220 clauses remain 96% out of 4416 scheduled
+c [vivify-tier2-11] keeping all 4220 remaining clauses prioritized 100%
+c v  1.65 18 15 18 35 4119 2 137791 34885 1.6 13 8 7 10 4% 11846 24521 3914 119%
+c [vivify-tier3-11] prioritizing all 95 scheduled clauses
+c [vivify-tier3-11] scheduled 95 clauses 0% of 34885
+c [vivify-tier3-11] vivified 83 clauses 98% out of 85 tried
+c [vivify-tier3-11] 10 clauses remain 11% out of 95 scheduled
+c [vivify-tier3-11] keeping all 10 remaining clauses prioritized 100%
+c w  1.65 18 15 18 35 4119 2 137791 34820 1.6 13 8 7 10 4% 11816 24521 3914 119%
+c [vivify-irredundant-11] prioritized 17413 clauses 71%
+c [vivify-irredundant-11] scheduled 24521 clauses 100% of 24521
+c [vivify-irredundant-11] vivified 54 clauses 24% out of 228 tried
+c [vivify-irredundant-11] 24293 clauses remain 99% out of 24521 scheduled
+c [vivify-irredundant-11] keeping all 17185 remaining clauses prioritized 71%
+c x  1.66 18 15 18 35 4119 2 137791 34820 1.6 13 8 7 10 4% 11816 24497 3914 119%
+c [vivify-limit-11] exceeded by 2787 ticks 0.08%
+c [substitute] round 1 removed 0 variables 0%
+c [transitive-10] probed 7828 (100%): reduced 0, units 0
+c [factorization-9] binary clause bounded variable addition
+c [factorization-9] introduced 0 extension variables 0%
+c [factorization-9] removed 0 binary clauses 0%
+c [factorization-9] removed 0 large clauses 0%
+c [probe-10] new limit of 170853 after 33062 conflicts
+c [reorder-5] reorder limit 120598 hit a after 137791 conflicts in focused mode 
+c [reorder-5] reordered decisions in focused search mode
+c [reorder-5] new limit of 187791 after 5e4 conflicts
+c o  1.66 18 15 18 35 4119 2 137791 34820 1.6 13 8 7 10 4% 11816 24497 3914 119%
+c [randec-34] new limit of 138607 after 816 conflicts
+c [randec-35] new limit of 139799 after 821 conflicts
+c [vectors] enlarged to 2^21 entries 8388608 bytes (8 MB) (in place)
+c [defrag] freed 797329 usable entries 75% thus 3189316 bytes (3 MB)
+c [vectors] enlarged to 2^20 entries 4194304 bytes (4 MB) (in place)
+c [randec-36] new limit of 140702 after 826 conflicts
+c [reduce-36] reduce limit 141802 hit after 141803 conflicts
+c [retiered-16] recomputed focused tier1 limit 7 and tier2 limit 10 after 141803 conflicts
+c [reduce-36] reducing clauses after offset 64856 in arena
+c [reduce-36] reducing 177085 words 1416680 bytes (1 MB) 73%
+c [reduce-36] reducing 2122 (66%) out of 3225 (5%) reducible clauses
+c [collect] flushed 4095 large garbage clauses 100%
+c [collect] collected 286112 bytes (279 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 85% with 224059 16-byte-words 3584944 bytes (3 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-36] new limit of 147803 after 6e3 conflicts
+c -  1.69 18 15 18 36 4357 2 141803 35376 1.6 13 8 7 10 4% 11816 24497 3914 119%
+c [randec-37] new limit of 142769 after 831 conflicts
+c }  1.74 19 15 19 36 4363 2 145395 37644 1.6 13 8 7 10 4% 11817 24497 3914 119%
+c [stable] switched to stable mode after 145395 conflicts
+c [stable] new stable mode switching limit of 154467236 after 26991314 ticks
+c [  1.74 19 19 19 36 4363 1 145395 37644 1.6 17 11 8 15 4% 11817 24497 3914 119%
+c [rephase-10] best phases in stable search mode
+c [rephase-10] new limit of 166305 after 20910 conflicts
+c B  1.74 19 19 19 36 4363 1 145395 37644 1.6 17 11 8 15 4% 11817 24497 3914 119%
+c [vectors] enlarged to 2^21 entries 8388608 bytes (8 MB) (in place)
+c [reduce-37] reduce limit 147803 hit after 147805 conflicts
+c [retiered-16] recomputed stable tier1 limit 8 and tier2 limit 14 after 147805 conflicts
+c [reduce-37] reducing clauses after offset 64856 in arena
+c [reduce-37] reducing 184956 words 1479648 bytes (1 MB) 74%
+c [reduce-37] reducing 1677 (66%) out of 2544 (4%) reducible clauses
+c [collect] flushed 3518 large garbage clauses 100%
+c [collect] collected 235552 bytes (230 KB) in total
+c [arena] capacity of 2^18 16-byte-words 4194304 bytes (4 MB)
+c [arena] filled 90% with 235090 16-byte-words 3761440 bytes (4 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-37] new limit of 153887 after 6082 conflicts
+c -  1.78 19 19 19 37 4365 1 147805 37792 1.6 17 11 8 14 4% 11817 24497 3914 119%
+c [defrag] freed 825749 usable entries 75% thus 3302996 bytes (3 MB)
+c [vectors] enlarged to 2^20 entries 4194304 bytes (4 MB) (in place)
+c [rescale] maximum score 1.01184e+150 increment 5.10763e+148
+c [rescale] rescaled by factor 9.88303e-151
+c [arena] enlarged to 2^19 16-byte-words 8388608 bytes (8 MB) (moved)
+c [reduce-38] reduce limit 153887 hit after 153888 conflicts
+c [retiered-16] recomputed stable tier1 limit 8 and tier2 limit 14 after 153888 conflicts
+c [reduce-38] reducing clauses after offset 64856 in arena
+c [reduce-38] reducing 200110 words 1600880 bytes (2 MB) 76%
+c [reduce-38] reducing 2193 (66%) out of 3320 (5%) reducible clauses
+c [collect] flushed 3810 large garbage clauses 100%
+c [collect] collected 278624 bytes (272 KB) in total
+c [arena] capacity of 2^19 16-byte-words 8388608 bytes (8 MB)
+c [arena] filled 47% with 247552 16-byte-words 3960832 bytes (4 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-38] new limit of 160052 after 6164 conflicts
+c -  1.87 18 18 19 38 4369 1 153888 39959 1.6 17 11 8 14 4% 11817 24497 3914 119%
+c [rescale] maximum score 1.03129e+150 increment 5.15646e+148
+c [rescale] rescaled by factor 9.69663e-151
+c ]  1.97 19 17 20 38 4371 1 159631 44072 1.6 17 10 8 14 4% 11817 24497 3914 119%
+c [focus] switching to focused mode after 159631 conflicts
+c [focused] new focused mode switching limit of 186370 after 26739 conflicts
+c {  1.97 19 15 20 38 4371 2 159631 44072 1.6 13 8 7 10 4% 11817 24497 3914 119%
+c [randec-38] new limit of 160467 after 836 conflicts
+c [vectors] enlarged to 2^21 entries 8388608 bytes (8 MB) (in place)
+c [reduce-39] reduce limit 160052 hit after 160052 conflicts
+c [retiered-16] recomputed focused tier1 limit 7 and tier2 limit 10 after 160052 conflicts
+c [reduce-39] reducing clauses after offset 64856 in arena
+c [reduce-39] reducing 210980 words 1687840 bytes (2 MB) 76%
+c [reduce-39] reducing 1761 (66%) out of 2661 (4%) reducible clauses
+c [collect] flushed 3518 large garbage clauses 100%
+c [collect] collected 258032 bytes (252 KB) in total
+c [arena] capacity of 2^19 16-byte-words 8388608 bytes (8 MB)
+c [arena] filled 50% with 259709 16-byte-words 4155344 bytes (4 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-39] new limit of 166296 after 6244 conflicts
+c -  1.98 19 15 20 39 4395 2 160052 42566 1.6 13 8 7 10 4% 11817 24497 3914 119%
+c [eliminate-5] elimination limit of 163667 conflicts hit
+c [forward] scheduled 2336 irredundant clauses 10%
+c [forward] subsumed 42 clauses 1.80% of 2336 checked 100%
+c [forward] strengthened 22 clauses 0.94% of 2336 checked 100%
+c [forward] 22 unchecked clauses remain 1%
+c
+c seconds   switched    rate          size/glue tier1    binary         remaining
+c        MB   reductions  conflicts         size  tier2      irredundant
+c         level    restarts      redundant    glue   trail         variables
+c
+c s  2.03 19 15 20 39 4452 2 163670 44799 1.6 13 8 7 10 4% 11818 24455 3914 119%
+c [eliminate-5] scheduled 3914 variables 100%
+c [defrag] freed 1014913 usable entries 85% thus 4059652 bytes (4 MB)
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c [collect] flushed 3272 large garbage clauses
+c [collect] collected 149904 bytes (146 KB) in total
+c [arena] capacity of 2^19 16-byte-words 8388608 bytes (8 MB)
+c [arena] filled 52% with 273194 16-byte-words 4371104 bytes (4 MB)
+c [arena] not shrinking since more than 25% filled
+c [eliminate-5] eliminated 256 variables 7% in round 1
+c e  2.05 16 15 20 39 4452 2 163670 44799 1.6 13 8 7 10 4% 11336 26274 3658 111%
+c [forward] scheduled 19779 irredundant clauses 75%
+c [forward] subsumed 348 clauses 1.76% of 19779 checked 100%
+c [forward] strengthened 417 clauses 2.11% of 19779 checked 100%
+c [forward] 417 unchecked clauses remain 2%
+c s  2.05 16 15 20 39 4452 2 163670 44799 1.6 13 8 7 10 4% 11336 25926 3658 111%
+c [eliminate-5] scheduled 603 variables 16%
+c [collect] flushed 418 large garbage clauses
+c [collect] collected 18864 bytes (18 KB) in total
+c [arena] capacity of 2^19 16-byte-words 8388608 bytes (8 MB)
+c [arena] filled 52% with 272688 16-byte-words 4363008 bytes (4 MB)
+c [arena] not shrinking since more than 25% filled
+c [eliminate-5] eliminated 8 variables 1% in round 2
+c e  2.05 16 15 20 39 4452 2 163670 44799 1.6 13 8 7 10 4% 11270 26048 3650 111%
+c [eliminate-5] eliminated 264 variables 7% out of 3914 in 2 rounds
+c [eliminate-5] completed elimination bound 8 next 16
+c ^  2.05 16 15 20 39 4452 2 163670 44799 1.6 13 8 7 10 4% 11270 26048 3650 111%
+c [vectors] enlarged to 2^20 entries 4194304 bytes (4 MB) (in place)
+c [eliminate-5] new limit of 248476 after 84806 conflicts
+c [randec-39] new limit of 164510 after 840 conflicts
+c [randec-40] new limit of 165845 after 845 conflicts
+c [reduce-40] reduce limit 166296 hit after 166297 conflicts
+c [retiered-16] recomputed focused tier1 limit 7 and tier2 limit 10 after 166297 conflicts
+c [reduce-40] reducing clauses after offset 60547 in arena
+c [reduce-40] reducing 223546 words 1788368 bytes (2 MB) 79%
+c [reduce-40] reducing 2112 (66%) out of 3185 (4%) reducible clauses
+c [collect] flushed 3905 large garbage clauses 100%
+c [collect] collected 321248 bytes (314 KB) in total
+c [arena] capacity of 2^19 16-byte-words 8388608 bytes (8 MB)
+c [arena] filled 50% with 264015 16-byte-words 4224240 bytes (4 MB)
+c [arena] not shrinking since more than 25% filled
+c [move] moving redundant clauses of 3255488 bytes (3 MB) to the end
+c [reduce-40] new limit of 172621 after 6324 conflicts
+c -  2.07 19 15 20 40 5108 2 166297 43513 1.6 13 8 7 10 4% 11270 26048 3650 111%
+c [probe-11] probing limit hit after 170853 conflicts
+c [substitute] round 1 removed 0 variables 0%
+c [vivify-tier1-12] prioritized 4409 clauses 11%
+c [vectors] enlarged to 2^21 entries 8388608 bytes (8 MB) (in place)
+c [vivify-tier1-12] scheduled 39615 clauses 85% of 46489
+c [vivify-tier1-12] vivified 192 clauses 81% out of 236 tried
+c [vivify-tier1-12] 39379 clauses remain 99% out of 39615 scheduled
+c [vivify-tier1-12] keeping all 4173 remaining clauses prioritized 11%
+c u  2.13 21 15 20 40 6137 2 170854 46353 1.5 13 8 7 10 4% 11270 26048 3650 111%
+c [vivify-tier2-12] prioritizing all 5056 scheduled clauses
+c [vivify-tier2-12] scheduled 5056 clauses 11% of 46353
+c [vivify-tier2-12] vivified 487 clauses 98% out of 496 tried
+c [vivify-tier2-12] 4560 clauses remain 90% out of 5056 scheduled
+c [vivify-tier2-12] keeping all 4560 remaining clauses prioritized 100%
+c v  2.14 21 15 20 40 6137 2 170854 46082 1.5 13 8 7 10 4% 11270 26048 3650 111%
+c [vivify-tier3-12] prioritizing all 1817 scheduled clauses
+c [vivify-tier3-12] scheduled 1817 clauses 4% of 46082
+c [vivify-tier3-12] vivified 251 clauses 100% out of 252 tried
+c [vivify-tier3-12] 1565 clauses remain 86% out of 1817 scheduled
+c [vivify-tier3-12] keeping all 1565 remaining clauses prioritized 100%
+c w  2.15 22 15 20 40 6137 2 170854 45892 1.5 13 8 7 10 4% 11270 26048 3650 111%
+c [vivify-limit-12] exceeded by 6069 ticks 0.13%
+c [substitute] round 1 removed 0 variables 0%
+c [transitive-11] probed 7300 (100%): reduced 0, units 0
+c [factorization-10] binary clause bounded variable addition
+c [factorization-10] introduced 0 extension variables 0%
+c [factorization-10] removed 0 binary clauses 0%
+c [factorization-10] removed 0 large clauses 0%
+c [probe-11] new limit of 207808 after 36954 conflicts
+c [randec-41] new limit of 171703 after 849 conflicts
+c [defrag] freed 1357189 usable entries 81% thus 5428756 bytes (5 MB)
+c [vectors] enlarged to 2^20 entries 4194304 bytes (4 MB) (in place)
+c [reduce-41] reduce limit 172621 hit after 172621 conflicts
+c [retiered-16] recomputed focused tier1 limit 7 and tier2 limit 10 after 172621 conflicts
+c [reduce-41] reducing clauses after offset 68603 in arena
+c [reduce-41] reducing 221101 words 1768808 bytes (2 MB) 76%
+c [reduce-41] reducing 1651 (66%) out of 2485 (3%) reducible clauses
+c [collect] flushed 4452 large garbage clauses 100%
+c [collect] collected 317760 bytes (310 KB) in total
+c [arena] capacity of 2^19 16-byte-words 8388608 bytes (8 MB)
+c [arena] filled 51% with 269844 16-byte-words 4317504 bytes (4 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-41] new limit of 179024 after 6403 conflicts
+c -  2.19 19 15 20 41 6152 2 172621 45342 1.5 13 8 7 10 4% 11270 26048 3650 111%
+c i  2.22 19 15 20 41 6152 2 174827 46629 1.5 13 8 7 10 4% 11278 26048 3649 111%
+c [randec-42] new limit of 175680 after 853 conflicts
+c [vectors] enlarged to 2^21 entries 8388608 bytes (8 MB) (in place)
+c i  2.28 20 15 20 41 6185 2 177735 48394 1.6 13 8 7 10 4% 11287 26048 3648 111%
+c [randec-43] new limit of 178593 after 858 conflicts
+c [defrag] freed 961674 usable entries 75% thus 3846696 bytes (4 MB)
+c [reduce-42] reduce limit 179024 hit after 179024 conflicts
+c [retiered-16] recomputed focused tier1 limit 7 and tier2 limit 10 after 179024 conflicts
+c [reduce-42] reducing clauses after offset 68603 in arena
+c [reduce-42] reducing 226286 words 1810288 bytes (2 MB) 77%
+c [reduce-42] reducing 2235 (67%) out of 3358 (4%) reducible clauses
+c [collect] flushed 8324 falsified literals in large clauses
+c [collect] flushed 5966 satisfied large clauses 56%
+c [collect] flushed 4683 large garbage clauses 44%
+c [collect] collected 743408 bytes (726 KB) in total
+c [arena] capacity of 2^19 16-byte-words 8388608 bytes (8 MB)
+c [arena] filled 47% with 248426 16-byte-words 3974816 bytes (4 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-42] new limit of 185504 after 6480 conflicts
+c -  2.28 17 15 20 42 6372 2 179024 41010 1.5 13 8 7 10 4% 11256 26048 3648 111%
+c [randec-44] new limit of 182290 after 862 conflicts
+c [vectors] enlarged to 2^20 entries 4194304 bytes (4 MB) (in place)
+c [randec-45] new limit of 184933 after 866 conflicts
+c [vectors] enlarged to 2^21 entries 8388608 bytes (8 MB) (in place)
+c [reduce-43] reduce limit 185504 hit after 185505 conflicts
+c [retiered-16] recomputed focused tier1 limit 7 and tier2 limit 10 after 185505 conflicts
+c [reduce-43] reducing clauses after offset 68603 in arena
+c [reduce-43] reducing 205563 words 1644504 bytes (2 MB) 75%
+c [reduce-43] reducing 2524 (67%) out of 3786 (5%) reducible clauses
+c [collect] flushed 4770 large garbage clauses 100%
+c [collect] collected 306368 bytes (299 KB) in total
+c [arena] capacity of 2^19 16-byte-words 8388608 bytes (8 MB)
+c [arena] filled 49% with 255018 16-byte-words 4080288 bytes (4 MB)
+c [arena] not shrinking since more than 25% filled
+c [reduce-43] new limit of 192062 after 6557 conflicts
+c -  2.34 20 15 20 43 7092 2 185505 42649 1.5 13 8 7 10 4% 11259 26048 3648 111%
+c }  2.36 20 15 21 43 7092 2 186371 43174 1.5 13 8 7 10 4% 11261 26048 3648 111%
+c [stable] switched to stable mode after 186371 conflicts
+c [stable] new stable mode switching limit of 218538672 after 32033652 ticks
+c [  2.36 20 17 21 43 7092 1 186371 43174 1.6 17 10 8 14 4% 11261 26048 3648 111%
+c all variables assigned at decision level 996 during warming-up saved phases
+c [walk-4] imported 3648 decision phases 100%
+c [vectors] enlarged to 8 entries 32 bytes (moved)
+c [vectors] enlarged to 16 entries 64 bytes (moved)
+c [vectors] enlarged to 32 entries 128 bytes (moved)
+c [vectors] enlarged to 64 entries 256 bytes (moved)
+c [vectors] enlarged to 2^7 entries 512 bytes (moved)
+c [vectors] enlarged to 2^8 entries 1024 bytes (1 KB) (moved)
+c [vectors] enlarged to 2^9 entries 2048 bytes (2 KB) (moved)
+c [vectors] enlarged to 2^10 entries 4096 bytes (4 KB) (moved)
+c [vectors] enlarged to 2^11 entries 8192 bytes (8 KB) (moved)
+c [vectors] enlarged to 2^12 entries 16384 bytes (16 KB) (moved)
+c [vectors] enlarged to 2^13 entries 32768 bytes (32 KB) (moved)
+c [vectors] enlarged to 2^14 entries 65536 bytes (64 KB) (moved)
+c [vectors] enlarged to 2^15 entries 131072 bytes (128 KB) (moved)
+c [vectors] enlarged to 2^16 entries 262144 bytes (256 KB) (in place)
+c [walk-4] initially 0 unsatisfied binary clauses 0% out of 11260
+c [vectors] enlarged to 2^17 entries 524288 bytes (512 KB) (in place)
+c [vectors] enlarged to 2^18 entries 1048576 bytes (1 MB) (in place)
+c [vectors] enlarged to 2^19 entries 2097152 bytes (2 MB) (in place)
+c [walk-4] initially 2464 unsatisfied large clauses 9% out of 26028
+c [walk-4] initially 2464 unsatisfied irredundant clauses 7% out of 37308
+c [walk-4] average clause size 5.14
+c [walk-4] CB 2.00 with inverse 0.50 as base
+c [walk-4] table size 1075 and epsilon 4.94066e-324
+c [walk-4] new minimum 130 after 11810 flips
+c [walk-4] saving improved assignment of 130 unsatisfied clauses
+c [vectors] enlarged to 2^20 entries 4194304 bytes (4 MB) (in place)
+c [rephase-11] walking phases in stable search mode
+c [rephase-11] new limit of 210595 after 24224 conflicts
+c W  2.36 15 17 21 43 7092 1 186371 43174 1.6 17 10 8 14 4% 11260 26028 3648 111%
+c [rescale] maximum score 1.02116e+150 increment 5.10757e+148
+c [rescale] rescaled by factor 9.79276e-151
+c [vectors] enlarged to 2^21 entries 8388608 bytes (8 MB) (in place)
+c i  2.41 15 17 21 43 7094 1 189286 44974 1.6 16 10 8 14 4% 11266 26028 3646 110%
+c [reorder-6] reorder limit 187791 hit a after 189286 conflicts in stable mode 
+c [rescale] maximum score 1.39065e+13 increment 7.70451e+11
+c [rescale] rescaled by factor 7.19089e-14
+c [reorder-6] reordered decisions in stable search mode
+c [reorder-6] new limit of 249286 after 6e4 conflicts
+c o  2.42 15 17 21 43 7094 1 189286 44974 1.6 16 10 8 14 4% 11266 26028 3646 110%
+c i  2.44 15 18 21 43 7095 1 190749 45924 1.6 16 10 8 14 4% 11272 26028 3635 110%
+c
+c seconds   switched    rate          size/glue  tier1    binary         remaining
+c        MB   reductions  conflicts         size   tier2      irredundant
+c         level    restarts      redundant     glue   trail         variables
+c
+c i  2.45 15 18 21 43 7095 1 191174 46111 1.6 16 10 8 14 4% 11277 26028 3634 110%
+c i  2.45 15 18 21 43 7095 1 191444 46243 1.6 16 10 8 14 4% 11287 26028 3633 110%
+c i  2.46 15 18 21 43 7095 1 191499 46262 1.6 16 10 8 14 4% 11290 26028 3632 110%
+c i  2.46 15 18 21 43 7095 1 191531 46277 1.6 16 10 8 14 4% 11291 26028 3623 110%
+c i  2.46 15 18 21 43 7096 1 191570 46290 1.6 16 10 8 14 4% 11295 26028 3610 109%
+c i  2.46 15 18 21 43 7096 1 191574 46291 1.6 16 10 8 14 4% 11295 26028 3609 109%
+c ]  2.46 15 18 21 43 7096 1 191576 46291 1.6 16 10 8 14 4% 11295 26028 3580 108%
+c 0  2.46 15 15 21 43 7096 2 191576 46291 1.5 13 8 7 10 4% 11295 26028 3580 108%
+c
+c ---- [ result ] ------------------------------------------------------------
+c
+s UNSATISFIABLE
+c
+c ---- [ profiling ] ---------------------------------------------------------
+c
+c           1.88   76.44 %  search
+c           1.07   43.45 %  focused
+c           0.81   32.98 %  stable
+c           0.47   19.02 %  probe
+c           0.46   18.61 %  simplify
+c           0.21    8.57 %  vivify
+c           0.13    5.16 %  factor
+c           0.11    4.49 %  preprocess
+c           0.09    3.70 %  eliminate
+c           0.06    2.34 %  sweep
+c           0.06    2.26 %  reduce
+c           0.04    1.67 %  substitute
+c           0.03    1.13 %  subsume
+c           0.01    0.48 %  transitive
+c           0.01    0.48 %  congruence
+c           0.01    0.37 %  walking
+c           0.01    0.35 %  parse
+c           0.01    0.31 %  backbone
+c           0.00    0.10 %  lucky
+c =============================================
+c           2.46  100.00 %  total
+c
+c ---- [ statistics ] --------------------------------------------------------
+c
+c backbone_computations:                   25             7663    interval
+c backbone_ticks:                     1164441 
+c chronological:                          149                0 %  conflicts
+c clauses_added:                       334730              100 %  added
+c clauses_binary:                       11295                3 %  added
+c clauses_irredundant:                  26028                8 %  added
+c clauses_learned:                     189008               99 %  conflicts
+c clauses_original:                     85831               26 %  added
+c clauses_redundant:                    46291 
+c clauses_used:                        407848              216 %  learned
+c clauses_used_focused:                242785               60 %  used
+c clauses_used_stable:                 165063               40 %  used
+c closures:                                 4            47894    interval
+c conflicts:                           191576            77931.29 per second
+c congruent:                                0                0 %  variables
+c congruent_gates:                       7251             1812.75 per closure
+c congruent_gates_ands:                  7251              100 %  gates
+c congruent_gates_ites:                     0                0 %  gates
+c congruent_gates_xors:                     0                0 %  gates
+c congruent_matched:                        0                0 %  congruent
+c congruent_matched_ands:                   0                0 %  matched
+c congruent_matched_ites:                   0                0 %  matched
+c congruent_matched_xors:                   0                0 %  matched
+c decisions:                           337973                1.76 per conflict
+c eliminated:                            2142               65 %  variables
+c eliminate_resolutions:              1285507           522932.00 per second
+c eliminations:                             5            38315    interval
+c factored:                              2492               76 %  variables
+c factorizations:                          10            19158    interval
+c factor_ticks:                      32973773 
+c fast_eliminated:                          0                0 %  eliminated
+c fast_strengthened:                        0                0 %  per strengthened
+c fast_subsumed:                            0                0 %  per subsumed
+c forward_checks:                     2300673 
+c forward_steps:                      4806044                2.09 per check
+c iterations:                              11                0 %  variables
+c kitten_propagations:                1463124               46.09 per solved
+c kitten_solved:                        31746 
+c kitten_ticks:                       5948123                4.07 per prop
+c literals_factor:                      27034                8.19 per variable
+c probings:                                11            17416    interval
+c probing_ticks:                     24556253 
+c propagations:                      12303870          5005097    per second
+c random_sequences:                        45             4257    interval
+c reductions:                              43             4455    interval
+c reordered:                                6            31929    interval
+c rephased:                                11            17416    interval
+c restarts:                              7096               27    interval
+c retiered:                                16            11974    interval
+c searches:                                 1           191576    interval
+c search_ticks:                     198217399 
+c strengthened:                          1193                0 %  checks
+c substituted:                              0                0 %  variables
+c substitute_ticks:                   1072430 
+c subsumed:                               574                0 %  checks
+c subsumption_checks:                 2300673 
+c sweep:                                    4            47894    interval
+c sweep_completed:                          0                0.00 sweeps
+c sweep_equivalences:                       0                0 %  variables
+c sweep_solved:                         10712               34 %  kitten_solved
+c sweep_units:                              0                0 %  variables
+c switched:                                21             9123    interval
+c transitive_ticks:                   2851877 
+c units:                                   70                2 %  variables
+c variables_activated:                   5792                1.76 per variable
+c variables_eliminate:                  13123                3.98 variables
+c variables_extension:                   2492                0.76 per variable
+c variables_factor:                         0                0.00 per variable
+c variables_original:                    3300                1.00 per variable
+c variables_subsume:                    16569                5.02 per variable
+c vivifications:                           12            15965    interval
+c vivified:                              7297               69 %  checks
+c vivify_checks:                        10568              881    per vivify
+c vivify_probes:                       100543                9.51 per check
+c vivify_reused:                        43378               43 %  probes
+c walks:                                    4            47894    interval
+c walk_steps:                         3230405 
+c warming_decisions:                     3509              877.25 per walk
+c warming_propagations:                 19317                0 %  propagations
+c warmups:                                  4              100 %  walks
+c
+c ---- [ glue usage ] --------------------------------------------------------
+c
+c focused glue 7  used 36548 clauses 15.05% accumulated 64.40% tier1
+c focused glue 8  used 30114 clauses 12.40% accumulated 76.81%
+c focused glue 9  used 22644 clauses  9.33% accumulated 86.13%
+c focused glue 10 used 14748 clauses  6.07% accumulated 92.21% tier2
+c
+c stable glue 7    used 18205 clauses 11.03% accumulated 52.68% tier1
+c stable glue 8    used 17293 clauses 10.48% accumulated 63.16%
+c stable glue 9-11 used 34909 clauses 21.15% accumulated 84.30%
+c stable glue 12   used  6292 clauses  3.81% accumulated 88.12%
+c stable glue 13   used  4636 clauses  2.81% accumulated 90.93% tier2
+c
+c ---- [ resources ] ---------------------------------------------------------
+c
+c maximum-resident-set-size:         22151168 bytes         21 MB
+c process-time:                             2s               2.46 seconds
+c
+c ---- [ shutting down ] -----------------------------------------------------
+c
+c exit 20

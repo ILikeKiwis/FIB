@@ -1,5 +1,5 @@
 
-symbolicOutput(1).  % set to 1 for DEBUGGING: to see symbolic output only; 0 otherwise.
+symbolicOutput(0).  % set to 1 for DEBUGGING: to see symbolic output only; 0 otherwise.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% To use this prolog template for other optimization problems, replace the code parts 1,2,3,4 below. %%
@@ -79,10 +79,61 @@ satVariable( works(E, H) ) :-  available(E, H).
 writeClauses(infinite) :- !, writeClauses(72),!.
 writeClauses(MaxConsecutiveHours) :-
     atLeastKEmployeesOnTaskOnHour, 
+        atMostOneTaskPerHour,
+        linkWorksWithDoes,
     respectBreakBetweenTasks,
+        respectMaxConsecutiveHours(MaxConsecutiveHours),
     
     true,!.
 writeClauses(_) :- told, nl, write('writeClauses failed!'), nl,nl, halt.
+
+atLeastKEmployeesOnTaskOnHour :-
+        task(T),
+        hour(H),
+        needed(T,H,N),
+        findall(does(E,T,H), available(E,H), Lits),
+        exactly(N,Lits),
+        fail.
+atLeastKEmployeesOnTaskOnHour.
+
+atMostOneTaskPerHour :-
+        available(E,H),
+        task(T1),
+        task(T2),
+        T1 @< T2,
+        writeOneClause([ -does(E,T1,H), -does(E,T2,H) ]),
+        fail.
+atMostOneTaskPerHour.
+
+linkWorksWithDoes :-
+        available(E,H),
+        findall(does(E,T,H), task(T), Lits),
+        expressOr(works(E,H), Lits),
+        fail.
+linkWorksWithDoes.
+
+respectBreakBetweenTasks :-
+        available(E,H),
+        H < 72,
+        H1 is H+1,
+        available(E,H1),
+        task(T1),
+        task(T2),
+        T1 \= T2,
+        writeOneClause([ -does(E,T1,H), -does(E,T2,H1) ]),
+        fail.
+respectBreakBetweenTasks.
+
+respectMaxConsecutiveHours(MaxConsecutiveHours) :-
+        employee(E),
+        Start is 1,
+        End is 72-MaxConsecutiveHours,
+        between(Start,End,H),
+        HEnd is H+MaxConsecutiveHours,
+        findall(works(E,Hh), (between(H,HEnd,Hh), available(E,Hh)), Window),
+        atMost(MaxConsecutiveHours, Window),
+        fail.
+respectMaxConsecutiveHours(_).
 
 
 %%%%%%%  3. DisplaySol: this predicate displays a given solution M: ===========================
@@ -103,7 +154,24 @@ writeIfBusy(_,_,_) :- write('-'),!.
 %%%%%%%  4. This predicate computes the cost of a given solution M: ===========================
 
 % Here the sort predicate is used to remove repeated elements of the list:
-costOfThisSolution(M,Cost) :- ...
+costOfThisSolution(M,Cost) :-
+        findall(Run, (employee(E), maxRunEmployee(E,M,Run)), Runs),
+        max_list(Runs, Cost), !.
+
+maxRunEmployee(E,M,Run) :-
+        findall(H, member(works(E,H),M), WorkedHours),
+        longestConsecutive(WorkedHours, Run).
+
+longestConsecutive([], 0).
+longestConsecutive([H|Hs], MaxRun) :-
+        longestConsecutive(Hs, H, 1, 1, MaxRun).
+
+longestConsecutive([], _, Cur, Max, MaxOut) :-
+        MaxOut is max(Cur, Max).
+longestConsecutive([H|Hs], Prev, Cur, Max, MaxOut) :-
+        ( H =:= Prev+1 -> Cur1 is Cur+1 ; Cur1 = 1 ),
+        Max1 is max(Max, Cur1),
+        longestConsecutive(Hs, H, Cur1, Max1, MaxOut).
 
 
 %%%%%%% =======================================================================================

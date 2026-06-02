@@ -16,7 +16,33 @@
 %% un Codi i un Intent calculi els números E, D de la resposta.
 
 resposta(C,A,E,D) :-
-    ...
+    exactes(C, A, E),
+    encertsTotals(C, A, T),
+    D is T-E.
+
+color(v).
+color(b).
+color(g).
+color(l).
+color(t).
+color(m).
+
+codi([C1,C2,C3,C4]) :-
+    color(C1), color(C2), color(C3), color(C4).
+
+exactes([], [], 0).
+exactes([X|C], [Y|A], E) :-
+    exactes(C, A, E1),
+    (X == Y -> E is E1+1 ; E = E1).
+
+encertsTotals(C, A, T) :-
+    findall(Min, (color(Col), compta(Col, C, NC), compta(Col, A, NA), Min is min(NC, NA)), Ms),
+    sum_list(Ms, T).
+
+compta(_, [], 0).
+compta(X, [Y|L], N) :-
+    compta(X, L, N1),
+    (X == Y -> N is N1+1 ; N = N1).
 
 
 %% C2. Volem ara ajudar l'atacant a guanyar el joc, suggerint-li
@@ -32,4 +58,11 @@ intents([ [ [v,b,g,l], [1,1] ], [ [m,t,g,l], [1,0] ], [ [g,l,g,l], [0,0] ], [ [v
 %% ser el codi secret si és consistent amb el que trobem a l'històric.
 
 nouIntent(A) :-
-    ...
+    codi(A),
+    intents(H),
+    consistentAmbHistoric(A, H).
+
+consistentAmbHistoric(_, []).
+consistentAmbHistoric(Codi, [[Intent,[E,D]]|Resta]) :-
+    resposta(Codi, Intent, E, D),
+    consistentAmbHistoric(Codi, Resta).
